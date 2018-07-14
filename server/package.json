@@ -1,0 +1,23 @@
+{
+  "name": "server",
+  "version": "0.0.1",
+  "description": "Team manager server",
+  "main": "index.ts",
+  "scripts": {
+    "start": "ts-node ./index.ts",
+    "dev": "nodemon | bunyan"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bunyan": "^1.8.12",
+    "reflect-metadata": "^0.1.12"
+  },
+  "devDependencies": {
+    "prettier": "^1.13.7",
+    "ts-node": "^7.0.0",
+    "tslint": "^5.10.0",
+    "tslint-config-prettier": "^1.13.0",
+    "typescript": "^2.9.2"
+  }
+}

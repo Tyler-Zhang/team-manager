@@ -2,7 +2,7 @@ import { createConnection } from 'typeorm';
 import { get } from 'lodash';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
-import { useExpressServer, useContainer } from 'routing-controllers';
+import { useExpressServer } from 'routing-controllers';
 import { databaseConfig, log } from './config';
 import { join } from 'path';
 

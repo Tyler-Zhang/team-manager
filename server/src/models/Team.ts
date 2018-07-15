@@ -3,23 +3,14 @@ import { Organization } from './Organization';
 import { Position } from './Position';
 
 @Entity()
-export class Member extends BaseEntity {
+export class Team extends BaseEntity {
   @PrimaryGeneratedColumn()
   public id!: number;
 
   @Column()
-  public firstName!: string;
+  public name!: string;
 
-  @Column()
-  public lastName!: string;
-
-  @Column()
-  public email!: string;
-
-  @Column({ nullable: true })
-  public phoneNumber?: string;
-
-  @OneToMany(type => Position, position => position.member)
+  @OneToMany(type => Position, position => position.team)
   public positions!: Position[];
 
   @ManyToOne(type => Organization, { nullable: false })

@@ -2,9 +2,10 @@ import { createConnection } from 'typeorm';
 import { get } from 'lodash';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
-import { useExpressServer } from 'routing-controllers';
+import { useExpressServer, useContainer } from 'routing-controllers';
 import { databaseConfig, log } from './config';
 import { join } from 'path';
+import { Container } from 'typedi';
 
 
 export async function launch() {
@@ -15,20 +16,31 @@ export async function launch() {
   log.info(`Connected to database`);
 
   /**
-   * Start express server
+   * Create express server
    */
   const app = express();
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
 
+  /**
+   * Setup container so we can use dependency injection in
+   * routing-controllers
+   */
+  useContainer(Container);
+
+  /**
+   * Setup routing-controllers
+   */
   useExpressServer(app, {
     controllers: [join(__dirname, 'controllers', '*{ts,js}')],
     routePrefix: '/api',
     classTransformer: true
   });
 
+  /**
+   * Start the server
+   */
   const port = get(process.env, 'PORT', 80);
   app.listen(port);
-
   log.info(`Running web app on port ${port}`);
 }

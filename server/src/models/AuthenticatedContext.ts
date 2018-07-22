@@ -1,15 +1,69 @@
-export interface IAuthenticatedContextConstructorProps {
-  system?: boolean
+import { Authority } from "./Member";
+import { equal } from "assert";
+
+export enum AuthenticationType {
+  member = 'member',
+  system = 'system'
 }
 
-export class AuthenticatedContext {
-  private system: boolean;
+export interface IAuthenticatedContextMemberConstructorProps {
+  type: 'member';
+  memberId: number;
+  organizationId: number;
+  authority: Authority;
+}
 
-  constructor(options: IAuthenticatedContextConstructorProps = {}) {
-    this.system = options.system || false;
+export interface IAuthenticatedContextSystemConstructorProps {
+  type: 'system';
+}
+
+export type IAuthenticatedContextConstructorProps =
+  IAuthenticatedContextMemberConstructorProps |
+  IAuthenticatedContextSystemConstructorProps;
+
+export class AuthenticatedContext {
+  // Will always be defined as it differentiates the type of context
+  private system: boolean;
+  private member: boolean;
+
+  // Only defined if the auth context is a member context
+  private memberId?: number;
+  private organizationId?: number;
+  private authority?: Authority;
+
+  constructor(options: IAuthenticatedContextConstructorProps) {
+    if (options.type === AuthenticationType.member) {
+      this.system = false;
+      this.member = true;
+      this.memberId = options.memberId;
+      this.organizationId = options.organizationId;
+      this.authority = options.authority;
+    } else {
+      this.system = true;
+      this.member = false;
+    }
   }
 
-  public get isSystem() {
+  public isSystem() {
     return this.system;
+  }
+
+  public isMember() {
+    return this.member;
+  }
+
+  public getMemberId() {
+    equal(this.isMember(), true, 'Can only get memberId on a member auth context');
+    return this.memberId as number;
+  }
+
+  public getOrganizationId() {
+    equal(this.isMember(), true, 'Can only get organizationId on a member auth context');
+    return this.organizationId as number;
+  }
+
+  public getAuthority() {
+    equal(this.isMember(), true, 'Can only get authority on a member auth context');
+    return this.authority as Authority;
   }
 }

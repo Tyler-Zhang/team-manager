@@ -3,11 +3,20 @@ import { Organization } from './Organization';
 import { Position } from './Position';
 import { Type } from 'class-transformer';
 
+export enum Authority {
+  member = 'member',
+  admin = 'admin'
+}
+
 @Entity()
 @Index(['organizationId', 'email'], { unique: true })
 export class Member extends BaseEntity {
+
   @PrimaryGeneratedColumn()
   public id!: number;
+
+  @Column({ enum: Authority, default: Authority.member })
+  public authority!: Authority
 
   @Column()
   public firstName!: string;
@@ -17,6 +26,9 @@ export class Member extends BaseEntity {
 
   @Column()
   public email!: string;
+
+  @Column()
+  public password!: string;
 
   @Column({ nullable: true })
   public phoneNumber?: string;

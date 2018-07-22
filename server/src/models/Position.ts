@@ -1,10 +1,13 @@
-import { Entity, BaseEntity, ManyToOne, RelationId, Column, JoinColumn } from 'typeorm';
+import { Entity, BaseEntity, ManyToOne, RelationId, Column, JoinColumn, PrimaryGeneratedColumn } from 'typeorm';
 import { Team } from './Team';
 import { Member } from './Member';
 import { Type } from 'class-transformer';
 
 @Entity()
 export class Position extends BaseEntity {
+  @PrimaryGeneratedColumn()
+  public id!: number;
+
   @Column('int', { primary: true })
   public teamId!: number;
 

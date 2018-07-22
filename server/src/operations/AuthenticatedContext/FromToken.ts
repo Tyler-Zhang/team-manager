@@ -1,7 +1,8 @@
 import { verify } from "jsonwebtoken";
-import { AuthenticatedContext } from "../../models";
+import { AuthenticatedContext, AuthenticationType, IAuthenticatedContextConstructorProps } from "../../models";
 import { secretsConfig } from '../../config';
 import { AbstractOperation } from "../AbstractOperation";
+import { ITokenPayload } from './IntoToken';
 
 export interface IFromToken {
   jwtToken: string
@@ -20,12 +21,22 @@ export class FromToken extends AbstractOperation{
   }
 
   public async run() {
-    const jwtPayload = verify(this.jwtToken, secretsConfig.privateKey) as any;
+    const payload: ITokenPayload = verify(this.jwtToken, secretsConfig.privateKey) as any;
+    let authContextArgs: IAuthenticatedContextConstructorProps;
 
-    const authContext = new AuthenticatedContext({
-      system: jwtPayload.isSystem
-    });
+    if (payload.type === AuthenticationType.member) {
+      authContextArgs = {
+        type: AuthenticationType.member,
+        authority: payload.authority,
+        memberId: payload.memberId,
+        organizationId: payload.organizationId
+      };
+    } else {
+      authContextArgs = {
+        type: AuthenticationType.system
+      };
+    }
 
-    return authContext;
+    return new AuthenticatedContext(authContextArgs);
   }
 }

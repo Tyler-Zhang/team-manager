@@ -1,16 +1,28 @@
-import { Post, Body, BadRequestError, JsonController } from "routing-controllers";
-import { Organization } from '../models';
+import { Post, Body, JsonController, Res, Redirect } from "routing-controllers";
+import { Authority } from '../models';
+import { CreateOrganizationRequest } from "../requests/CreateOrganizationRequest";
+import { getManager } from "typeorm";
+import { OrganizationCreateOperation } from "../operations/Organization/OrganizationCreateOperation";
+import { MemberCreateOperation } from "../operations/Member/MemberCreateOperation";
+import { Response } from "express-serve-static-core";
 
 @JsonController('/organizations')
 export class OrganizationController {
   @Post('')
-  public async create(@Body({ required: true, validate: true}) body: Organization) {
-    const existingOrganization = await Organization.findOne({ where: { name: body.name } });
+  @Redirect('/login')
+  public async create(
+    @Body({ required: true, validate: true}) body: CreateOrganizationRequest,
+    @Res() res: Response
+  ) {
+    // initial member is the person to create the organization, and should be an admin
+    const { organization, member: initialMember } = body;
 
-    if (existingOrganization) {
-      throw new BadRequestError('This organization name is already taken');
-    }
+    initialMember.authority = Authority.admin;
 
-    return body.save();
+    await getManager().transaction(async (entityManager) => {
+      const createdOrganization = await OrganizationCreateOperation.run({ model: organization, entityManager });
+      initialMember.organization = createdOrganization;
+      return MemberCreateOperation.run({ model: initialMember, entityManager });
+    });
   }
 }

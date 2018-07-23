@@ -1,6 +1,7 @@
 import { ICreateOperationArgs } from '../Abstract';
 import { Member } from '../../models';
 import { getManager, EntityManager } from 'typeorm';
+import { hash } from 'bcryptjs';
 import { AbstractOperation } from '../AbstractOperation';
 
 export class MemberCreateOperation extends AbstractOperation {
@@ -17,7 +18,13 @@ export class MemberCreateOperation extends AbstractOperation {
     this.entityManager = entityManager;
   }
 
-  public run() {
+  public async run() {
+    await this.hashPassword();
+
     return this.entityManager.save(this.model);
+  }
+
+  private async hashPassword() {
+    this.model.password = await hash(this.model.password, 10);
   }
 }

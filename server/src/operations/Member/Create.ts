@@ -4,7 +4,7 @@ import { getManager, EntityManager } from 'typeorm';
 import { hash } from 'bcryptjs';
 import { AbstractOperation } from '../AbstractOperation';
 
-export class MemberCreateOperation extends AbstractOperation {
+export class Create extends AbstractOperation {
   public static run(args: ICreateOperationArgs<Member>): Promise<Member> {
     return super.run(args);
   }

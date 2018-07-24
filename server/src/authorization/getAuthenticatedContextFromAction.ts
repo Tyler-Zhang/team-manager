@@ -1,9 +1,9 @@
 import { Action } from "routing-controllers";
 import { get } from 'lodash';
-import { FromToken } from "../operations/AuthenticatedContext/FromToken";
+import { AuthenticatedContextOperations } from '../operations';
 
 export function getAuthenticatedContextFromAction(action: Action) {
   const jwt = get(action.request, 'headers.authorization');
 
-  return FromToken.run({ jwtToken: jwt });
+  return AuthenticatedContextOperations.FromToken.run({ jwtToken: jwt });
 }

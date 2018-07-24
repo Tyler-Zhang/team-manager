@@ -3,8 +3,8 @@ import { compare } from 'bcryptjs';
 import { Member } from '../models';
 import { LoginRequest } from "../requests/LoginRequest";
 import { Response } from "express";
-import { IntoToken } from "../operations/AuthenticatedContext/IntoToken";
-import { FromMember } from "../operations/AuthenticatedContext/FromMember";
+import { AuthenticatedContextOperations } from '../operations';
+
 
 @JsonController('/authentication')
 export class AuthenticationController {
@@ -22,8 +22,8 @@ export class AuthenticationController {
       throw new UnauthorizedError('Bad credentials');
     }
 
-    const authContext = await FromMember.run({ member });
-    const token = await IntoToken.run({ authContext });
+    const authContext = await AuthenticatedContextOperations.FromMember.run({ member });
+    const token = await AuthenticatedContextOperations.IntoToken.run({ authContext });
 
     // Set as cookie
     res.cookie('authorization', token, { httpOnly: true });

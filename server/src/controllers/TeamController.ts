@@ -1,6 +1,6 @@
 import { Post, Body, BadRequestError, JsonController } from "routing-controllers";
 import { Team, Organization } from '../models';
-import { TeamCreateOperation } from "../operations/Team/TeamCreateOperation";
+import { TeamOperations } from "../operations";
 
 @JsonController('/teams')
 export class TeamController {
@@ -13,6 +13,6 @@ export class TeamController {
       throw new BadRequestError('That organization does not exist');
     }
     body.organization = organization;
-    return TeamCreateOperation.run({ model: body });
+    return TeamOperations.Create.run({ model: body });
   }
 }

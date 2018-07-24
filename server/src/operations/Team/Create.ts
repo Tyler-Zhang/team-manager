@@ -4,7 +4,7 @@ import { BadRequestError } from 'routing-controllers';
 import { getManager, EntityManager } from 'typeorm';
 import { AbstractOperation } from '../AbstractOperation';
 
-export class TeamCreateOperation extends AbstractOperation {
+export class Create extends AbstractOperation {
   public static run(args: ICreateOperationArgs<Team>) {
     return super.run(args);
   }

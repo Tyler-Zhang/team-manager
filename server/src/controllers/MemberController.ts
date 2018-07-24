@@ -1,7 +1,6 @@
 import { Post, Body, BadRequestError, JsonController } from "routing-controllers";
 import { Organization, Member } from '../models';
-import { MemberCreateOperation } from "../operations/Member/MemberCreateOperation";
-import { PositionCreateOperation } from "../operations/Position/PositionCreateOperation";
+import { MemberOperations, PositionOperations } from '../operations';
 import { getManager } from "typeorm";
 
 @JsonController('/members')
@@ -21,7 +20,7 @@ export class MemberController {
     body.positions = [];
 
     await getManager().transaction(async entityManager => {
-      body = await MemberCreateOperation.run({ model: body, entityManager });
+      body = await MemberOperations.Create.run({ model: body, entityManager });
 
       /**
        * Properly associated each position relation id
@@ -30,7 +29,7 @@ export class MemberController {
       /**
        * Create the positions
        */
-      body.positions = await Promise.all(positions.map((position) => PositionCreateOperation.run({ model: position, entityManager })));
+      body.positions = await Promise.all(positions.map((position) => PositionOperations.Create.run({ model: position, entityManager })));
 
     });
 

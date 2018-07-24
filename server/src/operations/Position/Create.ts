@@ -4,7 +4,7 @@ import { NotFoundError } from 'routing-controllers';
 import { getManager, EntityManager } from 'typeorm';
 import { AbstractOperation } from '../AbstractOperation';
 
-export class PositionCreateOperation extends AbstractOperation {
+export class Create extends AbstractOperation {
   public static run(args: ICreateOperationArgs<Position>) {
     return super.run(args);
   }

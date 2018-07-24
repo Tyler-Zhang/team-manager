@@ -5,19 +5,19 @@ import { AbstractOperation } from "../AbstractOperation";
 import { ITokenPayload } from './IntoToken';
 
 export interface IFromToken {
-  jwtToken: string
+  token: string
 }
 
 export class FromToken extends AbstractOperation{
   public static run(args: IFromToken): Promise<AuthenticatedContext> {
-    return super.call(args);
+    return super.run(args);
   }
 
   private jwtToken: string;
 
-  constructor({ jwtToken }: IFromToken) {
+  constructor({ token }: IFromToken) {
     super();
-    this.jwtToken = jwtToken;
+    this.jwtToken = token;
   }
 
   public async run() {

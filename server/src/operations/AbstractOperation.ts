@@ -20,7 +20,6 @@ export class AbstractOperation {
     if (childType) {
       return new childType(args).run();
     }
-
     return new this(args).run();
   }
 

@@ -3,7 +3,7 @@ import { get } from 'lodash';
 import { AuthenticatedContextOperations } from '../operations';
 
 export function getAuthenticatedContextFromAction(action: Action) {
-  const jwt = get(action.request, 'headers.authorization');
+  const token = get(action.request, 'headers.authorization');
 
-  return AuthenticatedContextOperations.FromToken.run({ jwtToken: jwt });
+  return AuthenticatedContextOperations.FromToken.run({ token });
 }

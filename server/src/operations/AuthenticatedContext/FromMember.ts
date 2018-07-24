@@ -7,7 +7,7 @@ export interface IFromMember {
 
 export class FromMember extends AbstractOperation{
   public static run(args: IFromMember): Promise<AuthenticatedContext> {
-    return super.call(args);
+    return super.run(args);
   }
 
   private member: Member;

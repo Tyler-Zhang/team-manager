@@ -7,9 +7,9 @@ import { Response } from "express-serve-static-core";
 
 @JsonController('/organizations')
 export class OrganizationController {
-  @Post('')
+  @Post('init')
   @Redirect('/login')
-  public async create(
+  public async init(
     @Body({ required: true, validate: true}) body: CreateOrganizationRequest,
     @Res() res: Response
   ) {

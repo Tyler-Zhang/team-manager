@@ -29,4 +29,10 @@ export class AuthenticationController {
     res.cookie('authorization', token, { httpOnly: true });
     return null;
   }
+
+  @Post('/logout')
+  public async logout(@Res() res: Response) {
+    res.clearCookie('authorization');
+    return null;
+  }
 }

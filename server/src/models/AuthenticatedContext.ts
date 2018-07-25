@@ -7,14 +7,14 @@ export enum AuthenticationType {
 }
 
 export interface IAuthenticatedContextMemberConstructorProps {
-  type: 'member';
+  type: AuthenticationType.member;
   memberId: number;
   organizationId: number;
   authority: Authority;
 }
 
 export interface IAuthenticatedContextSystemConstructorProps {
-  type: 'system';
+  type: AuthenticationType.system;
 }
 
 export type IAuthenticatedContextConstructorProps =

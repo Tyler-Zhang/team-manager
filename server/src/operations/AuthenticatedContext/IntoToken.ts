@@ -35,7 +35,7 @@ export class IntoToken extends AbstractOperation{
   public run() {
     let payload: ITokenPayload;
 
-    if (this.authContext.isMember) {
+    if (this.authContext.isSystem()) {
       payload = {
         type: 'system'
       };

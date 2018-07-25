@@ -8,7 +8,7 @@ import { Authority } from './Member';
 describe('models/AuthenticatedContext', () => {
   let subject: AuthenticatedContext;
 
-  describe('when the authenticated type is system', () => {
+  context('when the authenticated type is system', () => {
     beforeEach(() => {
       subject = new AuthenticatedContext({ type: AuthenticationType.system });
     })
@@ -44,7 +44,7 @@ describe('models/AuthenticatedContext', () => {
     })
   })
 
-  describe('when the authenticated type is member', () => {
+  context('when the authenticated type is member', () => {
     const authority: Authority = _.sample(Object.values(Authority));
     const memberId = Faker.random.number();
     const organizationId = Faker.random.number();

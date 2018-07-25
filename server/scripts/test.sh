@@ -1,1 +1,2 @@
-mocha -r ts-node/register src/**/*.spec.ts
+#!/bin/bash
+mocha --recursive -r ts-node/register "src/**/*.spec.ts"

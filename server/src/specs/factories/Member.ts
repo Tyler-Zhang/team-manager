@@ -5,7 +5,6 @@ import * as Faker from 'faker';
 import { organization } from './Organization';
 
 export const member = Factory.define<Member>('member', Member)
-  .sequence('id')
   .attr('authority', Authority.member)
   .attr('email', Faker.internet.email)
   .attr('firstName', Faker.name.firstName)

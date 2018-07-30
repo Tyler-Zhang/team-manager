@@ -1,10 +1,13 @@
 import { combineReducers } from 'redux';
+import authenticationReducer, { IAuthenticationState } from './authenticationReducer';
 import ormReducer from './ormReducer';
 
-export interface IStore {
+export interface IState {
   orm: any;
+  authentication: IAuthenticationState;
 }
 
 export const rootReducer = combineReducers({
-  orm: ormReducer
-})
+  orm: ormReducer,
+  authentication: authenticationReducer
+});

@@ -1,6 +1,6 @@
 import { createApplicationStore } from './createApplicationStore';
-import { IStore, rootReducer } from './reducers';
+import { IState, rootReducer } from './reducers';
 
-export { IStore };
+export { IState };
 
 export const store = createApplicationStore(rootReducer);

@@ -9,9 +9,9 @@ export const databaseConfig: ConnectionOptions = {
   synchronize: isStringTruthy(get(process.env, 'DATABASE_SYNC', 'false')),
   logging: isStringTruthy(get(process.env, 'DATABASE_LOGGING', 'false')),
   entities: [
-    path.join(__dirname, '..', 'models', '*.{ts,js}')
+    path.join(__dirname, '..', 'models', '!(*.spec).{ts,js}')
   ],
   migrations: [
-    path.join(__dirname, '..', 'migrations', '*.{ts,js}')
+    path.join(__dirname, '..', 'migrations', '!(*.spec).{ts,js}')
   ]
 }

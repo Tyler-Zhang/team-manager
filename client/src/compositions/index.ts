@@ -1,1 +1,1 @@
-export { default as withAlertContext } from './withAlertContext';
+export { default as withAlertContext, IAlertProps } from './withAlertContext';

@@ -1,14 +1,19 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 import { RouteComponentProps, withRouter } from 'react-router';
 import { compose } from 'recompose';
-import { IAlertProps, withAlertContext } from '../../compositions';
-
+import { Dispatch } from 'redux';
 import CenterInPage from '../../components/CenterInPage/CenterInPage';
+import { IAlertProps, withAlertContext } from '../../compositions';
 import { AuthenticationService } from '../../services';
-import { ILoginParams } from '../../services/AuthenticationService';
+import { AuthActions, IAuthPayloadLoggedIn } from '../../store/reducers/authReducer';
 import LoginForm from './LoginForm/LoginForm';
 
-class CreateOrganizationContainer extends React.Component<IAlertProps & RouteComponentProps<{}>> {
+interface IProps {
+  loginAction: (params: IAuthPayloadLoggedIn) => any;
+}
+
+class LoginContainer extends React.Component<IProps & IAlertProps & RouteComponentProps<{}>> {
   public render() {
     return (
       <CenterInPage width={4}>
@@ -18,9 +23,10 @@ class CreateOrganizationContainer extends React.Component<IAlertProps & RouteCom
     )
   }
 
-  public onSubmit = async (params: ILoginParams) => {
+  public onSubmit = async (params: AuthenticationService.ILoginParams) => {
     try {
-      await AuthenticationService.login(params);
+      const response = await AuthenticationService.login(params);
+      this.props.loginAction(response.data);
       this.props.history.push('/dashboard');
     } catch (e) {
       this.props.alert.error(e);
@@ -30,5 +36,8 @@ class CreateOrganizationContainer extends React.Component<IAlertProps & RouteCom
 
 export default compose(
   withAlertContext,
-  withRouter
-)(CreateOrganizationContainer);
+  withRouter,
+  connect(null, (dispatch: Dispatch) => ({
+    loginAction: (params: IAuthPayloadLoggedIn) => dispatch(AuthActions.authLoggedIn(params))
+  }))
+)(LoginContainer);

@@ -6,6 +6,7 @@ export * from './Member';
 export * from './Team';
 export * from './Organization';
 export * from './ApplicationModel';
+export * from './AuthenticatedContext';
 
 export interface IORMState extends ORMCommonState {
   member: MemberState;

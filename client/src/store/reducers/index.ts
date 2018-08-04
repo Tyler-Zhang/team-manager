@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import authenticationReducer, { IAuthenticationState } from './authenticationReducer';
+import authenticationReducer, { IAuthenticationState } from './authReducer';
 import ormReducer from './ormReducer';
 
 export interface IState {

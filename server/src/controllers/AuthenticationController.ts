@@ -16,7 +16,15 @@ export class AuthenticationController {
   ) {
     const { email, password } = body;
 
-    const member = await Member.findOne({ where: { email }});
+    const member = await Member.findOne({
+      where: { email },
+      join: {
+        alias: 'member',
+        leftJoinAndSelect: {
+          organization: 'member.organization'
+        }
+      }
+    });
 
     if (!member || !await compare(password, member.password)) {
       throw new UnauthorizedError('Bad credentials');
@@ -27,7 +35,11 @@ export class AuthenticationController {
 
     // Set as cookie
     res.cookie('authorization', token, { httpOnly: true });
-    return null;
+
+    return {
+      organization: member.organization,
+      authenticatedContext: authContext
+    }
   }
 
   @Post('/logout')

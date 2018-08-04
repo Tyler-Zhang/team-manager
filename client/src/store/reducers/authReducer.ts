@@ -1,22 +1,16 @@
 import { createAction } from 'typesafe-actions';
 import { AppReducer, mapReducers, ReducerMap } from '../../lib/ReduxHelpers';
-import { Authority } from '../../models/Member';
+import { IAuthenticatedContext, IOrganization } from '../../models';
 
 /* ------------- Types and Action Creators ------------- */
 
-interface IAuthLoggedInPayload {
-  authContext: {
-    authority: Authority;
-    memberId: number;
-    organizationId: number;
-  },
-  organization: {
-    name: string
-  }
+export interface IAuthPayloadLoggedIn {
+  authContext: IAuthenticatedContext,
+  organization: IOrganization;
 }
 
 const actions = {
-  authLoggedIn: createAction('auth/LOGGED_IN', resolve => (payload: IAuthLoggedInPayload) => resolve(payload)),
+  authLoggedIn: createAction('auth/LOGGED_IN', resolve => (payload: IAuthPayloadLoggedIn) => resolve(payload)),
   authLoggedOut: createAction('auth/LOGGED_OUT'),
 };
 
@@ -26,15 +20,9 @@ export const AuthActions = actions;
 export type IAuthenticationState =
   { authenticated: false } |
   {
-    authenticated: boolean;
-    authContext: {
-      authority: Authority,
-      memberId: number,
-      organizationId: number
-    },
-    organization: {
-      name: string
-    }
+    authenticated: true;
+    authContext: IAuthenticatedContext;
+    organization: IOrganization;
   };
 
 /* ------------- Initial State ------------- */
@@ -45,7 +33,7 @@ export const INITIAL_STATE: IAuthenticationState = {
 
 /* ------------- Reducers ------------- */
 
-const authLoggedIn: AppReducer<IAuthenticationState, IAuthLoggedInPayload> = (
+const authLoggedIn: AppReducer<IAuthenticationState, IAuthPayloadLoggedIn> = (
   state: IAuthenticationState,
   { payload }) => {
 

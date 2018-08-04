@@ -1,6 +1,6 @@
 import { Col, Row } from 'antd';
 import * as React from 'react';
-import './styles.scss';
+import './CenterInPage.scss';
 
 interface IProps {
   width: number;

@@ -2,8 +2,8 @@ import { Button, Col, Divider, Row } from 'antd';
 import * as React from 'react';
 import { Authority, IMember, IOrganization, ProtoModel } from '../../../models';
 
-import MemberForm from './MemberForm';
-import OrganizationForm from './OrganizationForm';
+import MemberForm from './MemberForm/MemberForm';
+import OrganizationForm from './OrganizationForm/OrganizationForm';
 
 interface IProps {
   onSubmit: (params: { organization: ProtoModel<IOrganization>, member: ProtoModel<IMember> }) => any

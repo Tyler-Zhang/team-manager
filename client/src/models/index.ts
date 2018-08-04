@@ -1,7 +1,18 @@
-import { ORM } from 'redux-orm';
-import { Member } from './Member';
+import { ORM, ORMCommonState } from 'redux-orm';
+import { Member, MemberState } from './Member';
+import { Team, TeamState } from './Team';
 
-const orm = new ORM();
-orm.register(Member as any)
+export interface IORMState extends ORMCommonState {
+  member: MemberState;
+  team: TeamState;
+}
+
+export interface IORMModels {
+  member: typeof Member;
+  team: typeof Team;
+}
+
+const orm = new ORM<IORMState>();
+orm.register<IORMModels>(Member)
 
 export { orm }

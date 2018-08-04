@@ -3,10 +3,10 @@ import { RouteComponentProps, withRouter } from 'react-router';
 import { compose } from 'recompose';
 import { IAlertProps, withAlertContext } from '../../compositions';
 
-import CenterInPage from '../../components/CenterInPage';
+import CenterInPage from '../../components/CenterInPage/CenterInPage';
 import { AuthenticationService } from '../../services';
 import { ILoginParams } from '../../services/AuthenticationService';
-import LoginForm from './components/LoginForm';
+import LoginForm from './LoginForm/LoginForm';
 
 class CreateOrganizationContainer extends React.Component<IAlertProps & RouteComponentProps<{}>> {
   public render() {

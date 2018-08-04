@@ -1,6 +1,6 @@
 import { Input, Row } from 'antd';
 import * as React from 'react';
-import { IOrganization, ProtoModel } from '../../../../../models';
+import { IOrganization, ProtoModel } from '../../../../models';
 
 interface IProps {
   organization: ProtoModel<IOrganization>;

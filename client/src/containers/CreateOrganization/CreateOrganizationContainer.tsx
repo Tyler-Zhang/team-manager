@@ -6,7 +6,7 @@ import { withAlertContext } from '../../compositions';
 import { IAlertProps } from '../../compositions/withAlertContext';
 import { IMember, IOrganization, ProtoModel } from '../../models';
 import { OrganizationService } from '../../services';
-import SignupFormComponent from './components/SignupForm';
+import SignupFormComponent from './SignupForm/SignupForm';
 
 interface ICreateOrganizationParams {
   organization: ProtoModel<IOrganization>;

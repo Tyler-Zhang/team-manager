@@ -6,18 +6,19 @@ export enum Authority {
   admin = 'admin'
 }
 
-export interface IMemberModel {
+export interface IMember {
   id: number;
   authority: Authority;
   firstName: string;
   lastName: string;
   email: string;
   phoneNumber: string;
+  password?: string;
 }
 
-export type MemberState = TableState<IMemberModel & IFetchableFields>;
+export type MemberState = TableState<IMember & IFetchableFields>;
 
-export class Member extends ApplicationModel<IMemberModel, IFetchableFields> {
+export class Member extends ApplicationModel<IMember, IFetchableFields> {
   public static modelName = 'member';
 
   public static fields = {

@@ -10,6 +10,7 @@
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "react-scripts-ts": "2.16.0",
+    "recompose": "~0.27.1",
     "redux": "^4.0.0",
     "redux-devtools-extension": "^2.13.5",
     "redux-orm": "^0.12.1",
@@ -29,9 +30,15 @@
     "@types/react-dom": "^16.0.6",
     "@types/react-redux": "^6.0.5",
     "@types/react-router-dom": "^4.3.0",
+    "@types/recompose": "^0.26.3",
     "@types/redux": "^3.6.0",
     "@types/redux-devtools-extension": "^2.13.2",
     "@types/redux-orm": "^0.9.0",
     "typescript": "^2.9.2"
+  },
+  "proxy": {
+    "/api": {
+      "target": "http://localhost:8080"
+    }
   }
 }

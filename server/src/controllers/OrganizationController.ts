@@ -1,4 +1,4 @@
-import { Post, Body, JsonController, Res, Redirect } from "routing-controllers";
+import { Post, Body, JsonController, Res, HttpCode } from "routing-controllers";
 import { Authority } from '../models';
 import { CreateOrganizationRequest } from "../requests/CreateOrganizationRequest";
 import { getManager } from "typeorm";
@@ -8,7 +8,7 @@ import { Response } from "express-serve-static-core";
 @JsonController('/organizations')
 export class OrganizationController {
   @Post('/init')
-  @Redirect('/login')
+  @HttpCode(204)
   public async init(
     @Body({ required: true, validate: true}) body: CreateOrganizationRequest,
     @Res() res: Response
@@ -23,5 +23,7 @@ export class OrganizationController {
       initialMember.organization = createdOrganization;
       return MemberOperations.Create.run({ model: initialMember, entityManager });
     });
+
+    return null;
   }
 }

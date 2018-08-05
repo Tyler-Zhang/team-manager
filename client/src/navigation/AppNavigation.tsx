@@ -17,7 +17,7 @@ const AppNavigation = () => (
       <Route exact={true} path="/create_organization" component={CreateOrganizationContainer}/>
       <SidebarContainer>
         <Switch>
-          <Route exact={true} path="/users" component={UsersContainer}/>
+          <Route exact={true} path="/dashboard/users" component={UsersContainer}/>
         </Switch>
       </SidebarContainer>
     </Switch>

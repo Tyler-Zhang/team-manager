@@ -32,3 +32,7 @@ export function mapReducers<S, R extends ReducersMapObject>(
     return reducer(state, action);
   };
 }
+
+export function noOpReducer(state: any) {
+  return state;
+}

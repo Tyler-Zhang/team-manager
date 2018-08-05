@@ -5,7 +5,7 @@
 import { createParamDecorator } from 'routing-controllers';
 import { getAuthenticatedContextFromAction } from './getAuthenticatedContextFromAction';
 
-export function authContext({ required = true } = {}) {
+export default function authenticatedContext({ required = true } = {}) {
   return createParamDecorator({
     required,
     value: getAuthenticatedContextFromAction

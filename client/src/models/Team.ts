@@ -1,5 +1,7 @@
+import { schema } from 'normalizr';
 import { attr, TableState } from 'redux-orm';
 import { ApplicationModel, fetchableFields, IFetchableFields } from './ApplicationModel';
+import { positionSchema } from './Position';
 
 export interface ITeam {
   id: number;
@@ -17,3 +19,7 @@ export class Team extends ApplicationModel<ITeam, IFetchableFields> {
     name: attr()
   }
 }
+
+export const teamSchema: schema.Entity = new schema.Entity('members', {
+  positions: [positionSchema]
+});

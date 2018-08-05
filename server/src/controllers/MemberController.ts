@@ -1,7 +1,8 @@
-import { Post, Body, BadRequestError, JsonController } from "routing-controllers";
-import { Organization, Member } from '../models';
+import { Get, Post, Body, BadRequestError, JsonController, QueryParam } from "routing-controllers";
+import { Organization, Member, AuthenticatedContext } from '../models';
 import { MemberOperations, PositionOperations } from '../operations';
 import { getManager } from "typeorm";
+import authenticatedContext from "../authorization/authenticatedContext";
 
 @JsonController('/members')
 export class MemberController {
@@ -34,5 +35,13 @@ export class MemberController {
     });
 
     return body;
+  }
+
+  @Get('')
+  public async get(@QueryParam('organizationId') organizationId: number = 5) {
+    return Member.find({
+      where: { organizationId },
+      relations: ['positions', 'positions.team']
+    });
   }
 }

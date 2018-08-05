@@ -5,6 +5,7 @@
   "dependencies": {
     "antd": "^3.7.1",
     "axios": "^0.18.0",
+    "normalizr": "^3.2.4",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-redux": "^5.0.7",
@@ -14,6 +15,8 @@
     "redux": "^4.0.0",
     "redux-devtools-extension": "^2.13.5",
     "redux-orm": "^0.12.1",
+    "redux-saga": "^0.16.0",
+    "reflexbox": "^3.0.1",
     "ts-import-plugin": "^1.5.4",
     "typesafe-actions": "^2.0.4"
   },
@@ -34,6 +37,7 @@
     "@types/redux": "^3.6.0",
     "@types/redux-devtools-extension": "^2.13.2",
     "@types/redux-orm": "^0.9.0",
+    "@types/redux-saga": "^0.10.5",
     "typescript": "^2.9.2"
   },
   "proxy": {

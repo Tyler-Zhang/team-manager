@@ -1,16 +1,17 @@
 import { createAction } from 'typesafe-actions';
-import { AppReducer, mapReducers, ReducerMap } from '../../lib/ReduxHelpers';
+import { AppReducer, mapReducers, noOpReducer, ReducerMap } from '../../lib/ReduxHelpers';
 
 /* ------------- Types and Action Creators ------------- */
 
 const actions = {
+  membersQuery: createAction('members/QUERY'),
   membersLoadStart: createAction('members/LOAD_START'),
   membersLoadError: createAction('members/LOAD_ERROR', resolve => (payload: Error) => resolve(payload)),
   membersLoadSuccess: createAction('members/LOAD_SUCCESS')
 };
 
 
-export const MembersActions = actions;
+export const MemberActions = actions;
 
 export interface IMembersState {
   error: Error | null;
@@ -25,6 +26,8 @@ export const INITIAL_STATE: IMembersState = {
 };
 
 /* ------------- Reducers ------------- */
+
+const membersQuery = noOpReducer;
 
 const membersLoadStart: AppReducer<IMembersState, undefined> = (state: IMembersState) => {
   return {
@@ -53,6 +56,7 @@ const membersLoadSuccess: AppReducer<IMembersState, undefined> = (state: IMember
 /* ------------- Hookup Reducers To Types ------------- */
 
 const reducerMap: ReducerMap<typeof actions, IMembersState> = {
+  membersQuery,
   membersLoadStart,
   membersLoadError,
   membersLoadSuccess

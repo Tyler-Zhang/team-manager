@@ -2,10 +2,11 @@ import * as React from 'react';
 
 import { RouteComponentProps, withRouter } from 'react-router';
 import { compose } from 'recompose';
-import { withAlertContext } from '../../compositions';
-import { IAlertProps } from '../../compositions/withAlertContext';
-import { IMember, IOrganization, ProtoModel } from '../../models';
-import { OrganizationService } from '../../services';
+import CenterInPage from '../../../components/CenterInPage/CenterInPage';
+import { withAlertContext } from '../../../compositions';
+import { IAlertProps } from '../../../compositions/withAlertContext';
+import { IMember, IOrganization, ProtoModel } from '../../../models';
+import { OrganizationService } from '../../../services';
 import SignupFormComponent from './SignupForm/SignupForm';
 
 interface ICreateOrganizationParams {
@@ -16,8 +17,10 @@ interface ICreateOrganizationParams {
 class CreateOrganizationContainer extends React.Component<IAlertProps & RouteComponentProps<{}>> {
   public render() {
     return (
-      <SignupFormComponent
-        onSubmit={this.onSubmit}/>
+      <CenterInPage width={6}>
+        <SignupFormComponent
+          onSubmit={this.onSubmit}/>
+      </CenterInPage>
     )
   }
 

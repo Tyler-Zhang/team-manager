@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { RouteComponentProps, withRouter } from 'react-router';
 import { compose } from 'recompose';
 import { Dispatch } from 'redux';
-import CenterInPage from '../../components/CenterInPage/CenterInPage';
-import { IAlertProps, withAlertContext } from '../../compositions';
-import { AuthenticationService } from '../../services';
-import { AuthActions, IAuthPayloadLoggedIn } from '../../store/reducers/authReducer';
+import CenterInPage from '../../../components/CenterInPage/CenterInPage';
+import { IAlertProps, withAlertContext } from '../../../compositions';
+import { AuthenticationService } from '../../../services';
+import { AuthActions, IAuthPayloadLoggedIn } from '../../../store/reducers/authReducer';
 import LoginForm from './LoginForm/LoginForm';
 
 interface IProps {

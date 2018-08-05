@@ -1,6 +1,6 @@
-import { Button, Col, Divider, Row } from 'antd';
+import { Button, Divider, Row } from 'antd';
 import * as React from 'react';
-import { Authority, IMember, IOrganization, ProtoModel } from '../../../models';
+import { Authority, IMember, IOrganization, ProtoModel } from '../../../../models';
 
 import MemberForm from './MemberForm/MemberForm';
 import OrganizationForm from './OrganizationForm/OrganizationForm';
@@ -37,33 +37,29 @@ export default class SignupFormComponent extends React.PureComponent<IProps, ISt
   public render (){
     return (
       <div>
+        <h1> Create a new organization </h1>
+
+        <Divider orientation='left'> Organization Settings </Divider>
         <Row>
-          <Col span={8} offset={8}>
-            <h1> Create a new organization </h1>
-
-            <Divider orientation='left'> Organization Settings </Divider>
-            <Row>
-              <OrganizationForm
-                organization={this.state.organization}
-                onChange={this.onChangeOrganization}
-              />
-            </Row>
-
-            <Divider orientation='left'> First Member </Divider>
-            <Row>
-              <MemberForm
-                member={this.state.member}
-                onChange={this.onChangeMember}
-              />
-            </Row>
-
-            <Button
-              children='Submit'
-              type='primary'
-              onClick={this.onSubmit}
-            />
-          </Col>
+          <OrganizationForm
+            organization={this.state.organization}
+            onChange={this.onChangeOrganization}
+          />
         </Row>
+
+        <Divider orientation='left'> First Member </Divider>
+        <Row>
+          <MemberForm
+            member={this.state.member}
+            onChange={this.onChangeMember}
+          />
+        </Row>
+
+        <Button
+          children='Submit'
+          type='primary'
+          onClick={this.onSubmit}
+        />
       </div>
     )
   }

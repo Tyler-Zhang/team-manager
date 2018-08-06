@@ -21,6 +21,7 @@ export default class MembersHeader extends React.PureComponent<IProps> {
               <Input.Search
                   placeholder="Search here"
                   enterButton={true}
+                  disabled={true}
               />
             </Col>
             <Col span={4} offset={8}>

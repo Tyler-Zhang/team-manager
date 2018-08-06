@@ -21,7 +21,7 @@ export interface IMember {
 export type MemberState = TableState<IMember & IFetchableFields>;
 
 export class Member extends ApplicationModel<IMember, IFetchableFields> {
-  public static modelName = 'member';
+  public static modelName = 'Member';
 
   public static fields = {
     ...fetchableFields,

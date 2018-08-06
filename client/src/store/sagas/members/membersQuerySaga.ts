@@ -4,15 +4,16 @@ import { getType } from 'typesafe-actions';
 import { memberListSchema } from '../../../models';
 import { MemberService } from '../../../services';
 import { MemberActions } from '../../reducers/membersReducer';
+import { OrmActions } from '../../reducers/ormReducer/ormReducer';
 
 function* membersQueryTask() {
   try {
     yield put(MemberActions.membersLoadStart());
     const membersQueryResponse = yield call(MemberService.get);
 
-    const entities = normalize(membersQueryResponse.data, memberListSchema);
+    const { entities } = normalize(membersQueryResponse.data, memberListSchema);
 
-    console.log(entities);
+    yield put(OrmActions.loadEntities({ entities }));
 
     yield put(MemberActions.membersLoadSuccess());
   } catch (e) {

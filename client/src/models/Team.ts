@@ -11,7 +11,7 @@ export interface ITeam {
 export type TeamState = TableState<ITeam & IFetchableFields>;
 
 export class Team extends ApplicationModel<ITeam, IFetchableFields> {
-  public static modelName = 'team';
+  public static modelName = 'Team';
 
   public static fields = {
     ...fetchableFields,

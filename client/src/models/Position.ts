@@ -14,7 +14,7 @@ export interface IPosition {
 export type PositionState = TableState<IPosition & IFetchableFields>;
 
 export class Position extends ApplicationModel<IPosition, IFetchableFields> {
-  public static modelName = 'member';
+  public static modelName = 'Position';
 
   public static fields = {
     ...fetchableFields,

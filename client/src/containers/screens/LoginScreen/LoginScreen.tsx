@@ -13,7 +13,7 @@ interface IProps {
   loginAction: (params: IAuthPayloadLoggedIn) => any;
 }
 
-class LoginContainer extends React.Component<IProps & IAlertProps & RouteComponentProps<{}>> {
+class LoginScreen extends React.Component<IProps & IAlertProps & RouteComponentProps<{}>> {
   public render() {
     return (
       <CenterInPage width={4}>
@@ -40,4 +40,4 @@ export default compose(
   connect(null, (dispatch: Dispatch) => ({
     loginAction: (params: IAuthPayloadLoggedIn) => dispatch(AuthActions.authLoggedIn(params))
   }))
-)(LoginContainer);
+)(LoginScreen);

@@ -19,7 +19,7 @@ interface IProps {
   teams: ITeam[];
 }
 
-class UsersContainer extends React.Component<IProps, {}> {
+class MembersScreen extends React.Component<IProps, {}> {
   public componentDidMount () {
     this.props.queryMembers();
   }
@@ -52,4 +52,4 @@ export default compose(
       createMember: MemberActions.membersCreate
     }, dispatch)
   )
-)(UsersContainer);
+)(MembersScreen);

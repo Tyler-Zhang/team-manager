@@ -14,7 +14,7 @@ interface ICreateOrganizationParams {
   member: ProtoModel<IMember>;
 }
 
-class CreateOrganizationContainer extends React.Component<IAlertProps & RouteComponentProps<{}>> {
+class CreateOrganizationScreen extends React.Component<IAlertProps & RouteComponentProps<{}>> {
   public render() {
     return (
       <CenterInPage width={6}>
@@ -37,4 +37,4 @@ class CreateOrganizationContainer extends React.Component<IAlertProps & RouteCom
 export default compose(
   withAlertContext,
   withRouter
-)(CreateOrganizationContainer);
+)(CreateOrganizationScreen);

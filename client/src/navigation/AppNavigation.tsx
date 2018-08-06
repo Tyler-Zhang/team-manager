@@ -4,10 +4,10 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 /**
  * Containers
  */
-import CreateOrganizationContainer from '../containers/screens/CreateOrganization/CreateOrganizationContainer';
-import LoginContainer from '../containers/screens/Login/LoginContainer';
-import MembersContainer from '../containers/screens/Members/MembersContainer';
-import SidebarContainer from '../containers/screens/Sidebar/SidebarContainer';
+import CreateOrganizationContainer from '../containers/screens/CreateOrganizationScreen/CreateOrganizationScreen';
+import LoginContainer from '../containers/screens/LoginScreen/LoginScreen';
+import MembersContainer from '../containers/screens/MembersScreen/MembersScreen';
+import SidebarContainer from '../containers/Sidebar/SidebarContainer';
 
 
 const AppNavigation = () => (

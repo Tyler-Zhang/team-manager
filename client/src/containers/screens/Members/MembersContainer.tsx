@@ -3,11 +3,20 @@ import * as React from 'react'
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { bindActionCreators, Dispatch } from 'redux';
-import { MemberActions } from '../../../store/reducers/membersReducer';
+import { IMember, ITeam, ProtoModel } from '../../../models';
+import { memberListSelector } from '../../../selectors/memberListSelector';
+import { IState } from '../../../store';
+import { IMemberPayloadCreate, MemberActions } from '../../../store/reducers/membersReducer';
 
+import { teamBareListSelector } from '../../../selectors/teamBareListSelector';
+import MembersHeader from './MembersHeader/MembersHeader';
+import MembersTable from './MembersTable/MembersTable';
 
 interface IProps {
-  queryMembers: () => any
+  queryMembers: () => any;
+  createMember: (member: IMemberPayloadCreate) => any;
+  members: IMember[];
+  teams: ITeam[];
 }
 
 class UsersContainer extends React.Component<IProps, {}> {
@@ -17,13 +26,30 @@ class UsersContainer extends React.Component<IProps, {}> {
 
   public render () {
     return (
-      <Layout/>
+      <Layout>
+        <MembersHeader
+          onCreate={this.createUser}
+          teams={this.props.teams}
+          onRefresh={this.props.queryMembers}
+        />
+        <MembersTable members={this.props.members}/>
+      </Layout>
     )
+  }
+
+  private createUser = (member: ProtoModel<IMember>) => {
+    this.props.createMember({ member });
   }
 }
 
 export default compose(
-  connect(null, (dispatch: Dispatch) => bindActionCreators({
-    queryMembers: MemberActions.membersQuery
-  }, dispatch))
+  connect((state: IState) => ({
+      members: memberListSelector(state.orm),
+      teams: teamBareListSelector(state.orm)
+    }),
+    (dispatch: Dispatch) => bindActionCreators({
+      queryMembers: MemberActions.membersQuery,
+      createMember: MemberActions.membersCreate
+    }, dispatch)
+  )
 )(UsersContainer);

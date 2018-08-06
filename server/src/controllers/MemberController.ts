@@ -7,8 +7,13 @@ import authenticatedContext from "../authorization/authenticatedContext";
 @JsonController('/members')
 export class MemberController {
   @Post('')
-  public async create(@Body({ required: true }) body: Member) {
-    const organization = await Organization.findOne(body.id);
+  public async create(
+    @Body({ required: true }) body: Member,
+    @authenticatedContext({ required: true }) authContext: AuthenticatedContext
+  ) {
+    body.organizationId = body.organizationId || authContext.getOrganizationId();
+
+    const organization = await Organization.findOne(body.organizationId);
 
     if (!organization) {
       throw new BadRequestError('Organization does not exist');

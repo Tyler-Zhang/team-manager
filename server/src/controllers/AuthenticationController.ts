@@ -54,7 +54,7 @@ export class AuthenticationController {
     @authenticatedContext({required: true}) authContext: AuthenticatedContext
   ) {
     const organizationId = authContext.getOrganizationId();
-    const organization = await Organization.find({ where: { organizationId } });
+    const organization = await Organization.findOne({ where: { organizationId } });
 
     if (!organization) {
       throw new BadRequestError('Your organization does not exist');

@@ -4,14 +4,14 @@ import { IAuthenticatedContext, IOrganization } from '../../models';
 
 /* ------------- Types and Action Creators ------------- */
 
-export interface IAuthPayloadLoggedIn {
+export interface IAuthPayloadSuccess {
   authContext: IAuthenticatedContext,
   organization: IOrganization;
 }
 
 const actions = {
-  authLoggedIn: createAction('auth/LOGGED_IN', resolve => (payload: IAuthPayloadLoggedIn) => resolve(payload)),
-  authLoggedOut: createAction('auth/LOGGED_OUT'),
+  authSuccess: createAction('auth/SUCCESS', resolve => (payload: IAuthPayloadSuccess) => resolve(payload)),
+  authLogout: createAction('auth/LOGOUT'),
 };
 
 
@@ -33,7 +33,7 @@ export const INITIAL_STATE: IAuthenticationState = {
 
 /* ------------- Reducers ------------- */
 
-const authLoggedIn: AppReducer<IAuthenticationState, IAuthPayloadLoggedIn> = (
+const authSuccess: AppReducer<IAuthenticationState, IAuthPayloadSuccess> = (
   state: IAuthenticationState,
   { payload }) => {
 
@@ -44,7 +44,7 @@ const authLoggedIn: AppReducer<IAuthenticationState, IAuthPayloadLoggedIn> = (
   }
 };
 
-const authLoggedOut: AppReducer<IAuthenticationState, undefined> = (
+const authLogout: AppReducer<IAuthenticationState, undefined> = (
   state: IAuthenticationState
 ) => {
   return {
@@ -55,8 +55,8 @@ const authLoggedOut: AppReducer<IAuthenticationState, undefined> = (
 /* ------------- Hookup Reducers To Types ------------- */
 
 const reducerMap: ReducerMap<typeof actions, IAuthenticationState> = {
-  authLoggedIn,
-  authLoggedOut
+  authSuccess,
+  authLogout
 };
 
 

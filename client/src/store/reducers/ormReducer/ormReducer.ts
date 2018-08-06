@@ -2,6 +2,7 @@ import { Action } from 'redux';
 import { createAction } from 'typesafe-actions';
 import { orm } from '../../../models';
 import memberReducer  from './memberReducer';
+import positionReducer from './positionReducer';
 import teamReducer from './teamReducer';
 
 export interface IOrmPayloadLoadEntities {
@@ -17,7 +18,8 @@ export const OrmActions = Actions;
 
 const ormReducers = [
   memberReducer,
-  teamReducer
+  teamReducer,
+  positionReducer
 ]
 
 export default function ormReducer(state: any = orm.getEmptyState(), action: Action) {

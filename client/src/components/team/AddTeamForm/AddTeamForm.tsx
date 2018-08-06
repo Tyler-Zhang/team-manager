@@ -30,6 +30,12 @@ class AddTeamForm extends React.Component<IProps & FormComponentProps, {}> {
         return;
       }
 
+      if (values.members) {
+        values.positions = values.members.map((memberId: number) => ({
+          memberId
+        }));
+      }
+
       this.props.onCreate(values);
     })
   }

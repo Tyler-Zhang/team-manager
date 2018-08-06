@@ -10,7 +10,7 @@ import { AuthActions, IAuthPayloadSuccess } from '../../../store/reducers/authRe
 import LoginForm from './LoginForm/LoginForm';
 
 interface IProps {
-  loginSuccess: (params: IAuthPayloadSuccess) => any;
+  authSuccess: (params: IAuthPayloadSuccess) => any;
 }
 
 class LoginScreen extends React.Component<IProps & IAlertProps & RouteComponentProps<{}>> {
@@ -26,7 +26,7 @@ class LoginScreen extends React.Component<IProps & IAlertProps & RouteComponentP
   public onSubmit = async (params: AuthenticationService.ILoginParams) => {
     try {
       const response = await AuthenticationService.login(params);
-      this.props.loginSuccess(response.data);
+      this.props.authSuccess(response.data);
       this.props.history.push('/dashboard');
     } catch (e) {
       this.props.alert.error(e);
@@ -38,6 +38,6 @@ export default compose(
   withAlertContext,
   withRouter,
   connect(null, (dispatch: Dispatch) => ({
-    loginSuccess: (params: IAuthPayloadSuccess) => dispatch(AuthActions.authSuccess(params))
+    authSuccess: (params: IAuthPayloadSuccess) => dispatch(AuthActions.authSuccess(params))
   }))
 )(LoginScreen);

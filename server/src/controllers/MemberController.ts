@@ -22,7 +22,7 @@ export class MemberController {
     /**
      * Split up the creation of the member, with it joining the different teams
      */
-    const positions = body.positions;
+    const positions = body.positions || [];
     body.positions = [];
 
     await getManager().transaction(async entityManager => {

@@ -2,6 +2,7 @@ import { createConnection } from 'typeorm';
 import { get } from 'lodash';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
+import * as cookieParser from 'cookie-parser';
 import { useExpressServer, useContainer } from 'routing-controllers';
 import { databaseConfig, log } from './config';
 import { join } from 'path';
@@ -21,6 +22,7 @@ export async function launch() {
   const app = express();
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
+  app.use(cookieParser());
 
   /**
    * Setup container so we can use dependency injection in

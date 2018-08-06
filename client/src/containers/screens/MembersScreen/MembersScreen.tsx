@@ -20,10 +20,6 @@ interface IProps {
 }
 
 class MembersScreen extends React.Component<IProps, {}> {
-  public componentDidMount () {
-    this.props.queryMembers();
-  }
-
   public render () {
     return (
       <Layout>

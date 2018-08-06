@@ -20,10 +20,6 @@ interface IProps {
 }
 
 class TeamsScreen extends React.Component<IProps, {}> {
-  public componentDidMount () {
-    this.props.queryTeams();
-  }
-
   public render () {
     return (
       <Layout>

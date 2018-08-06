@@ -17,6 +17,7 @@ function* teamsQueryTask() {
 
     yield put(TeamActions.teamsLoadSuccess());
   } catch (e) {
+    console.log(e);
     yield put(TeamActions.teamsLoadError(e));
   }
 }

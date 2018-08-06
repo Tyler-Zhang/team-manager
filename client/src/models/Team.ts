@@ -21,7 +21,7 @@ export class Team extends ApplicationModel<ITeam, IFetchableFields> {
 }
 
 export const teamSchema: schema.Entity = new schema.Entity('teams', {
-  positions: [positionSchema]
+  positions: new schema.Array(positionSchema)
 });
 
 export const teamListSchema = new schema.Array(teamSchema);

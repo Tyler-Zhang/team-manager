@@ -35,7 +35,7 @@ export class Member extends ApplicationModel<IMember, IFetchableFields> {
 }
 
 export const memberSchema: schema.Entity = new schema.Entity('members', {
-  positions: [positionSchema]
+  positions: new schema.Array(positionSchema)
 });
 
 export const memberListSchema = new schema.Array(memberSchema);

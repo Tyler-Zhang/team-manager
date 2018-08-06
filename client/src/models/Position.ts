@@ -30,3 +30,5 @@ export const positionSchema = new schema.Entity('positions', {
   member: memberSchema,
   team: teamSchema
 })
+
+export const positionListSchema = new schema.Array(positionSchema);

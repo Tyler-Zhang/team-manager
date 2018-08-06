@@ -30,6 +30,16 @@ class AddMemberForm extends React.Component<IProps & FormComponentProps, {}> {
         return;
       }
 
+      /**
+       * The form input for "teams" are a list of teamIds, we convert
+       * to position associations
+       */
+      if(values.teams) {
+        values.positions = values.teams.map((teamId: number) => ({
+          teamId
+        }))
+      }
+
       this.props.onCreate(values);
     })
   }

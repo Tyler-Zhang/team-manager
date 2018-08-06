@@ -2,6 +2,7 @@ import * as _ from 'lodash';
 import { AnyAction } from 'redux';
 import { getType } from 'typesafe-actions';
 import { orm } from '../../../models';
+import { IPosition } from '../../../models/Position';
 import { OrmActions } from './ormReducer';
 
 export default function positionReducer(state: any, action: AnyAction) {
@@ -14,7 +15,11 @@ export default function positionReducer(state: any, action: AnyAction) {
 
       if (positionEntites) {
         const positions = Object.values(positionEntites);
-        positions.forEach(position => Position.upsert(position));
+        positions.forEach((position: IPosition) => {
+          const createdPosition = Position.upsert(position);
+          createdPosition.member = position.memberId;
+          createdPosition.team = position.teamId;
+        });
       }
     }
   }

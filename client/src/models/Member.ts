@@ -1,5 +1,5 @@
 import { schema } from 'normalizr';
-import { attr, many, TableState } from 'redux-orm';
+import { attr, TableState } from 'redux-orm';
 import { ApplicationModel, fetchableFields, IFetchableFields } from './ApplicationModel';
 import { positionSchema } from './Position';
 
@@ -30,8 +30,7 @@ export class Member extends ApplicationModel<IMember, IFetchableFields> {
     firstName: attr(),
     lastName: attr(),
     email: attr(),
-    phoneNumber: attr(),
-    positions: many('Position', 'positions')
+    phoneNumber: attr()
   }
 }
 

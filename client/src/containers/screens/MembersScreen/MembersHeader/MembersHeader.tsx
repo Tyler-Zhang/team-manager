@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Flex } from 'reflexbox';
 import { IMember, ITeam, ProtoModel } from '../../../../models';
 
-import AddMemberModal from '../../../../components/Member/AddMemberModal/AddMemberModal';
+import AddMemberModal from '../../../../components/member/AddMemberModal/AddMemberModal';
 
 interface IProps {
   teams: ITeam[];

@@ -1,5 +1,7 @@
+import { ConnectedRouter } from 'connected-react-router';
 import * as React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
+import { history } from '../store';
 
 /**
  * Containers
@@ -12,7 +14,7 @@ import SidebarContainer from '../containers/Sidebar/SidebarContainer';
 
 
 const AppNavigation = () => (
-  <BrowserRouter>
+  <ConnectedRouter history={history}>
     <Switch>
       <Route exact={true} path="/login" component={LoginContainer}/>
       <Route exact={true} path="/create_organization" component={CreateOrganizationContainer}/>
@@ -23,7 +25,7 @@ const AppNavigation = () => (
         </Switch>
       </SidebarContainer>
     </Switch>
-  </BrowserRouter>
+  </ConnectedRouter>
 )
 
 export default AppNavigation;

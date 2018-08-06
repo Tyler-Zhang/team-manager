@@ -15,5 +15,9 @@ function getTokenFromRequest(request: Request) {
 export function getAuthenticatedContextFromAction(action: Action) {
   const token = getTokenFromRequest(action.request);
 
+  if (!token) {
+    return null;
+  }
+
   return AuthenticatedContextOperations.FromToken.run({ token });
 }

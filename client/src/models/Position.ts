@@ -1,5 +1,5 @@
 import { schema } from 'normalizr';
-import { attr, TableState } from 'redux-orm';
+import { attr, fk, TableState } from 'redux-orm';
 import { ApplicationModel, fetchableFields, IFetchableFields } from './ApplicationModel';
 import { IMember, memberSchema } from './Member';
 import { ITeam, teamSchema } from './Team';
@@ -20,7 +20,9 @@ export class Position extends ApplicationModel<IPosition, IFetchableFields> {
     ...fetchableFields,
     id: attr(),
     teamId: attr(),
-    memberId: attr()
+    memberId: attr(),
+    member: fk('Member', 'positions'),
+    team: fk('Team', 'positions')
   }
 }
 

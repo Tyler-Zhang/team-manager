@@ -1,5 +1,5 @@
 import { schema } from 'normalizr';
-import { attr, TableState } from 'redux-orm';
+import { attr, many, TableState } from 'redux-orm';
 import { ApplicationModel, fetchableFields, IFetchableFields } from './ApplicationModel';
 import { positionSchema } from './Position';
 
@@ -16,7 +16,8 @@ export class Team extends ApplicationModel<ITeam, IFetchableFields> {
   public static fields = {
     ...fetchableFields,
     id: attr(),
-    name: attr()
+    name: attr(),
+    positions: many('Position', 'positions')
   }
 }
 

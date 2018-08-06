@@ -1,10 +1,22 @@
 import { Icon, Layout, Menu } from 'antd';
 import Sider from 'antd/lib/layout/Sider';
 import * as React from 'react';
+import { connect } from 'react-redux';
 import { RouteComponentProps, withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
+import { compose } from 'recompose';
+import { bindActionCreators, Dispatch } from 'redux';
+import { StartupActions } from '../../store/reducers/startupReducer';
 
-class SidebarContainer extends React.PureComponent<RouteComponentProps<{}>> {
+interface IProps {
+  dashboardLoad: () => any;
+}
+
+class SidebarContainer extends React.PureComponent<IProps & RouteComponentProps<{}>> {
+  public componentDidMount() {
+    this.props.dashboardLoad();
+  }
+
   public render() {
     return (
       <Layout style={{ minHeight: '100vh' }}>
@@ -35,4 +47,9 @@ class SidebarContainer extends React.PureComponent<RouteComponentProps<{}>> {
   }
 }
 
-export default withRouter(SidebarContainer);
+export default compose(
+  withRouter,
+  connect(null, (dispatch: Dispatch) => bindActionCreators({
+    dashboardLoad: StartupActions.dashboardLoad
+  }, dispatch))
+)(SidebarContainer);

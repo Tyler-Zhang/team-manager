@@ -8,5 +8,5 @@ function* teamsStartupTask() {
 }
 
 export default function* teamsStartupSaga() {
-  yield takeLatest(getType(StartupActions.initialLoad), teamsStartupTask);
+  yield takeLatest(getType(StartupActions.dashboardLoad), teamsStartupTask);
 }

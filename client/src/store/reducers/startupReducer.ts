@@ -3,7 +3,8 @@ import { AppReducer, mapReducers, ReducerMap } from '../../lib/ReduxHelpers';
 
 /* ------------- Types and Action Creators ------------- */
 const actions = {
-  initialLoad: createAction('startup/INITIAL_LOAD')
+  initialLoad: createAction('startup/INITIAL_LOAD'),
+  dashboardLoad: createAction('startup/DASHBOARD_LOAD')
 };
 
 
@@ -11,11 +12,13 @@ export const StartupActions = actions;
 
 /* ------------- Initial State ------------- */
 export interface IStartupState {
-  initialized: boolean
+  initialized: boolean;
+  dashboardInitialized: boolean;
 }
 
 export const INITIAL_STATE: IStartupState = {
-  initialized: false
+  initialized: false,
+  dashboardInitialized: false
 };
 
 /* ------------- Reducers ------------- */
@@ -27,10 +30,17 @@ const initialLoad: AppReducer<IStartupState, undefined> = (state: IStartupState)
   }
 };
 
+const dashboardLoad: AppReducer<IStartupState, undefined> = (state: IStartupState) => {
+  return {
+    ...state,
+    dashboardInitialized: true
+  }
+};
 /* ------------- Hookup Reducers To Types ------------- */
 
 const reducerMap: ReducerMap<typeof actions, IStartupState> = {
-  initialLoad
+  initialLoad,
+  dashboardLoad
 };
 
 

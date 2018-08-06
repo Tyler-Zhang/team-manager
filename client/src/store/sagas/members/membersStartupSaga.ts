@@ -8,5 +8,5 @@ function* membersStartupTask() {
 }
 
 export default function* membersStartupSaga() {
-  yield takeLatest(getType(StartupActions.initialLoad), membersStartupTask);
+  yield takeLatest(getType(StartupActions.dashboardLoad), membersStartupTask);
 }

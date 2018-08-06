@@ -10,12 +10,10 @@ function* authStartupTask() {
    * the current browser, the server will respond with the necessary
    * authentication details. Otherwise, we will need to login again
    */
-
   const response = yield call(AuthenticationService.reauthenticate);
-
   yield put(AuthActions.authSuccess(response.data));
 }
 
 export default function* authStartupSaga() {
-  yield takeLatest(getType(StartupActions.initialLoad), authStartupTask);
+  yield takeLatest(getType(StartupActions.dashboardLoad), authStartupTask);
 }

@@ -1,9 +1,10 @@
-import { Post, Body, JsonController, OnUndefined, Res, UnauthorizedError } from "routing-controllers";
+import { Post, Body, JsonController, OnUndefined, Res, UnauthorizedError, BadRequestError } from "routing-controllers";
 import { compare } from 'bcryptjs';
-import { Member } from '../models';
+import { Member, AuthenticatedContext, Organization } from '../models';
 import { LoginRequest } from "../requests/LoginRequest";
 import { Response } from "express";
 import { AuthenticatedContextOperations } from '../operations';
+import authenticatedContext from "../authorization/authenticatedContext";
 
 
 @JsonController('/authentication')
@@ -46,5 +47,22 @@ export class AuthenticationController {
   public async logout(@Res() res: Response) {
     res.clearCookie('authorization');
     return null;
+  }
+
+  @Post('/reauthenticate')
+  public async reauthenticate(
+    @authenticatedContext({required: true}) authContext: AuthenticatedContext
+  ) {
+    const organizationId = authContext.getOrganizationId();
+    const organization = await Organization.find({ where: { organizationId } });
+
+    if (!organization) {
+      throw new BadRequestError('Your organization does not exist');
+    }
+
+    return {
+      organization,
+      authenticatedContext: authContext
+    }
   }
 }

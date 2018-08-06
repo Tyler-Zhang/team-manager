@@ -6,7 +6,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
  */
 import CreateOrganizationContainer from '../containers/screens/CreateOrganizationScreen/CreateOrganizationScreen';
 import LoginContainer from '../containers/screens/LoginScreen/LoginScreen';
-import MembersContainer from '../containers/screens/MembersScreen/MembersScreen';
+import MembersScreen from '../containers/screens/MembersScreen/MembersScreen';
+import TeamsScreen from '../containers/screens/TeamsScreen/TeamsScreen';
 import SidebarContainer from '../containers/Sidebar/SidebarContainer';
 
 
@@ -17,7 +18,8 @@ const AppNavigation = () => (
       <Route exact={true} path="/create_organization" component={CreateOrganizationContainer}/>
       <SidebarContainer>
         <Switch>
-          <Route exact={true} path="/dashboard/users" component={MembersContainer}/>
+          <Route exact={true} path="/dashboard/users" component={MembersScreen}/>
+          <Route exact={true} path="/dashboard/teams" component={TeamsScreen}/>
         </Switch>
       </SidebarContainer>
     </Switch>

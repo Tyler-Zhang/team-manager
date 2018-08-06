@@ -1,26 +1,26 @@
 import { normalize } from 'normalizr';
 import { call, put, takeEvery } from 'redux-saga/effects';
 import { getType } from 'typesafe-actions';
-import { memberSchema } from '../../../models';
+import { teamSchema } from '../../../models';
 import { TeamService } from '../../../services';
 import { OrmActions } from '../../reducers/ormReducer/ormReducer';
 import { TeamActions } from '../../reducers/teamsReducer';
 
-function* membersCreateTask(action: ReturnType<typeof TeamActions['teamsCreate']>) {
+function* teamsCreateTask(action: ReturnType<typeof TeamActions['teamsCreate']>) {
   try {
-    yield put(TeamActions.membersCreateStart());
-    const membersCreateResponse = yield call(TeamService.create, action.payload.member);
+    yield put(TeamActions.teamsCreateStart());
+    const teamsCreateResponse = yield call(TeamService.create, action.payload.team);
 
-    const { entities } = normalize(membersCreateResponse.data, memberSchema);
+    const { entities } = normalize(teamsCreateResponse.data, teamSchema);
 
     yield put(OrmActions.loadEntities({ entities }));
 
-    yield put(TeamActions.membersCreateSuccess());
+    yield put(TeamActions.teamsCreateSuccess());
   } catch (e) {
-    yield put(TeamActions.membersCreateError(e));
+    yield put(TeamActions.teamsCreateError(e));
   }
 }
 
-export default function* membersCreateSaga() {
-  yield takeEvery(getType(TeamActions.membersCreate), membersCreateTask);
+export default function* teamsCreateSaga() {
+  yield takeEvery(getType(TeamActions.teamsCreate), teamsCreateTask);
 }

@@ -6,39 +6,39 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { IMember, ITeam, ProtoModel } from '../../../models';
 import { memberListSelector } from '../../../selectors/memberListSelector';
 import { IState } from '../../../store';
-import { IMemberPayloadCreate, MemberActions } from '../../../store/reducers/membersReducer';
+import { ITeamPayloadCreate, TeamActions } from '../../../store/reducers/teamsReducer';
 
 import { teamBareListSelector } from '../../../selectors/teamBareListSelector';
-import MembersHeader from './MembersHeader/MembersHeader';
-import MembersTable from './MembersTable/MembersTable';
+import TeamsHeader from './TeamsHeader/TeamsHeader';
+import TeamsTable from './TeamsTable/TeamsTable';
 
 interface IProps {
-  queryMembers: () => any;
-  createMember: (member: IMemberPayloadCreate) => any;
-  members: IMember[];
+  queryTeams: () => any;
+  createTeam: (member: ITeamPayloadCreate) => any;
   teams: ITeam[];
+  members: IMember[];
 }
 
 class TeamsScreen extends React.Component<IProps, {}> {
   public componentDidMount () {
-    this.props.queryMembers();
+    this.props.queryTeams();
   }
 
   public render () {
     return (
       <Layout>
-        <MembersHeader
-          onCreate={this.createUser}
-          teams={this.props.teams}
-          onRefresh={this.props.queryMembers}
+        <TeamsHeader
+          onCreate={this.createTeam}
+          members={this.props.members}
+          onRefresh={this.props.queryTeams}
         />
-        <MembersTable members={this.props.members}/>
+        <TeamsTable teams={this.props.teams}/>
       </Layout>
     )
   }
 
-  private createUser = (member: ProtoModel<IMember>) => {
-    this.props.createMember({ member });
+  private createTeam = (team: ProtoModel<ITeam>) => {
+    this.props.createTeam({ team });
   }
 }
 
@@ -48,8 +48,8 @@ export default compose(
       teams: teamBareListSelector(state.orm)
     }),
     (dispatch: Dispatch) => bindActionCreators({
-      queryMembers: MemberActions.membersQuery,
-      createMember: MemberActions.membersCreate
+      queryTeams: TeamActions.teamsQuery,
+      createTeam: TeamActions.teamsCreate
     }, dispatch)
   )
 )(TeamsScreen);

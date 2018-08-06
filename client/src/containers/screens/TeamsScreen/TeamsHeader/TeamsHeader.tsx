@@ -3,15 +3,15 @@ import * as React from 'react';
 import { Flex } from 'reflexbox';
 import { IMember, ITeam, ProtoModel } from '../../../../models';
 
-import AddMemberModal from '../../../../components/member/AddMemberModal/AddMemberModal';
+import AddTeamModal from '../../../../components/team/AddTeamModal/AddTeamModal';
 
 interface IProps {
-  teams: ITeam[];
-  onCreate: (member: ProtoModel<IMember>) => any;
+  members: IMember[];
+  onCreate: (member: ProtoModel<ITeam>) => any;
   onRefresh: () => any;
 }
 
-export default class MembersHeader extends React.PureComponent<IProps> {
+export default class TeamsHeader extends React.PureComponent<IProps> {
   public render() {
     return (
       <Layout.Header style={{ background: '#fff'}}>
@@ -28,8 +28,8 @@ export default class MembersHeader extends React.PureComponent<IProps> {
               <Flex align="center" justify="flex-end">
                 <Button type="dashed" icon="reload" onClick={this.props.onRefresh}/>
                 <div style={{width: 10}}/>
-                <AddMemberModal
-                  teams={this.props.teams}
+                <AddTeamModal
+                  members={this.props.members}
                   onCreate={this.props.onCreate}/>
               </Flex>
             </Col>

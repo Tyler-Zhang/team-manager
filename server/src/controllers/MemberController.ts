@@ -1,4 +1,4 @@
-import { Get, Post, Body, BadRequestError, JsonController, QueryParam, Delete, Param } from "routing-controllers";
+import { Get, Post, Body, BadRequestError, JsonController, QueryParam, Delete, Param, HttpCode } from "routing-controllers";
 import { Organization, Member, AuthenticatedContext } from '../models';
 import { MemberOperations, PositionOperations } from '../operations';
 import { getManager } from "typeorm";
@@ -43,7 +43,9 @@ export class MemberController {
   }
 
   @Get('')
-  public async get(@QueryParam('organizationId') organizationId: string) {
+  public async get(@authenticatedContext({ required: true }) authContext: AuthenticatedContext) {
+    const organizationId = authContext.getOrganizationId();
+
     return Member.find({
       where: { organizationId },
       relations: ['positions', 'positions.team']
@@ -51,6 +53,7 @@ export class MemberController {
   }
 
   @Delete('/:id')
+  @HttpCode(204)
   public async delete(@Param('id') memberId: string) {
     const member = await Member.findOne(memberId);
 
@@ -59,5 +62,7 @@ export class MemberController {
     }
 
     await MemberOperations.Delete.run({ model: member });
+
+    return null;
   }
 }

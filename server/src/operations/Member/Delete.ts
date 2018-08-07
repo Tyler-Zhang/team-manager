@@ -21,6 +21,8 @@ export class Delete extends AbstractOperation {
   public run() {
     return this.entityManager.transaction(async entityManager => {
       await this.deletePositions(entityManager);
+
+      await entityManager.remove(this.model);
     });
   }
 

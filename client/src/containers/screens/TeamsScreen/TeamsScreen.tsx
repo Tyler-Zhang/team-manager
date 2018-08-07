@@ -6,7 +6,7 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { IMember, ITeam, ProtoModel } from '../../../models';
 import { memberListSelector } from '../../../selectors/memberListSelector';
 import { IState } from '../../../store';
-import { ITeamPayloadCreate, TeamActions } from '../../../store/reducers/teamsReducer';
+import { ITeamPayloadCreate, ITeamPayloadDelete, TeamActions } from '../../../store/reducers/teamsReducer';
 
 import { teamBareListSelector } from '../../../selectors/teamBareListSelector';
 import TeamsHeader from './TeamsHeader/TeamsHeader';
@@ -15,6 +15,7 @@ import TeamsTable from './TeamsTable/TeamsTable';
 interface IProps {
   queryTeams: () => any;
   createTeam: (member: ITeamPayloadCreate) => any;
+  deleteTeam: (payload: ITeamPayloadDelete) => any;
   teams: ITeam[];
   members: IMember[];
 }
@@ -28,7 +29,10 @@ class TeamsScreen extends React.Component<IProps, {}> {
           members={this.props.members}
           onRefresh={this.props.queryTeams}
         />
-        <TeamsTable teams={this.props.teams}/>
+        <TeamsTable
+          teams={this.props.teams}
+          onDelete={this.deleteTeam}
+        />
       </Layout>
     )
   }
@@ -36,6 +40,9 @@ class TeamsScreen extends React.Component<IProps, {}> {
   private createTeam = (team: ProtoModel<ITeam>) => {
     this.props.createTeam({ team });
   }
+
+
+  private deleteTeam = (id: number) => this.props.deleteTeam({ id });
 }
 
 export default compose(
@@ -45,7 +52,8 @@ export default compose(
     }),
     (dispatch: Dispatch) => bindActionCreators({
       queryTeams: TeamActions.teamsQuery,
-      createTeam: TeamActions.teamsCreate
+      createTeam: TeamActions.teamsCreate,
+      deleteTeam: TeamActions.teamsDelete
     }, dispatch)
   )
 )(TeamsScreen);

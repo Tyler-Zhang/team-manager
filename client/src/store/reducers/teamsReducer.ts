@@ -7,6 +7,10 @@ export interface ITeamPayloadCreate {
   team: ProtoModel<ITeam>
 }
 
+export interface ITeamPayloadDelete {
+  id: number;
+}
+
 const actions = {
   teamsQuery: createAction('teams/QUERY'),
   teamsLoadStart: createAction('teams/LOAD_START'),
@@ -15,7 +19,8 @@ const actions = {
   teamsCreate: createAction('teams/CREATE', resolve => (payload: ITeamPayloadCreate) => resolve(payload)),
   teamsCreateStart: createAction('teams/CREATE_START'),
   teamsCreateError: createAction('teams/CREATE_ERROR', resolve => (payload: Error) => resolve(payload)),
-  teamsCreateSuccess: createAction('teams/CREATE_SUCCESS')
+  teamsCreateSuccess: createAction('teams/CREATE_SUCCESS'),
+  teamsDelete: createAction('teams/DELETE', resolve => (payload: ITeamPayloadDelete) => resolve(payload))
 };
 
 
@@ -90,6 +95,8 @@ const teamsCreateSuccess: AppReducer<ITeamsState, undefined> = (state: ITeamsSta
     createError: null
   }
 };
+
+const teamsDelete = noOpReducer;
 /* ------------- Hookup Reducers To Types ------------- */
 
 const reducerMap: ReducerMap<typeof actions, ITeamsState> = {
@@ -100,7 +107,8 @@ const reducerMap: ReducerMap<typeof actions, ITeamsState> = {
   teamsCreate,
   teamsCreateStart,
   teamsCreateError,
-  teamsCreateSuccess
+  teamsCreateSuccess,
+  teamsDelete
 };
 
 

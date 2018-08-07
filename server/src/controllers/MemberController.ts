@@ -1,4 +1,4 @@
-import { Get, Post, Body, BadRequestError, JsonController, QueryParam } from "routing-controllers";
+import { Get, Post, Body, BadRequestError, JsonController, QueryParam, Delete, Param } from "routing-controllers";
 import { Organization, Member, AuthenticatedContext } from '../models';
 import { MemberOperations, PositionOperations } from '../operations';
 import { getManager } from "typeorm";
@@ -43,10 +43,21 @@ export class MemberController {
   }
 
   @Get('')
-  public async get(@QueryParam('organizationId') organizationId: number = 5) {
+  public async get(@QueryParam('organizationId') organizationId: string) {
     return Member.find({
       where: { organizationId },
       relations: ['positions', 'positions.team']
     });
+  }
+
+  @Delete('/:id')
+  public async delete(@Param('id') memberId: string) {
+    const member = await Member.findOne(memberId);
+
+    if (!member) {
+      throw new BadRequestError('This member does not exist');
+    }
+
+    await MemberOperations.Delete.run({ model: member });
   }
 }

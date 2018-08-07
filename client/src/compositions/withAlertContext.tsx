@@ -1,17 +1,17 @@
 import * as React from 'react';
 import { AlertContext } from "../contexts";
-import { IAlertContext } from "../contexts/AlertContext";
+import { IAlert } from '../utils/alert';
 
 export default function withAlertContext(BaseComponent: React.ComponentClass) {
   return (props: any) => (
       <AlertContext.Consumer>
         {
-          (alertContext: IAlertContext) => <BaseComponent {...props} alert={alertContext}/>
+          (alertContext: IAlert) => <BaseComponent {...props} alert={alertContext}/>
         }
       </AlertContext.Consumer>
   )
 }
 
 export interface IAlertProps {
-  alert: IAlertContext;
+  alert: IAlert;
 }

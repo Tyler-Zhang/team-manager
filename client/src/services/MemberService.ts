@@ -9,3 +9,7 @@ export function get() {
 export function create(member: ProtoModel<IMember>) {
   return axios.post<ProtoModel<IMember>>(`${apiConfig.API_BASE_URL}/members`, member);
 }
+
+export function remove(id: number) {
+  return axios.delete(`${apiConfig.API_BASE_URL}/members/${id}`);
+}

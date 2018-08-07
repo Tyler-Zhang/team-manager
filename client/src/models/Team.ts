@@ -1,6 +1,6 @@
 import { schema } from 'normalizr';
 import { attr, TableState } from 'redux-orm';
-import { ApplicationModel, fetchableFields, IFetchableFields } from './ApplicationModel';
+import { ApplicationModel, baseFields, IBaseFields } from './ApplicationModel';
 import { positionSchema } from './Position';
 
 export interface ITeam {
@@ -8,13 +8,13 @@ export interface ITeam {
   name: string;
 }
 
-export type TeamState = TableState<ITeam & IFetchableFields>;
+export type TeamState = TableState<ITeam & IBaseFields>;
 
-export class Team extends ApplicationModel<ITeam, IFetchableFields> {
+export class Team extends ApplicationModel<ITeam, IBaseFields> {
   public static modelName = 'Team';
 
   public static fields = {
-    ...fetchableFields,
+    ...baseFields,
     id: attr(),
     name: attr()
   }

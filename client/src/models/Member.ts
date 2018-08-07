@@ -1,6 +1,6 @@
 import { schema } from 'normalizr';
 import { attr, TableState } from 'redux-orm';
-import { ApplicationModel, fetchableFields, IFetchableFields } from './ApplicationModel';
+import { ApplicationModel, baseFields, IBaseFields } from './ApplicationModel';
 import { positionSchema } from './Position';
 
 export enum Authority {
@@ -18,13 +18,15 @@ export interface IMember {
   password?: string;
 }
 
-export type MemberState = TableState<IMember & IFetchableFields>;
+export type MemberModel = IMember & IBaseFields;
 
-export class Member extends ApplicationModel<IMember, IFetchableFields> {
+export type MemberState = TableState<MemberModel>;
+
+export class Member extends ApplicationModel<IMember, IBaseFields> {
   public static modelName = 'Member';
 
   public static fields = {
-    ...fetchableFields,
+    ...baseFields,
     id: attr(),
     authority: attr(),
     firstName: attr(),

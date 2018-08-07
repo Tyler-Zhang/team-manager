@@ -3,6 +3,7 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import { getType } from 'typesafe-actions';
 import { memberSchema } from '../../../models';
 import { MemberService } from '../../../services';
+import alert from '../../../utils/alert';
 import { MemberActions } from '../../reducers/membersReducer';
 import { OrmActions } from '../../reducers/ormReducer/ormReducer';
 
@@ -18,6 +19,7 @@ function* membersCreateTask(action: ReturnType<typeof MemberActions['membersCrea
     yield put(MemberActions.membersCreateSuccess());
   } catch (e) {
     yield put(MemberActions.membersCreateError(e));
+    alert.error(e);
   }
 }
 

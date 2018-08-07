@@ -3,6 +3,7 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import { getType } from 'typesafe-actions';
 import { memberListSchema } from '../../../models';
 import { MemberService } from '../../../services';
+import alert from '../../../utils/alert';
 import { MemberActions } from '../../reducers/membersReducer';
 import { OrmActions } from '../../reducers/ormReducer/ormReducer';
 
@@ -18,6 +19,7 @@ function* membersQueryTask() {
     yield put(MemberActions.membersLoadSuccess());
   } catch (e) {
     yield put(MemberActions.membersLoadError(e));
+    alert.error(e);
   }
 }
 

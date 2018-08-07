@@ -7,6 +7,10 @@ export interface IMemberPayloadCreate {
   member: ProtoModel<IMember>
 }
 
+export interface IMemberPayloadDelete {
+  id: number;
+}
+
 const actions = {
   membersQuery: createAction('members/QUERY'),
   membersLoadStart: createAction('members/LOAD_START'),
@@ -15,7 +19,8 @@ const actions = {
   membersCreate: createAction('members/CREATE', resolve => (payload: IMemberPayloadCreate) => resolve(payload)),
   membersCreateStart: createAction('members/CREATE_START'),
   membersCreateError: createAction('members/CREATE_ERROR', resolve => (payload: Error) => resolve(payload)),
-  membersCreateSuccess: createAction('members/CREATE_SUCCESS')
+  membersCreateSuccess: createAction('members/CREATE_SUCCESS'),
+  membersDelete: createAction('members/DELETE', resolve => (payload: IMemberPayloadDelete) => resolve(payload))
 };
 
 
@@ -90,6 +95,8 @@ const membersCreateSuccess: AppReducer<IMembersState, undefined> = (state: IMemb
     createError: null
   }
 };
+
+const membersDelete = noOpReducer;
 /* ------------- Hookup Reducers To Types ------------- */
 
 const reducerMap: ReducerMap<typeof actions, IMembersState> = {
@@ -100,7 +107,8 @@ const reducerMap: ReducerMap<typeof actions, IMembersState> = {
   membersCreate,
   membersCreateStart,
   membersCreateError,
-  membersCreateSuccess
+  membersCreateSuccess,
+  membersDelete
 };
 
 

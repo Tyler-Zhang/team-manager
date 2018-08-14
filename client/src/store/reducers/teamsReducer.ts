@@ -16,10 +16,6 @@ const actions = {
   teamsLoadStart: createAction('teams/LOAD_START'),
   teamsLoadError: createAction('teams/LOAD_ERROR', resolve => (payload: Error) => resolve(payload)),
   teamsLoadSuccess: createAction('teams/LOAD_SUCCESS'),
-  teamsCreate: createAction('teams/CREATE', resolve => (payload: ITeamPayloadCreate) => resolve(payload)),
-  teamsCreateStart: createAction('teams/CREATE_START'),
-  teamsCreateError: createAction('teams/CREATE_ERROR', resolve => (payload: Error) => resolve(payload)),
-  teamsCreateSuccess: createAction('teams/CREATE_SUCCESS'),
   teamsDelete: createAction('teams/DELETE', resolve => (payload: ITeamPayloadDelete) => resolve(payload)),
   teamsDeleteSuccess: createAction('teams/DELETE_SUCCES', resolve => (payload: ITeamPayloadDelete) => resolve(payload)),
   teamsDeleteError: createAction('teams/DELETE_ERROR', resolve => (payload: ITeamPayloadDelete) => resolve(payload))
@@ -72,32 +68,6 @@ const teamsLoadSuccess: AppReducer<ITeamsState, undefined> = (state: ITeamsState
   }
 };
 
-const teamsCreate = noOpReducer;
-
-const teamsCreateStart: AppReducer<ITeamsState, undefined> = (state: ITeamsState) => {
-  return {
-    ...state,
-    isCreating: true,
-    createError: null
-  }
-};
-
-const teamsCreateError: AppReducer<ITeamsState, Error> = (state: ITeamsState, { payload }) => {
-  return {
-    ...state,
-    isCreating: false,
-    createError: payload
-  }
-};
-
-const teamsCreateSuccess: AppReducer<ITeamsState, undefined> = (state: ITeamsState) => {
-  return {
-    ...state,
-    isCreating: false,
-    createError: null
-  }
-};
-
 const teamsDelete = noOpReducer;
 
 const teamsDeleteSuccess = noOpReducer;
@@ -110,10 +80,6 @@ const reducerMap: ReducerMap<typeof actions, ITeamsState> = {
   teamsLoadStart,
   teamsLoadError,
   teamsLoadSuccess,
-  teamsCreate,
-  teamsCreateStart,
-  teamsCreateError,
-  teamsCreateSuccess,
   teamsDelete,
   teamsDeleteSuccess,
   teamsDeleteError

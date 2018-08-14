@@ -3,7 +3,7 @@ import * as React from 'react'
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { bindActionCreators, Dispatch } from 'redux';
-import { IMember, ITeam, ProtoModel } from '../../../models';
+import { IMember, ITeam } from '../../../models';
 import { memberListSelector } from '../../../selectors/memberListSelector';
 import { IState } from '../../../store';
 import { ITeamPayloadCreate, ITeamPayloadDelete, TeamActions } from '../../../store/reducers/teamsReducer';
@@ -24,11 +24,7 @@ class TeamsScreen extends React.Component<IProps, {}> {
   public render () {
     return (
       <Layout>
-        <TeamsHeader
-          onCreate={this.createTeam}
-          members={this.props.members}
-          onRefresh={this.props.queryTeams}
-        />
+        <TeamsHeader onRefresh={this.props.queryTeams}/>
         <TeamsTable
           teams={this.props.teams}
           onDelete={this.deleteTeam}
@@ -36,11 +32,6 @@ class TeamsScreen extends React.Component<IProps, {}> {
       </Layout>
     )
   }
-
-  private createTeam = (team: ProtoModel<ITeam>) => {
-    this.props.createTeam({ team });
-  }
-
 
   private deleteTeam = (id: number) => this.props.deleteTeam({ id });
 }
@@ -52,7 +43,6 @@ export default compose(
     }),
     (dispatch: Dispatch) => bindActionCreators({
       queryTeams: TeamActions.teamsQuery,
-      createTeam: TeamActions.teamsCreate,
       deleteTeam: TeamActions.teamsDelete
     }, dispatch)
   )

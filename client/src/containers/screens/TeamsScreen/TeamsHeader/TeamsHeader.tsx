@@ -1,13 +1,10 @@
 import { Button, Col, Input, Layout, Row } from 'antd';
 import * as React from 'react';
 import { Flex } from 'reflexbox';
-import { IMember, ITeam, ProtoModel } from '../../../../models';
 
 import AddTeamButton from '../../../teams/AddTeamButton/AddTeamButton';
 
 interface IProps {
-  members: IMember[];
-  onCreate: (member: ProtoModel<ITeam>) => any;
   onRefresh: () => any;
 }
 

@@ -1,10 +1,10 @@
 import { createAction } from 'typesafe-actions';
 import { AppReducer, mapReducers, noOpReducer, ReducerMap } from '../../lib/ReduxHelpers';
-import { IMember, ProtoModel } from '../../models';
+import { IMember } from '../../models';
 
 /* ------------- Types and Action Creators ------------- */
-export interface IMemberPayloadCreate {
-  member: ProtoModel<IMember>
+export interface IMemberPayloadCreateSuccess {
+  member: IMember
 }
 
 export interface IMemberPayloadDelete {
@@ -16,10 +16,6 @@ const actions = {
   membersLoadStart: createAction('members/LOAD_START'),
   membersLoadError: createAction('members/LOAD_ERROR', resolve => (payload: Error) => resolve(payload)),
   membersLoadSuccess: createAction('members/LOAD_SUCCESS'),
-  membersCreate: createAction('members/CREATE', resolve => (payload: IMemberPayloadCreate) => resolve(payload)),
-  membersCreateStart: createAction('members/CREATE_START'),
-  membersCreateError: createAction('members/CREATE_ERROR', resolve => (payload: Error) => resolve(payload)),
-  membersCreateSuccess: createAction('members/CREATE_SUCCESS'),
   membersDelete: createAction('members/DELETE', resolve => (payload: IMemberPayloadDelete) => resolve(payload)),
   membersDeleteSuccess: createAction('members/DELETE_SUCCESS',
     resolve => (payload: IMemberPayloadDelete) => resolve(payload)),
@@ -34,8 +30,6 @@ export const MemberActions = actions;
 export interface IMembersState {
   fetchError: Error | null;
   isFetching: boolean;
-  isCreating: boolean;
-  createError: Error | null;
 }
 
 /* ------------- Initial State ------------- */
@@ -43,8 +37,6 @@ export interface IMembersState {
 export const INITIAL_STATE: IMembersState = {
   isFetching: false,
   fetchError: null,
-  isCreating: false,
-  createError: null
 };
 
 /* ------------- Reducers ------------- */
@@ -75,32 +67,6 @@ const membersLoadSuccess: AppReducer<IMembersState, undefined> = (state: IMember
   }
 };
 
-const membersCreate = noOpReducer;
-
-const membersCreateStart: AppReducer<IMembersState, undefined> = (state: IMembersState) => {
-  return {
-    ...state,
-    isCreating: true,
-    createError: null
-  }
-};
-
-const membersCreateError: AppReducer<IMembersState, Error> = (state: IMembersState, { payload }) => {
-  return {
-    ...state,
-    isCreating: false,
-    createError: payload
-  }
-};
-
-const membersCreateSuccess: AppReducer<IMembersState, undefined> = (state: IMembersState) => {
-  return {
-    ...state,
-    isCreating: false,
-    createError: null
-  }
-};
-
 const membersDelete = noOpReducer;
 const membersDeleteError = noOpReducer;
 const membersDeleteSuccess = noOpReducer;
@@ -111,10 +77,6 @@ const reducerMap: ReducerMap<typeof actions, IMembersState> = {
   membersLoadStart,
   membersLoadError,
   membersLoadSuccess,
-  membersCreate,
-  membersCreateStart,
-  membersCreateError,
-  membersCreateSuccess,
   membersDelete,
   membersDeleteError,
   membersDeleteSuccess

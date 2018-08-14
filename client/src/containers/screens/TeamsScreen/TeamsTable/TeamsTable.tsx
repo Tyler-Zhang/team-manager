@@ -1,10 +1,10 @@
 import { Table } from 'antd';
 import * as React from 'react';
 import DeleteButton from '../../../../components/DeleteButton/DeleteButton';
-import { ITeam } from '../../../../models';
+import { ITeam, OrmModel } from '../../../../models';
 
 interface IProps {
-  teams: ITeam[];
+  teams: Array<OrmModel<ITeam>>;
   onDelete: (id: number) => any;
 }
 

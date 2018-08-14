@@ -11,6 +11,8 @@ export interface IBaseFields {
 
 export type ProtoModel<M extends { id: any }> = Omit<M, 'id'>
 
+export type OrmModel<M> = M & IBaseFields
+
 export const baseFields = {
   isFetching: attr({ getDefault: () => false }),
   isDeleting: attr({ getDefault: () => false })

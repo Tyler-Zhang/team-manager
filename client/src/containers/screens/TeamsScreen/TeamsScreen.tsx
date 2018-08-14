@@ -3,8 +3,7 @@ import * as React from 'react'
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { bindActionCreators, Dispatch } from 'redux';
-import { IMember, ITeam } from '../../../models';
-import { memberListSelector } from '../../../selectors/memberListSelector';
+import { ITeam, OrmModel } from '../../../models';
 import { IState } from '../../../store';
 import { ITeamPayloadCreate, ITeamPayloadDelete, TeamActions } from '../../../store/reducers/teamsReducer';
 
@@ -16,8 +15,7 @@ interface IProps {
   queryTeams: () => any;
   createTeam: (member: ITeamPayloadCreate) => any;
   deleteTeam: (payload: ITeamPayloadDelete) => any;
-  teams: ITeam[];
-  members: IMember[];
+  teams: Array<OrmModel<ITeam>>;
 }
 
 class TeamsScreen extends React.Component<IProps, {}> {
@@ -38,7 +36,6 @@ class TeamsScreen extends React.Component<IProps, {}> {
 
 export default compose(
   connect((state: IState) => ({
-      members: memberListSelector(state.orm),
       teams: teamBareListSelector(state.orm)
     }),
     (dispatch: Dispatch) => bindActionCreators({

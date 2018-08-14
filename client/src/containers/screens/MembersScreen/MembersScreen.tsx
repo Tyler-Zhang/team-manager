@@ -3,7 +3,7 @@ import * as React from 'react'
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { bindActionCreators, Dispatch } from 'redux';
-import { IMember } from '../../../models';
+import { IMember, OrmModel } from '../../../models';
 import { memberListSelector } from '../../../selectors/memberListSelector';
 import { IState } from '../../../store';
 import { IMemberPayloadDelete, MemberActions } from '../../../store/reducers/membersReducer';
@@ -14,7 +14,7 @@ import MembersTable from './MembersTable/MembersTable';
 interface IProps {
   queryMembers: () => any;
   deleteMember: (member: IMemberPayloadDelete) => any;
-  members: IMember[];
+  members: Array<OrmModel<IMember>>;
 }
 
 class MembersScreen extends React.Component<IProps, {}> {

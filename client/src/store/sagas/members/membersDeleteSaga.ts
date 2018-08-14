@@ -10,7 +10,7 @@ function* membersDeleteTask(action: ReturnType<typeof MemberActions['membersDele
 
     yield put(MemberActions.membersDeleteSuccess(action.payload));
   } catch (e) {
-    yield put(MemberActions.membersDeleteCancel(action.payload));
+    yield put(MemberActions.membersDeleteError(action.payload));
     alert.error(e);
   }
 }

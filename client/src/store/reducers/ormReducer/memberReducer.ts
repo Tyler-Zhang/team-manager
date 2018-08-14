@@ -30,7 +30,7 @@ export default function memberReducer(state: any, action: AnyAction) {
       break;
     }
 
-    case getType(MemberActions.membersDeleteCancel): {
+    case getType(MemberActions.membersDeleteError): {
       Member.withId(action.payload.id).isDeleting = false;
       break;
     }

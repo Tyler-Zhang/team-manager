@@ -23,7 +23,7 @@ const actions = {
   membersDelete: createAction('members/DELETE', resolve => (payload: IMemberPayloadDelete) => resolve(payload)),
   membersDeleteSuccess: createAction('members/DELETE_SUCCESS',
     resolve => (payload: IMemberPayloadDelete) => resolve(payload)),
-  membersDeleteCancel: createAction('members/DELETE_CANCEL',
+  membersDeleteError: createAction('members/DELETE_ERROR',
     resolve => (payload: IMemberPayloadDelete) => resolve(payload))
 
 };
@@ -102,7 +102,7 @@ const membersCreateSuccess: AppReducer<IMembersState, undefined> = (state: IMemb
 };
 
 const membersDelete = noOpReducer;
-const membersDeleteCancel = noOpReducer;
+const membersDeleteError = noOpReducer;
 const membersDeleteSuccess = noOpReducer;
 /* ------------- Hookup Reducers To Types ------------- */
 
@@ -116,7 +116,7 @@ const reducerMap: ReducerMap<typeof actions, IMembersState> = {
   membersCreateError,
   membersCreateSuccess,
   membersDelete,
-  membersDeleteCancel,
+  membersDeleteError,
   membersDeleteSuccess
 };
 

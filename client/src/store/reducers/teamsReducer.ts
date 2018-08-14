@@ -20,7 +20,9 @@ const actions = {
   teamsCreateStart: createAction('teams/CREATE_START'),
   teamsCreateError: createAction('teams/CREATE_ERROR', resolve => (payload: Error) => resolve(payload)),
   teamsCreateSuccess: createAction('teams/CREATE_SUCCESS'),
-  teamsDelete: createAction('teams/DELETE', resolve => (payload: ITeamPayloadDelete) => resolve(payload))
+  teamsDelete: createAction('teams/DELETE', resolve => (payload: ITeamPayloadDelete) => resolve(payload)),
+  teamsDeleteSuccess: createAction('teams/DELETE_SUCCES', resolve => (payload: ITeamPayloadDelete) => resolve(payload)),
+  teamsDeleteError: createAction('teams/DELETE_ERROR', resolve => (payload: ITeamPayloadDelete) => resolve(payload))
 };
 
 
@@ -97,6 +99,10 @@ const teamsCreateSuccess: AppReducer<ITeamsState, undefined> = (state: ITeamsSta
 };
 
 const teamsDelete = noOpReducer;
+
+const teamsDeleteSuccess = noOpReducer;
+
+const teamsDeleteError = noOpReducer;
 /* ------------- Hookup Reducers To Types ------------- */
 
 const reducerMap: ReducerMap<typeof actions, ITeamsState> = {
@@ -108,7 +114,9 @@ const reducerMap: ReducerMap<typeof actions, ITeamsState> = {
   teamsCreateStart,
   teamsCreateError,
   teamsCreateSuccess,
-  teamsDelete
+  teamsDelete,
+  teamsDeleteSuccess,
+  teamsDeleteError
 };
 
 

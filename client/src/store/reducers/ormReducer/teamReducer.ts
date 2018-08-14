@@ -2,6 +2,7 @@ import * as _ from 'lodash';
 import { AnyAction } from 'redux';
 import { getType } from 'typesafe-actions';
 import { orm } from '../../../models';
+import { TeamActions } from '../teamsReducer';
 import { OrmActions } from './ormReducer';
 
 export default function teamReducer(state: any, action: AnyAction) {
@@ -16,6 +17,21 @@ export default function teamReducer(state: any, action: AnyAction) {
         const teams = Object.values(teamEntites);
         teams.forEach(team => Team.upsert(team));
       }
+      break;
+    }
+    case getType(TeamActions.teamsDelete): {
+      Team.withId(action.payload.id).isDeleting = true;
+      break;
+    }
+
+    case getType(TeamActions.teamsDeleteSuccess): {
+      Team.withId(action.payload.id).delete();
+      break;
+    }
+
+    case getType(TeamActions.teamsDeleteError): {
+      Team.withId(action.payload.id).isDeleting = false;
+      break;
     }
   }
 

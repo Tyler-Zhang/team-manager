@@ -2,7 +2,7 @@ import { Table } from 'antd';
 import * as React from 'react';
 import { IMember } from '../../../../models';
 
-import DeleteMemberButton from '../../../../components/member/DeleteMemberButton/DeleteMemberButton';
+import DeleteButton from '../../../../components/DeleteButton/DeleteButton';
 
 interface IProps {
   members: IMember[];
@@ -15,9 +15,9 @@ export default class MembersTable extends React.PureComponent<IProps> {
     dataIndex: 'id',
     key: 'delete',
     render: (id: number, member: IMember) => (
-      <DeleteMemberButton
+      <DeleteButton
         onDelete={this.onDeleteFactory(id)}
-        member={member}
+        message={`Delete ${member.firstName} ${member.lastName}?`}
       />
     ),
     width: 80

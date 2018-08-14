@@ -1,22 +1,21 @@
 import { Icon, Popconfirm } from 'antd';
 import * as React from 'react';
-import { IMember } from '../../../models';
 
 interface IProps {
   onDelete: () => any;
-  member: IMember;
+  message: string;
 }
 
-const DeleteMemberButton: React.SFC<IProps> = ({
+const DeleteButton: React.SFC<IProps> = ({
   onDelete,
-  member
+  message
 }) => (
   <Popconfirm
-    title={`Delete ${member.firstName} ${member.lastName}?`}
+    title={message}
     onConfirm={onDelete}
   >
     <Icon type="delete"/>
   </Popconfirm>
 )
 
-export default DeleteMemberButton;
+export default DeleteButton;

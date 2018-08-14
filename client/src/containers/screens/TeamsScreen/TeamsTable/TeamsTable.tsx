@@ -1,6 +1,6 @@
 import { Table } from 'antd';
 import * as React from 'react';
-import DeleteTeamButton from '../../../../components/team/DeleteTeamButton/DeleteMemberButton';
+import DeleteButton from '../../../../components/DeleteButton/DeleteButton';
 import { ITeam } from '../../../../models';
 
 interface IProps {
@@ -14,9 +14,9 @@ export default class MembersTable extends React.PureComponent<IProps> {
     dataIndex: 'id',
     key: 'delete',
     render: (id: number, team: ITeam) => (
-      <DeleteTeamButton
+      <DeleteButton
         onDelete={this.onDeleteFactory(id)}
-        team={team}
+        message={`Delete ${team.name}?`}
       />
     ),
     width: 80

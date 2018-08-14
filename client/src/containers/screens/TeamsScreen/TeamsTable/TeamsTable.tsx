@@ -13,10 +13,11 @@ export default class MembersTable extends React.PureComponent<IProps> {
     title: 'Delete',
     dataIndex: 'id',
     key: 'delete',
-    render: (id: number, team: ITeam) => (
+    render: (id: number, team: OrmModel<ITeam>) => (
       <DeleteButton
-        onDelete={this.onDeleteFactory(id)}
         message={`Delete ${team.name}?`}
+        loading={team.isDeleting}
+        onDelete={this.onDeleteFactory(id)}
       />
     ),
     width: 80

@@ -20,6 +20,7 @@ const formItemLayout = {
 interface IProps{
   members: IMember[];
   onCreate: (team: ProtoModel<ITeam>) => any;
+  loading?: boolean;
 }
 
 class AddTeamForm extends React.Component<IProps & FormComponentProps, {}> {
@@ -76,6 +77,7 @@ class AddTeamForm extends React.Component<IProps & FormComponentProps, {}> {
           <Button
             type="primary"
             htmlType="submit"
+            loading={this.props.loading}
           >Submit
           </Button>
         </FormItem>

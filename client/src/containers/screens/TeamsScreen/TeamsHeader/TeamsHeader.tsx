@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Flex } from 'reflexbox';
 import { IMember, ITeam, ProtoModel } from '../../../../models';
 
-import AddTeamModal from '../../../../components/team/AddTeamModal/AddTeamModal';
+import AddTeamButton from '../../../teams/AddTeamButton/AddTeamButton';
 
 interface IProps {
   members: IMember[];
@@ -28,9 +28,7 @@ export default class TeamsHeader extends React.PureComponent<IProps> {
               <Flex align="center" justify="flex-end">
                 <Button type="dashed" icon="reload" onClick={this.props.onRefresh}/>
                 <div style={{width: 10}}/>
-                <AddTeamModal
-                  members={this.props.members}
-                  onCreate={this.props.onCreate}/>
+                <AddTeamButton/>
               </Flex>
             </Col>
           </Row>

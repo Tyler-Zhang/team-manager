@@ -1,4 +1,4 @@
-import { Post, Body, BadRequestError, JsonController, Get, QueryParam } from "routing-controllers";
+import { Post, Body, BadRequestError, JsonController, Get, QueryParam, Param, Delete, NotFoundError, HttpCode } from "routing-controllers";
 import { Team, Organization, AuthenticatedContext } from '../models';
 import { TeamOperations, PositionOperations } from "../operations";
 import authenticatedContext from "../authorization/authenticatedContext";
@@ -56,5 +56,22 @@ export class TeamController {
       where: { organizationId },
       relations: ['positions']
     });
+  }
+
+  @Delete('/:id')
+  @HttpCode(204)
+  public async delete(
+    @Param('id') teamId: number,
+    @authenticatedContext({ required: true }) authContext: AuthenticatedContext
+  ) {
+    const team = await Team.findOne(teamId);
+
+    if (!team) {
+      throw new NotFoundError();
+    }
+
+    await TeamOperations.Delete.run({ model: team });
+
+    return null;
   }
 }

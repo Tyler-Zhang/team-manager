@@ -18,13 +18,7 @@ export class AuthenticationController {
     const { email, password } = body;
 
     const member = await Member.findOne({
-      where: { email },
-      join: {
-        alias: 'member',
-        leftJoinAndSelect: {
-          organization: 'member.organization'
-        }
-      }
+      where: { email }
     });
 
     if (!member || !await compare(password, member.password)) {
@@ -60,9 +54,6 @@ export class AuthenticationController {
       throw new BadRequestError('Your organization does not exist');
     }
 
-    return {
-      organization,
-      authenticatedContext: authContext
-    }
+    return { authenticatedContext: authContext };
   }
 }

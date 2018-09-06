@@ -1,6 +1,7 @@
 import { schema } from 'normalizr';
 import { attr, TableState } from 'redux-orm';
 import { ApplicationModel, baseFields, IBaseFields } from './ApplicationModel';
+import { ExternalConnectionListSchema } from './ExternalConnection';
 
 export interface IOrganization {
   id: number;
@@ -19,6 +20,8 @@ export class Organization extends ApplicationModel<IOrganization, IBaseFields> {
   }
 }
 
-export const OrganizationSchema = new schema.Entity('organizations');
+export const OrganizationSchema = new schema.Entity('organizations', {
+  externalConnections: ExternalConnectionListSchema
+});
 
 export const OrganizationListSchema = new schema.Array(OrganizationSchema);

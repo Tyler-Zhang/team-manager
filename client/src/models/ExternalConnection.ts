@@ -1,6 +1,7 @@
 import { schema } from 'normalizr';
-import { attr, TableState } from 'redux-orm';
+import { attr, fk, TableState } from 'redux-orm';
 import { ApplicationModel, baseFields, IBaseFields } from './ApplicationModel';
+import { IOrganization } from './Organization';
 
 export enum ExternalConnectionType {
   google = 'GoogleExternalConnection'
@@ -9,6 +10,7 @@ export enum ExternalConnectionType {
 export interface IExternalConnection {
   id: number;
   type: ExternalConnectionType;
+  organization: IOrganization;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -24,11 +26,12 @@ export class ExternalConnection extends ApplicationModel<IExternalConnection, IB
     ...baseFields,
     id: attr(),
     type: attr(),
+    organization: fk('Organization', 'externalConnections'),
     createdAt: attr(),
     updatedAt: attr()
   }
 }
 
-export const ExternalConnectionSchema: schema.Entity = new schema.Entity('ExternalConnections');
+export const ExternalConnectionSchema: schema.Entity = new schema.Entity('externalConnections');
 
 export const ExternalConnectionListSchema = new schema.Array(ExternalConnectionSchema);

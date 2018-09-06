@@ -37,6 +37,13 @@ class SidebarContainer extends React.PureComponent<IProps & RouteComponentProps<
                 <span> Teams </span>
               </Link>
             </Menu.Item>
+
+            <Menu.Item key="/dashboard/organization">
+              <Link to="/dashboard/organization">
+                <Icon type="global"/>
+                <span> Organization </span>
+              </Link>
+            </Menu.Item>
           </Menu>
         </Sider>
         <Layout>

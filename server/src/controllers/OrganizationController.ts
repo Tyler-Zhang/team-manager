@@ -1,12 +1,21 @@
-import { Post, Body, JsonController, Res, HttpCode } from "routing-controllers";
-import { Authority } from '../models';
+import { Post, Body, JsonController, Res, HttpCode, Get } from "routing-controllers";
+import { Authority, AuthenticatedContext, Organization } from '../models';
 import { CreateOrganizationRequest } from "../requests/CreateOrganizationRequest";
 import { getManager } from "typeorm";
 import { OrganizationOperations, MemberOperations } from '../operations';
 import { Response } from "express-serve-static-core";
+import authenticatedContext from "../authorization/authenticatedContext";
 
 @JsonController('/organizations')
 export class OrganizationController {
+  @Get()
+  public async get(@authenticatedContext() authContext: AuthenticatedContext) {
+    const organizationId = authContext.getOrganizationId();
+
+    return Organization.find({ where: { id: organizationId } });
+  }
+
+
   @Post('/init')
   @HttpCode(204)
   public async init(

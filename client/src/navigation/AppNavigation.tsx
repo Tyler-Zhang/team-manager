@@ -9,6 +9,7 @@ import { history } from '../store';
 import CreateOrganizationContainer from '../containers/screens/CreateOrganizationScreen/CreateOrganizationScreen';
 import LoginContainer from '../containers/screens/LoginScreen/LoginScreen';
 import MembersScreen from '../containers/screens/MembersScreen/MembersScreen';
+import OrganizationScreen from '../containers/screens/OrganizationScreen/OrganizationScreen';
 import TeamsScreen from '../containers/screens/TeamsScreen/TeamsScreen';
 import SidebarContainer from '../containers/Sidebar/SidebarContainer';
 
@@ -22,6 +23,7 @@ const AppNavigation = () => (
         <Switch>
           <Route exact={true} path="/dashboard/users" component={MembersScreen}/>
           <Route exact={true} path="/dashboard/teams" component={TeamsScreen}/>
+          <Route exact={true} path="/dashboard/organization" component={OrganizationScreen}/>
         </Switch>
       </SidebarContainer>
     </Switch>

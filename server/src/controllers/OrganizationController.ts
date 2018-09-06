@@ -12,7 +12,10 @@ export class OrganizationController {
   public async get(@authenticatedContext() authContext: AuthenticatedContext) {
     const organizationId = authContext.getOrganizationId();
 
-    return Organization.find({ where: { id: organizationId } });
+    return Organization.find({
+      where: { id: organizationId },
+      relations: ['externalConnections']
+    });
   }
 
 

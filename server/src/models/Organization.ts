@@ -2,6 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 import { ApplicationEntity } from './ApplicationEntity';
 import { Member } from './Member';
 import { Type } from 'class-transformer';
+import { ExternalConnection } from './ExternalConnection';
 
 @Entity()
 export class Organization extends ApplicationEntity {
@@ -14,4 +15,8 @@ export class Organization extends ApplicationEntity {
   @Type(() => Member)
   @OneToMany(type => Member, member => member.organization)
   public members!: Member[];
+
+  @Type(() => ExternalConnection)
+  @OneToMany(type => ExternalConnection, externalConnection => externalConnection.organization)
+  public externalConnections!: ExternalConnection[];
 }

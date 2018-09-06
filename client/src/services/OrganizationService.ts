@@ -8,3 +8,7 @@ export function init(params: {
 }) {
   return axios.post(`${apiConfig.API_BASE_URL}/organizations/init`, params);
 }
+
+export function get() {
+  return axios.get(`${apiConfig.API_BASE_URL}/organizations`);
+}

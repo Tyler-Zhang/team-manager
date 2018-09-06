@@ -19,6 +19,6 @@ export class Organization extends ApplicationModel<IOrganization, IBaseFields> {
   }
 }
 
-export const OrganizationSchema = new schema.Entity('Organizations');
+export const OrganizationSchema = new schema.Entity('organizations');
 
 export const OrganizationListSchema = new schema.Array(OrganizationSchema);

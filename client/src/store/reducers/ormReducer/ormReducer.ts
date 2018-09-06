@@ -2,6 +2,7 @@ import { Action } from 'redux';
 import { createAction } from 'typesafe-actions';
 import { orm } from '../../../models';
 import memberReducer  from './memberReducer';
+import organizationReducer from './organizationReducer';
 import positionReducer from './positionReducer';
 import teamReducer from './teamReducer';
 
@@ -17,6 +18,7 @@ const Actions = {
 export const OrmActions = Actions;
 
 const ormReducers = [
+  organizationReducer,
   memberReducer,
   teamReducer,
   positionReducer

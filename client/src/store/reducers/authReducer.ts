@@ -1,12 +1,11 @@
 import { createAction } from 'typesafe-actions';
 import { AppReducer, mapReducers, ReducerMap } from '../../lib/ReduxHelpers';
-import { IAuthenticatedContext, IOrganization } from '../../models';
+import { IAuthenticatedContext } from '../../models';
 
 /* ------------- Types and Action Creators ------------- */
 
 export interface IAuthPayloadSuccess {
-  authContext: IAuthenticatedContext,
-  organization: IOrganization;
+  authContext: IAuthenticatedContext
 }
 
 const actions = {
@@ -22,7 +21,6 @@ export type IAuthenticationState =
   {
     authenticated: true;
     authContext: IAuthenticatedContext;
-    organization: IOrganization;
   };
 
 /* ------------- Initial State ------------- */

@@ -1,11 +1,12 @@
 import { schema } from 'normalizr';
 import { attr, TableState } from 'redux-orm';
 import { ApplicationModel, baseFields, IBaseFields } from './ApplicationModel';
-import { ExternalConnectionListSchema } from './ExternalConnection';
+import { ExternalConnectionListSchema, IExternalConnection } from './ExternalConnection';
 
 export interface IOrganization {
   id: number;
   name: string;
+  externalConnections?: IExternalConnection[];
 }
 
 export type OrganizationState = TableState<IOrganization & IBaseFields>;

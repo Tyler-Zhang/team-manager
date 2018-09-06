@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, BaseEntity, Column, ManyToOne, OneToMany, JoinColumn, BeforeInsert, BeforeUpdate, Index } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, JoinColumn, BeforeInsert, BeforeUpdate, Index } from 'typeorm';
+import { ApplicationEntity } from './ApplicationEntity';
 import { Organization } from './Organization';
 import { Position } from './Position';
 import { Type } from 'class-transformer';
@@ -10,7 +11,7 @@ export enum Authority {
 
 @Entity()
 @Index(['organizationId', 'email'], { unique: true })
-export class Member extends BaseEntity {
+export class Member extends ApplicationEntity {
 
   @PrimaryGeneratedColumn()
   public id!: number;

@@ -1,9 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, BaseEntity, Column, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { ApplicationEntity } from './ApplicationEntity';
 import { Member } from './Member';
 import { Type } from 'class-transformer';
 
 @Entity()
-export class Organization extends BaseEntity {
+export class Organization extends ApplicationEntity {
   @PrimaryGeneratedColumn()
   public id!: number;
 

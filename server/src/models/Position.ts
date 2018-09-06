@@ -1,10 +1,11 @@
-import { Entity, BaseEntity, ManyToOne, RelationId, Column, JoinColumn, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, ManyToOne, Column, JoinColumn, PrimaryGeneratedColumn } from 'typeorm';
+import { ApplicationEntity } from './ApplicationEntity';
 import { Team } from './Team';
 import { Member } from './Member';
 import { Type } from 'class-transformer';
 
 @Entity()
-export class Position extends BaseEntity {
+export class Position extends ApplicationEntity {
   @PrimaryGeneratedColumn()
   public id!: number;
 

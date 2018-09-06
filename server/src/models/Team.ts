@@ -1,11 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, BaseEntity, Column, ManyToOne, OneToMany, JoinColumn, Index } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, JoinColumn, Index } from 'typeorm';
+import { ApplicationEntity } from './ApplicationEntity';
 import { Organization } from './Organization';
 import { Position } from './Position';
 import { Type } from 'class-transformer';
 
 @Entity()
 @Index(['organizationId', 'name'], { unique: true })
-export class Team extends BaseEntity {
+export class Team extends ApplicationEntity {
   @PrimaryGeneratedColumn()
   public id!: number;
 

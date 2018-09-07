@@ -5,12 +5,15 @@ import { Type } from 'class-transformer';
 
 @Entity()
 @TableInheritance({ column: { name: 'type', type: 'varchar' } })
-export abstract class ExternalConnection extends ApplicationEntity {
+export abstract class ExternalConnection extends ApplicationEntity {  
   @PrimaryGeneratedColumn()
   public id!: number;
   
   @Column()
   public type!: string;
+
+  @Column({ type: 'json' })
+  public data!: any;
 
   @Column({ type: 'int', nullable: false })
   @Index()
@@ -20,4 +23,9 @@ export abstract class ExternalConnection extends ApplicationEntity {
   @ManyToOne(type => Organization)
   @JoinColumn({ name: 'organizationId' })
   public organization!: Organization;
+
+  constructor() {
+    super();
+    this.data = {};
+  }
 }

@@ -37,24 +37,20 @@ export default class GoogleController {
     const authContext = await AuthenticatedContextOperations.FromToken.run({ token: state });
     const googleOauth2Client = createGoogleOauth2Client();
 
-    try {
-      const { tokens } = await googleOauth2Client.getToken(code);
-      
-      if (!tokens.refresh_token || !tokens.access_token || !tokens.expiry_date) {
-        throw new BadRequestError('Google oauth flow did not return required information');
-      }
-      
-      const googleExternalConnection = new GoogleExternalConnection();
-      googleExternalConnection.organizationId = authContext.getOrganizationId();
-      googleExternalConnection.refreshToken = tokens.refresh_token;
-      googleExternalConnection.validUntil = new Date(tokens.expiry_date);
-      googleExternalConnection.token = tokens.access_token;
-      
-      await ExternalConnectionOperations.Create.run({ model: googleExternalConnection });
-    } catch (e) {
+    const { tokens } = await googleOauth2Client.getToken(code);
+
+    if (!tokens.refresh_token || !tokens.access_token || !tokens.expiry_date) {
       throw new BadRequestError('Google oauth flow did not return required information');
     }
-      
+    
+    const googleExternalConnection = new GoogleExternalConnection();
+    googleExternalConnection.organizationId = authContext.getOrganizationId();
+    googleExternalConnection.refreshToken = tokens.refresh_token;
+    googleExternalConnection.validUntil = new Date(tokens.expiry_date);
+    googleExternalConnection.token = tokens.access_token;
+    
+    await ExternalConnectionOperations.Create.run({ model: googleExternalConnection });
+    
     return true;
   }
 }

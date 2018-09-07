@@ -3,14 +3,29 @@ import { ChildEntity, Column } from 'typeorm';
 
 @ChildEntity('GoogleExternalConnection')
 export class GoogleExternalConnection extends ExternalConnection {
-  @Column()
-  public refreshToken!: string;
+  get validUntil() {
+    return new Date(this.data.validUntil);
+  }
 
-  @Column()
-  public token!: string;
+  set validUntil(value: Date) {
+    this.data.validUntil = value.toString();
+  }
 
-  @Column()
-  public validUntil!: Date;
+  get token() {
+    return this.data.token as string;
+  }
+
+  set token(value: string) {
+    this.data.token = value;
+  }
+
+  get refreshToken() {
+    return this.data.refreshToken as string;
+  }
+
+  set refreshToken(value: string) {
+    this.data.refreshToken = value;
+  }
 
   public get isValid() {
     return Date.now() < this.validUntil.getTime();

@@ -13,8 +13,8 @@ export class Position extends ApplicationEntity {
   public teamId!: number;
 
   @Type(() => Team)
-  @ManyToOne(type => Member)
-  @JoinColumn({ name: 'teamId' })
+  @ManyToOne(type => Team)
+  @JoinColumn({ name: 'teamId'})
   public team!: Team;
 
   @Column('int', { primary: true })

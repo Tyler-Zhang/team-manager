@@ -6,7 +6,7 @@ import { GoogleExternalConnection } from './ExternalConnection/GoogleExternalCon
 
 @Entity()
 @TableInheritance({ column: { name: 'type', type: 'varchar' } })
-export abstract class ExternalConnection extends STIApplicationEntity {  
+export abstract class ExternalConnection extends STIApplicationEntity {
   @PrimaryGeneratedColumn()
   public id!: number;
   

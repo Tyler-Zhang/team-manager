@@ -7,10 +7,10 @@ import { GoogleDriveFileResource } from './Resource/GoogleDriveFileResource';
 
 @Entity()
 @TableInheritance({ column: { name: 'type', type: 'varchar' } })
-export class Resource extends STIApplicationEntity {  
+export class Resource extends STIApplicationEntity {
   @PrimaryGeneratedColumn()
   public id!: number;
-  
+
   @Column()
   public type!: string;
 
@@ -27,7 +27,7 @@ export class Resource extends STIApplicationEntity {
 
   @ManyToMany(() => Team)
   public teams!: Team[];
-  
+
   static get typeMap() {
     return {
       GoogleDriveFileResource

@@ -3,6 +3,7 @@ import { ApplicationEntity } from './ApplicationEntity';
 import { Member } from './Member';
 import { Type } from 'class-transformer';
 import { ExternalConnection } from './ExternalConnection';
+import { Resource } from './Resource';
 
 @Entity()
 export class Organization extends ApplicationEntity {
@@ -19,4 +20,8 @@ export class Organization extends ApplicationEntity {
   @Type(() => ExternalConnection)
   @OneToMany(type => ExternalConnection, externalConnection => externalConnection.organization)
   public externalConnections!: ExternalConnection[];
+
+  @Type(() => Resource)
+  @OneToMany(type => Resource, resource => resource.organization)
+  public resources!: ExternalConnection[];
 }

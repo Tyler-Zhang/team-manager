@@ -1,12 +1,13 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, Index, TableInheritance } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, Index, TableInheritance, ManyToMany } from 'typeorm';
 import { STIApplicationEntity } from './STIApplicationEntity';
 import { Organization } from './Organization';
-import { Type } from 'class-transformer';
-import { GoogleExternalConnection } from './ExternalConnection/GoogleExternalConnection';
+import { Team } from './Team';
+
+import { GoogleDriveFileResource } from './Resource/GoogleDriveFileResource';
 
 @Entity()
 @TableInheritance({ column: { name: 'type', type: 'varchar' } })
-export abstract class ExternalConnection extends STIApplicationEntity {  
+export class Resource extends STIApplicationEntity {  
   @PrimaryGeneratedColumn()
   public id!: number;
   
@@ -20,14 +21,16 @@ export abstract class ExternalConnection extends STIApplicationEntity {
   @Index()
   public organizationId!: number;
 
-  @Type(() => Organization)
   @ManyToOne(type => Organization)
   @JoinColumn({ name: 'organizationId' })
   public organization!: Organization;
 
-  public static get typeMap() {
+  @ManyToMany(() => Team)
+  public teams!: Team[];
+  
+  static get typeMap() {
     return {
-      GoogleExternalConnection
+      GoogleDriveFileResource
     }
   }
 

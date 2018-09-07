@@ -1,5 +1,5 @@
 import { ExternalConnection } from '../ExternalConnection';
-import { ChildEntity, Column } from 'typeorm';
+import { ChildEntity } from 'typeorm';
 
 @ChildEntity('GoogleExternalConnection')
 export class GoogleExternalConnection extends ExternalConnection {

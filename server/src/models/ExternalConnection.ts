@@ -8,13 +8,13 @@ import { Type } from 'class-transformer';
 export abstract class ExternalConnection extends ApplicationEntity {
   @PrimaryGeneratedColumn()
   public id!: number;
+  
+  @Column()
+  public type!: string;
 
   @Column({ type: 'int', nullable: false })
   @Index()
   public organizationId!: number;
-
-  @Column()
-  public type!: string;
 
   @Type(() => Organization)
   @ManyToOne(type => Organization)

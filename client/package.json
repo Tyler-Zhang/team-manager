@@ -23,7 +23,7 @@
     "typesafe-actions": "^2.0.4"
   },
   "scripts": {
-    "start": "react-scripts-ts start",
+    "start": "DANGEROUSLY_DISABLE_HOST_CHECK=true react-scripts-ts start",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject"

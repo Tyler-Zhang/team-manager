@@ -3,6 +3,7 @@ import * as MemberOperations from './Member';
 import * as OrganizationOperations from './Organization';
 import * as PositionOperations from './Position';
 import * as TeamOperations from './Team';
+import * as ExternalConnectionOperations from './ExternalConnection';
 
 
 export {
@@ -11,4 +12,5 @@ export {
   OrganizationOperations,
   PositionOperations,
   TeamOperations,
+  ExternalConnectionOperations
 }

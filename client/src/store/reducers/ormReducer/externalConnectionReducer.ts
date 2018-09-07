@@ -14,7 +14,10 @@ export default function organizationReducer(state: any, action: AnyAction) {
 
       if (externalConnectionEntities) {
         const externalConnections = Object.values(externalConnectionEntities);
-        externalConnections.forEach(externalConnection => ExternalConnection.upsert(externalConnection));
+        externalConnections.forEach((externalConnection: any) => {
+          const createdExternalConnection = ExternalConnection.upsert(externalConnection)
+          createdExternalConnection.organization = externalConnection.organizationId;
+        });
       }
       break;
     }

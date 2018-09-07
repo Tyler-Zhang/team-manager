@@ -13,6 +13,9 @@ export abstract class ExternalConnection extends ApplicationEntity {
   @Index()
   public organizationId!: number;
 
+  @Column()
+  public type!: string;
+
   @Type(() => Organization)
   @ManyToOne(type => Organization)
   @JoinColumn({ name: 'organizationId' })

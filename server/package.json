@@ -18,6 +18,7 @@
     "cookie-parser": "^1.4.3",
     "express": "^4.16.3",
     "faker": "^4.1.0",
+    "googleapis": "^33.0.0",
     "jsonwebtoken": "^8.3.0",
     "lodash": "^4.17.10",
     "mocha": "^5.2.0",

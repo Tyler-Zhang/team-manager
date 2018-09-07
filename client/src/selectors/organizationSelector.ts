@@ -4,6 +4,15 @@ import { orm } from '../models';
 export const organizationSelector = createSelector(
   orm,
   session => {
-    return session.Organization.all().first();
+    let organization = session.Organization.all().first();
+    
+    if (organization) {
+      organization = {
+        ...organization.ref,
+        externalConnections: organization.externalConnections.toRefArray()
+      };
+    }
+
+    return organization;
   }
 )

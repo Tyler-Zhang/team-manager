@@ -6,6 +6,7 @@ import { IOrganization } from '../../../models';
 import { organizationSelector } from '../../../selectors/organizationSelector';
 import { IState } from '../../../store';
 
+import CenterInPage from '../../../components/CenterInPage/CenterInPage';
 import spinnerWhileLoading from '../../../compositions/spinnerWhileLoading';
 import ExternalConnections from './ExternalConnections/ExternalConnections';
 import OrganizationHeader from './OrganizationHeader/OrganizationHeader';
@@ -16,12 +17,15 @@ interface IProps {
 
 class OrganizationScreen extends React.Component<IProps> {
   public render() {
+    console.log(this.props.organization);
     return (
       <Layout>
         <OrganizationHeader organization={this.props.organization}/>
         
-        <Layout.Content>
-          <ExternalConnections externalConnections={this.props.organization.externalConnections as any}/>
+        <Layout.Content style={{ padding: 24 }}>
+          <CenterInPage width={8}>
+            <ExternalConnections externalConnections={this.props.organization.externalConnections as any}/>
+          </CenterInPage>
         </Layout.Content>
       </Layout>
     );

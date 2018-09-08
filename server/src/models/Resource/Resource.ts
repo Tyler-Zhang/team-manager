@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, Index, TableInheritance, ManyToMany } from 'typeorm';
-import { Organization } from './Organization';
-import { Team } from './Team';
-import { ApplicationEntity } from './ApplicationEntity';
+import { Organization } from '../Organization';
+import { Team } from '../Team';
+import { ApplicationEntity } from '../ApplicationEntity';
 
 @Entity()
 @TableInheritance({ column: { name: 'type', type: 'varchar' } })

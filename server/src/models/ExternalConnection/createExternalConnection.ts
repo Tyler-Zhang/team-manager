@@ -1,13 +1,13 @@
-// import { ExternalConnection } from './ExternalConnection';
-// import { GoogleExternalConnection } from './GoogleExternalConnection';
-// import { factoryCreator } from '../../lib/factoryCreator';
+import { ExternalConnection } from './ExternalConnection';
+import { GoogleExternalConnection } from './GoogleExternalConnection';
+import { factoryCreator } from '../../lib/factoryCreator';
 
-// const typeMap = {
-//   ExternalConnection,
-//   GoogleExternalConnection
-// }
+const typeMap = {
+  ExternalConnection,
+  GoogleExternalConnection
+}
 
-// export const createExternalConnection = factoryCreator<typeof ExternalConnection>(
-//   typeMap,
-//   ExternalConnection
-// );
+export const createExternalConnection = factoryCreator<typeof ExternalConnection>(
+  typeMap,
+  ExternalConnection
+);

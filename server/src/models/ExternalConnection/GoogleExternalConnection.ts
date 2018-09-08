@@ -1,4 +1,4 @@
-import { ExternalConnection } from '../ExternalConnection';
+import { ExternalConnection } from './ExternalConnection';
 import { ChildEntity } from 'typeorm';
 
 @ChildEntity('GoogleExternalConnection')

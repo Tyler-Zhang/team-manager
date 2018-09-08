@@ -1,13 +1,11 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, Index, TableInheritance, ManyToMany } from 'typeorm';
-import { STIApplicationEntity } from './STIApplicationEntity';
 import { Organization } from './Organization';
 import { Team } from './Team';
-
-import { GoogleDriveFileResource } from './Resource/GoogleDriveFileResource';
+import { ApplicationEntity } from './ApplicationEntity';
 
 @Entity()
 @TableInheritance({ column: { name: 'type', type: 'varchar' } })
-export class Resource extends STIApplicationEntity {
+export class Resource extends ApplicationEntity {
   @PrimaryGeneratedColumn()
   public id!: number;
 
@@ -27,12 +25,6 @@ export class Resource extends STIApplicationEntity {
 
   @ManyToMany(() => Team)
   public teams!: Team[];
-
-  static get typeMap() {
-    return {
-      GoogleDriveFileResource
-    }
-  }
 
   constructor() {
     super();

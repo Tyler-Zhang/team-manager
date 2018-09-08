@@ -1,56 +1,56 @@
-// import { JsonController, Redirect, Get, BadRequestError, QueryParam } from 'routing-controllers'
-// import { createGoogleOauth2Client } from '../config';
-// import authenticatedContext from '../authorization/authenticatedContext';
-// import { AuthenticatedContext } from '../models';
-// import { GoogleExternalConnection } from '../models/ExternalConnection/GoogleExternalConnection';
-// import { ExternalConnectionOperations, AuthenticatedContextOperations } from '../operations';
+import { JsonController, Redirect, Get, BadRequestError, QueryParam } from 'routing-controllers'
+import { createGoogleOauth2Client } from '../config';
+import authenticatedContext from '../authorization/authenticatedContext';
+import { AuthenticatedContext } from '../models';
+import { GoogleExternalConnection } from '../models/ExternalConnection/GoogleExternalConnection';
+import { ExternalConnectionOperations, AuthenticatedContextOperations } from '../operations';
 
-// @JsonController('/google')
-// export default class GoogleController {
-//   @Get('/redirect_url')
-//   public redirectUrl (
-//     @authenticatedContext() authContext: AuthenticatedContext
-//   ) {
-//     const authContextToken = AuthenticatedContextOperations.IntoToken.run({ authContext });
+@JsonController('/google')
+export default class GoogleController {
+  @Get('/redirect_url')
+  public redirectUrl (
+    @authenticatedContext() authContext: AuthenticatedContext
+  ) {
+    const authContextToken = AuthenticatedContextOperations.IntoToken.run({ authContext });
 
-//     const authUrl = createGoogleOauth2Client().generateAuthUrl({
-//       access_type: 'offline',
-//       scope: ['https://www.googleapis.com/auth/drive'],
-//       state: authContextToken,
-//       prompt: 'consent'
-//     });
+    const authUrl = createGoogleOauth2Client().generateAuthUrl({
+      access_type: 'offline',
+      scope: ['https://www.googleapis.com/auth/drive'],
+      state: authContextToken,
+      prompt: 'consent'
+    });
 
-//     return authUrl;
-//   }
+    return authUrl;
+  }
 
-//   @Get('/callback')
-//   @Redirect('/dashboard/organization')
-//   public async googleCallBack (
-//     @QueryParam('error') error: string,
-//     @QueryParam('state', { required: true }) state: string,
-//     @QueryParam('code', { required: true }) code: string
-//   ) {
-//     if ( error ) { 
-//       throw new BadRequestError(error);
-//     }
+  @Get('/callback')
+  @Redirect('/dashboard/organization')
+  public async googleCallBack (
+    @QueryParam('error') error: string,
+    @QueryParam('state', { required: true }) state: string,
+    @QueryParam('code', { required: true }) code: string
+  ) {
+    if ( error ) { 
+      throw new BadRequestError(error);
+    }
 
-//     const authContext = await AuthenticatedContextOperations.FromToken.run({ token: state });
-//     const googleOauth2Client = createGoogleOauth2Client();
+    const authContext = await AuthenticatedContextOperations.FromToken.run({ token: state });
+    const googleOauth2Client = createGoogleOauth2Client();
 
-//     const { tokens } = await googleOauth2Client.getToken(code);
+    const { tokens } = await googleOauth2Client.getToken(code);
 
-//     if (!tokens.refresh_token || !tokens.access_token || !tokens.expiry_date) {
-//       throw new BadRequestError('Google oauth flow did not return required information');
-//     }
+    if (!tokens.refresh_token || !tokens.access_token || !tokens.expiry_date) {
+      throw new BadRequestError('Google oauth flow did not return required information');
+    }
     
-//     const googleExternalConnection = new GoogleExternalConnection();
-//     googleExternalConnection.organizationId = authContext.getOrganizationId();
-//     googleExternalConnection.refreshToken = tokens.refresh_token;
-//     googleExternalConnection.validUntil = new Date(tokens.expiry_date);
-//     googleExternalConnection.token = tokens.access_token;
+    const googleExternalConnection = new GoogleExternalConnection();
+    googleExternalConnection.organizationId = authContext.getOrganizationId();
+    googleExternalConnection.refreshToken = tokens.refresh_token;
+    googleExternalConnection.validUntil = new Date(tokens.expiry_date);
+    googleExternalConnection.token = tokens.access_token;
     
-//     await ExternalConnectionOperations.Create.run({ model: googleExternalConnection });
+    await ExternalConnectionOperations.Create.run({ model: googleExternalConnection });
     
-//     return true;
-//   }
-// }
+    return true;
+  }
+}

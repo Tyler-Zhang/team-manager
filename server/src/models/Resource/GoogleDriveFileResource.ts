@@ -1,4 +1,4 @@
-import { Resource } from '../Resource';
+import { Resource } from '../Resource/Resource';
 import { ChildEntity } from 'typeorm';
 
 export enum FilePermission {

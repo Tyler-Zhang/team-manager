@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { IExternalConnection } from '../../../models';
 
-import { GoogleService } from '../../../services';
+import { GoogleOauthService } from '../../../services';
 import ConnectedCard from './ConnectedCard/ConnectedCard';
 import DisconnectedCard from './DisconnectedCard/DisconnectedCard';
 
@@ -23,7 +23,7 @@ export default class GoogleExternalConnectionCard extends React.PureComponent<IP
   }
 
   private async authorize() {
-    const response = await GoogleService.getRedirectUrl();
+    const response = await GoogleOauthService.getRedirectUrl();
 
     const url = response.data;
 

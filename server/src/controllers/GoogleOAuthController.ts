@@ -5,7 +5,7 @@ import { AuthenticatedContext } from '../models';
 import { GoogleExternalConnection } from '../models/ExternalConnection/GoogleExternalConnection';
 import { ExternalConnectionOperations, AuthenticatedContextOperations } from '../operations';
 
-@JsonController('/google')
+@JsonController('/google_oauth')
 export default class GoogleController {
   @Get('/redirect_url')
   public redirectUrl (
@@ -45,9 +45,7 @@ export default class GoogleController {
     
     const googleExternalConnection = new GoogleExternalConnection();
     googleExternalConnection.organizationId = authContext.getOrganizationId();
-    googleExternalConnection.refreshToken = tokens.refresh_token;
-    googleExternalConnection.validUntil = new Date(tokens.expiry_date);
-    googleExternalConnection.token = tokens.access_token;
+    googleExternalConnection.setFromCredential(tokens);
     
     await ExternalConnectionOperations.Create.run({ model: googleExternalConnection });
     

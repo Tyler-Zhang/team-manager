@@ -1,11 +1,13 @@
 import { AuthenticatedContext, Member, IAuthenticatedContextConstructorProps, AuthenticationType } from "../../models";
-import { AbstractOperation } from "../AbstractOperation";
+import { ApplicationOperation } from "../ApplicationOperation";
+import { Operation } from "../../lib/AutoOperation";
 
 export interface IFromMember {
   member: Member
 }
 
-export class FromMember extends AbstractOperation{
+@Operation('AuthenticatedContext')
+export class FromMember extends ApplicationOperation{
   public static run(args: IFromMember): Promise<AuthenticatedContext> {
     return super.run(args);
   }

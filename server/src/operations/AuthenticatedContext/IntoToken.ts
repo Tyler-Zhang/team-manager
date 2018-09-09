@@ -1,7 +1,8 @@
 import { AuthenticatedContext, Authority } from "../../models";
 import { sign } from "jsonwebtoken";
 import { secretsConfig } from '../../config';
-import { AbstractOperation } from "../AbstractOperation";
+import { ApplicationOperation } from "../ApplicationOperation";
+import { Operation } from "../../lib/AutoOperation";
 
 export interface IMemberTokenPayload {
   type: 'member',
@@ -20,7 +21,8 @@ export interface IIntoToken {
   authContext: AuthenticatedContext
 }
 
-export class IntoToken extends AbstractOperation{
+@Operation('AuthenticatedContext')
+export class IntoToken extends ApplicationOperation{
   public static run(args: IIntoToken): string {
     return super.run(args);
   }

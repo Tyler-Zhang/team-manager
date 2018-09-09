@@ -1,21 +1,12 @@
-import { ICreateOperationArgs } from '../Abstract';
+import { ModelApplicationOperation, IModelApplicationOperationArgs } from '../ApplicationOperation';
 import { Member } from '../../models';
-import { getManager, EntityManager } from 'typeorm';
 import { hash } from 'bcryptjs';
-import { AbstractOperation } from '../AbstractOperation';
+import { Operation } from '../../lib/AutoOperation';
 
-export class Create extends AbstractOperation {
-  public static run(args: ICreateOperationArgs<Member>): Promise<Member> {
+@Operation('Member')
+export class Create extends ModelApplicationOperation<Member> {
+  public static run(args: IModelApplicationOperationArgs<Member>): Promise<Member> {
     return super.run(args);
-  }
-
-  public model: Member;
-  public entityManager: EntityManager;
-
-  constructor({ model, entityManager = getManager() }: ICreateOperationArgs<Member>) {
-    super();
-    this.model = model;
-    this.entityManager = entityManager;
   }
 
   public async run() {

@@ -1,14 +1,16 @@
 import { verify } from "jsonwebtoken";
 import { AuthenticatedContext, AuthenticationType, IAuthenticatedContextConstructorProps } from "../../models";
 import { secretsConfig } from '../../config';
-import { AbstractOperation } from "../AbstractOperation";
+import { ApplicationOperation } from "../ApplicationOperation";
 import { ITokenPayload } from './IntoToken';
+import { Operation } from "../../lib/AutoOperation";
 
 export interface IFromToken {
   token: string
 }
 
-export class FromToken extends AbstractOperation{
+@Operation('AuthenticatedContext')
+export class FromToken extends ApplicationOperation{
   public static run(args: IFromToken): Promise<AuthenticatedContext> {
     return super.run(args);
   }

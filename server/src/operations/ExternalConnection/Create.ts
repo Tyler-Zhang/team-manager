@@ -1,20 +1,11 @@
-import { ICreateOperationArgs } from '../Abstract';
+import { ModelApplicationOperation, IModelApplicationOperationArgs } from '../ApplicationOperation';
 import { ExternalConnection } from '../../models';
-import { getManager, EntityManager } from 'typeorm';
-import { AbstractOperation } from '../AbstractOperation';
+import { Operation } from '../../lib/AutoOperation';
 
-export class Create extends AbstractOperation {
-  public static run(args: ICreateOperationArgs<ExternalConnection>): Promise<ExternalConnection> {
+@Operation('ExternalConnection')
+export class Create extends ModelApplicationOperation<ExternalConnection> {
+  public static run(args: IModelApplicationOperationArgs<ExternalConnection>): Promise<ExternalConnection> {
     return super.run(args);
-  }
-
-  public model: ExternalConnection;
-  public entityManager: EntityManager;
-
-  constructor({ model, entityManager = getManager() }: ICreateOperationArgs<ExternalConnection>) {
-    super();
-    this.model = model;
-    this.entityManager = entityManager;
   }
 
   public async run() {

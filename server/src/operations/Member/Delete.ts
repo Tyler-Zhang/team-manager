@@ -1,21 +1,13 @@
-import { ICreateOperationArgs, IDeleteOperationArgs } from '../Abstract';
+import { ModelApplicationOperation, IModelApplicationOperationArgs } from '../ApplicationOperation';
 import { Member, Position } from '../../models';
-import { getManager, EntityManager } from 'typeorm';
-import { AbstractOperation } from '../AbstractOperation';
+import { EntityManager } from 'typeorm';
 import { PositionOperations } from '..';
+import { Operation } from '../../lib/AutoOperation';
 
-export class Delete extends AbstractOperation {
-  public static run(args: IDeleteOperationArgs<Member>): Promise<Member> {
+@Operation('Member')
+export class Delete extends ModelApplicationOperation<Member> {
+  public static run(args: IModelApplicationOperationArgs<Member>): Promise<Member> {
     return super.run(args);
-  }
-
-  public model: Member;
-  public entityManager: EntityManager;
-
-  constructor({ model, entityManager = getManager() }: ICreateOperationArgs<Member>) {
-    super();
-    this.model = model;
-    this.entityManager = entityManager;
   }
 
   public run() {

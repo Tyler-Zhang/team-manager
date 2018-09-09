@@ -40,7 +40,7 @@ function getOperationDescriptorKey(klass: IClass) {
 const container: Record<string, IOperationMap> = {};
 
 export function Operation(modelName: string) {
-  return (klass: IClass) => {
+  return (klass: any) => {
     klass[OPERATION_NAME_PROPERTY] = klass.name;
     klass[MODEL_NAME_PROPERTY] = modelName;
     klass[IS_BASE_PROPERTY] = true;
@@ -55,7 +55,7 @@ export function Operation(modelName: string) {
 }
 
 export function SubclassOperation(modelName: string) {
-  return (klass: IClass) => {
+  return (klass: any) => {
     const parentClass = klass.__proto__;
     
     klass[OPERATION_NAME_PROPERTY] = parentClass.name;
@@ -87,23 +87,31 @@ export abstract class BaseOperation {
     
     const modelType = this.getType(...args);
 
+    if (!modelType) {
+      return this;
+    }
+
     return (
       IOperationMapItem.subclasses[modelType] && 
       IOperationMapItem.subclasses[modelType].klass
     ) || IOperationMapItem.klass;
   }
 
-  public static getType(...args: any[]): string {
-    throw new Error('This method needs to be implemented');
+  public static getType(...args: any[]): string | null {
+    return null;
   }
 
   public static build(...args: any[]): any {
     const appropriateClass = this.getAppropriateClass(...args);
 
-    return appropriateClass(...args);
+    return new appropriateClass(...args);
   }
 
   public static run(...args: any[]) {
     return this.build(...args).run();
+  }
+
+  constructor(...args: any[]) {
+    return;
   }
 }

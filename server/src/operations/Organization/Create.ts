@@ -1,21 +1,12 @@
-import { ICreateOperationArgs } from '../Abstract';
+import { IModelApplicationOperationArgs, ModelApplicationOperation } from '../ApplicationOperation';
 import { Organization } from '../../models';
-import { getManager, EntityManager } from 'typeorm';
-import { AbstractOperation } from '../AbstractOperation';
 import { BadRequestError } from 'routing-controllers';
+import { Operation } from '../../lib/AutoOperation';
 
-export class Create extends AbstractOperation {
-  public static run(args: ICreateOperationArgs<Organization>): Promise<Organization> {
+@Operation('Organization')
+export class Create extends ModelApplicationOperation<Organization> {
+  public static run(args: IModelApplicationOperationArgs<Organization>): Promise<Organization> {
     return super.run(args);
-  }
-
-  public model: Organization;
-  public entityManager: EntityManager;
-
-  constructor({ model, entityManager = getManager() }: ICreateOperationArgs<Organization>) {
-    super();
-    this.model = model;
-    this.entityManager = entityManager;
   }
 
   public async run() {

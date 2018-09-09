@@ -8,7 +8,6 @@ import * as _ from 'lodash';
 /**
  * Used for decorating the classes
  */
-export const SUBCLASS_DELIMITER = '>';
 export const OPERATION_TYPE_CHAIN_PROPERTY = Symbol('model_type');
 export const OPERATION_NAME_PROPERTY = Symbol('model_operation');
 

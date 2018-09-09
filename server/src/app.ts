@@ -7,6 +7,8 @@ import { useExpressServer, useContainer } from 'routing-controllers';
 import { databaseConfig, log } from './config';
 import { join } from 'path';
 import { Container } from 'typedi';
+import { container } from './lib/sti-model-operations';
+import { ExternalConnection } from './models';
 
 
 export async function launch() {

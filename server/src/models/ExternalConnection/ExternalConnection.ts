@@ -2,7 +2,9 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, Index, T
 import { Organization } from '../Organization';
 import { Type } from 'class-transformer';
 import { ApplicationEntity } from '../ApplicationEntity';
+import { Model } from '../../lib/sti-model-operations';
 
+@Model('ExternalConnection')
 @Entity()
 @TableInheritance({ column: { name: 'type', type: 'varchar' } })
 export abstract class ExternalConnection extends ApplicationEntity {

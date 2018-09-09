@@ -32,12 +32,11 @@ function getOperationDescriptorKey(klass: IClass) {
   return `${klass[OPERATION_NAME_PROPERTY]}.${klass[MODEL_NAME_PROPERTY]}`;
 }
 
-
 /**
  * the key for the map is the name of the model that the operation
  * should be called for
  */
-const container: Record<string, IOperationMap> = {};
+export const container: Record<string, IOperationMap> = {};
 
 export function Operation(modelName: string) {
   return (klass: any) => {

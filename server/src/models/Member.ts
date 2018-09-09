@@ -3,12 +3,14 @@ import { ApplicationEntity } from './ApplicationEntity';
 import { Organization } from './Organization';
 import { Position } from './Position';
 import { Type } from 'class-transformer';
+import { Model } from '../lib/sti-model-operations';
 
 export enum Authority {
   member = 'member',
   admin = 'admin'
 }
 
+@Model('Entity')
 @Entity()
 @Index(['organizationId', 'email'], { unique: true })
 export class Member extends ApplicationEntity {

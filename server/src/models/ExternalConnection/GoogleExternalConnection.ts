@@ -1,8 +1,10 @@
 import { ExternalConnection } from './ExternalConnection';
 import { ChildEntity } from 'typeorm';
 import { Credentials } from 'google-auth-library/build/src/auth/credentials';
+import { Model } from '../../lib/sti-model-operations';
 
-@ChildEntity('GoogleExternalConnection')
+@Model('GoogleExternalConnection')
+@ChildEntity('ExternalConnection>GoogleExternalConnection')
 export class GoogleExternalConnection extends ExternalConnection {
   public get expiryDate() {
     return new Date(this.data.validUntil);

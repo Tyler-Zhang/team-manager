@@ -3,7 +3,9 @@ import { ApplicationEntity } from './ApplicationEntity';
 import { Team } from './Team';
 import { Member } from './Member';
 import { Type } from 'class-transformer';
+import { Model } from '../lib/sti-model-operations';
 
+@Model('Position')
 @Entity()
 export class Position extends ApplicationEntity {
   @PrimaryGeneratedColumn()

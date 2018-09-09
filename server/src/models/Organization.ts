@@ -4,7 +4,9 @@ import { Member } from './Member';
 import { Type } from 'class-transformer';
 import { ExternalConnection } from './ExternalConnection';
 import { Resource } from './Resource';
+import { Model } from '../lib/sti-model-operations';
 
+@Model('Organization')
 @Entity()
 export class Organization extends ApplicationEntity {
   @PrimaryGeneratedColumn()

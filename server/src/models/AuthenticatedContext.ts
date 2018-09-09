@@ -1,5 +1,6 @@
 import { Authority } from "./Member";
 import { equal } from "assert";
+import { Model } from "../lib/sti-model-operations";
 
 export enum AuthenticationType {
   member = 'member',
@@ -21,6 +22,7 @@ export type IAuthenticatedContextConstructorProps =
   IAuthenticatedContextMemberConstructorProps |
   IAuthenticatedContextSystemConstructorProps;
 
+@Model('AuthenticatedContext')
 export class AuthenticatedContext {
   // Will always be defined as it differentiates the type of context
   private system: boolean;

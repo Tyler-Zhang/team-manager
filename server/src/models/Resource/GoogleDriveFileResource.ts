@@ -1,12 +1,14 @@
 import { Resource } from '../Resource/Resource';
 import { ChildEntity } from 'typeorm';
+import { Model } from '../../lib/sti-model-operations';
 
 export enum FilePermission {
   read = 'read',
   write = 'write'
 }
 
-@ChildEntity('GoogleDriveFileResource')
+@Model('GoogleDriveFileResource')
+@ChildEntity('Resource>GoogleDriveFileResource')
 export class GoogleDriveFileResource extends Resource {
   get fileId(): string {
     return this.data.fileId;

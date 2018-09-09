@@ -2,10 +2,12 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, Index, T
 import { Organization } from '../Organization';
 import { Team } from '../Team';
 import { ApplicationEntity } from '../ApplicationEntity';
+import { Model } from '../../lib/sti-model-operations';
 
+@Model('Resource')
 @Entity()
 @TableInheritance({ column: { name: 'type', type: 'varchar' } })
-export class Resource extends ApplicationEntity {
+export abstract class Resource extends ApplicationEntity {
   @PrimaryGeneratedColumn()
   public id!: number;
 

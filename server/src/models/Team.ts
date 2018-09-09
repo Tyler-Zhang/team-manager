@@ -4,7 +4,9 @@ import { Organization } from './Organization';
 import { Position } from './Position';
 import { Type } from 'class-transformer';
 import { Resource } from './Resource';
+import { Model } from '../lib/sti-model-operations';
 
+@Model('Team')
 @Entity()
 @Index(['organizationId', 'name'], { unique: true })
 export class Team extends ApplicationEntity {

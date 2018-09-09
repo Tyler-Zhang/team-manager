@@ -2,7 +2,7 @@ import { IModelApplicationOperationArgs, ModelApplicationOperation } from '../Ap
 import { Team, Position } from '../../models';
 import { EntityManager } from 'typeorm';
 import { PositionOperations } from '..';
-import { Operation } from '../../lib/AutoOperation';
+import { Operation } from "../../lib/sti-model-operations/Operation";
 
 @Operation('Team')
 export class Delete extends ModelApplicationOperation<Team> {

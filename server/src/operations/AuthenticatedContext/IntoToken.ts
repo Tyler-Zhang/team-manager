@@ -2,7 +2,7 @@ import { AuthenticatedContext, Authority } from "../../models";
 import { sign } from "jsonwebtoken";
 import { secretsConfig } from '../../config';
 import { ApplicationOperation } from "../ApplicationOperation";
-import { Operation } from "../../lib/AutoOperation";
+import { Operation } from "../../lib/sti-model-operations/Operation";
 
 export interface IMemberTokenPayload {
   type: 'member',
@@ -22,7 +22,7 @@ export interface IIntoToken {
 }
 
 @Operation('AuthenticatedContext')
-export class IntoToken extends ApplicationOperation{
+export class IntoToken extends ApplicationOperation {
   public static run(args: IIntoToken): string {
     return super.run(args);
   }

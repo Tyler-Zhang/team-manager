@@ -3,7 +3,7 @@ import { AuthenticatedContext, AuthenticationType, IAuthenticatedContextConstruc
 import { secretsConfig } from '../../config';
 import { ApplicationOperation } from "../ApplicationOperation";
 import { ITokenPayload } from './IntoToken';
-import { Operation } from "../../lib/AutoOperation";
+import { Operation } from "../../lib/sti-model-operations/Operation";
 
 export interface IFromToken {
   token: string

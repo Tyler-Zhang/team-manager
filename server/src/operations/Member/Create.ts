@@ -1,7 +1,7 @@
 import { ModelApplicationOperation, IModelApplicationOperationArgs } from '../ApplicationOperation';
 import { Member } from '../../models';
 import { hash } from 'bcryptjs';
-import { Operation } from '../../lib/AutoOperation';
+import { Operation } from "../../lib/sti-model-operations/Operation";
 
 @Operation('Member')
 export class Create extends ModelApplicationOperation<Member> {

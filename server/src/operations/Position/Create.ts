@@ -1,7 +1,7 @@
 import { IModelApplicationOperationArgs, ModelApplicationOperation } from '../ApplicationOperation';
 import { Position, Member, Team } from '../../models';
 import { NotFoundError } from 'routing-controllers';
-import { Operation } from '../../lib/AutoOperation';
+import { Operation } from "../../lib/sti-model-operations/Operation";
 
 @Operation('Position')
 export class Create extends ModelApplicationOperation<Position> {

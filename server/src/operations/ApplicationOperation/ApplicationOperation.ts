@@ -1,3 +1,3 @@
-import { BaseOperation } from "../../lib/AutoOperation";
+import { ConstructableOperation } from "../../lib/sti-model-operations/Operation";
 
-export class ApplicationOperation extends BaseOperation {}
+export class ApplicationOperation extends ConstructableOperation {}

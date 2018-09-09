@@ -1,13 +1,13 @@
 import { AuthenticatedContext, Member, IAuthenticatedContextConstructorProps, AuthenticationType } from "../../models";
 import { ApplicationOperation } from "../ApplicationOperation";
-import { Operation } from "../../lib/AutoOperation";
+import { Operation } from "../../lib/sti-model-operations/Operation";
 
 export interface IFromMember {
   member: Member
 }
 
 @Operation('AuthenticatedContext')
-export class FromMember extends ApplicationOperation{
+export class FromMember extends ApplicationOperation {
   public static run(args: IFromMember): Promise<AuthenticatedContext> {
     return super.run(args);
   }

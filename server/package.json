@@ -13,6 +13,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
+    "bull": "^3.4.8",
     "bunyan": "^1.8.12",
     "class-validator": "^0.8.5",
     "cookie-parser": "^1.4.3",
@@ -32,6 +33,7 @@
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.1",
+    "@types/bull": "^3.3.20",
     "@types/bunyan": "^1.8.4",
     "@types/chai": "^4.1.4",
     "@types/cookie-parser": "^1.4.1",

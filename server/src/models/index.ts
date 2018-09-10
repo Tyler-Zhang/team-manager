@@ -5,3 +5,4 @@ export * from './Team';
 export * from './Position';
 export * from './ExternalConnection';
 export * from './Resource';
+export * from './IncomingWebhook';

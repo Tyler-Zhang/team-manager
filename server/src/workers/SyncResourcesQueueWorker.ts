@@ -1,13 +1,10 @@
 import { DBApplicationWorker } from './ApplicationWorker';
 import { ExternalConnectionOperations } from '../operations';
 import { ExternalConnection } from '../models';
+import { ISyncResourcesJobPayload } from '../publishers';
 
-interface ISyncResourcesJob {
-  externalConnectionId: number;
-}
-
-export class SyncResourcesQueueWorker extends DBApplicationWorker {
-  protected async process(job: ISyncResourcesJob) {
+export class SyncResourcesQueueWorker extends DBApplicationWorker<ISyncResourcesJobPayload> {
+  protected async process(job: ISyncResourcesJobPayload) {
     const externalConnection = await ExternalConnection.findOne(job.externalConnectionId);
 
     if (!externalConnection) {

@@ -5,7 +5,7 @@ import { ApplicationWorker } from './ApplicationWorker';
 import { databaseConfig } from '../../config';
 import { createConnection } from 'typeorm';
 
-export class DBApplicationWorker extends ApplicationWorker {
+export class DBApplicationWorker<J> extends ApplicationWorker<J> {
   protected async setup() {
     await super.setup();
 

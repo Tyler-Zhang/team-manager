@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, Index, TableInheritance, ManyToMany } from 'typeorm';
 import { Organization } from '../Organization';
 import { Team } from '../Team';
+import { ExternalConnection } from '../ExternalConnection';
 import { ApplicationEntity } from '../ApplicationEntity';
 import { Model } from '../../lib/sti-model-operations';
 
@@ -16,6 +17,9 @@ export abstract class Resource extends ApplicationEntity {
 
   @Column({ type: 'json' })
   public data!: any;
+
+  @ManyToOne(() => ExternalConnection)
+  public externalConnection!: ExternalConnection;
 
   @Column({ type: 'int', nullable: false })
   @Index()

@@ -1,8 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, Index, TableInheritance } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, Index, TableInheritance, OneToMany } from 'typeorm';
 import { Organization } from '../Organization';
 import { Type } from 'class-transformer';
 import { ApplicationEntity } from '../ApplicationEntity';
 import { Model } from '../../lib/sti-model-operations';
+import { Resource } from '../Resource';
 
 @Model('ExternalConnection')
 @Entity()
@@ -16,6 +17,12 @@ export abstract class ExternalConnection extends ApplicationEntity {
 
   @Column({ type: 'json' })
   public data!: any;
+
+  @Column()
+  public lastResourceSync!: Date;
+
+  @OneToMany(() => Resource, resource => resource.externalConnection)
+  public resources!: Resource[]
 
   @Column({ type: 'int', nullable: false })
   @Index()

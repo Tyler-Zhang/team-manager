@@ -3,9 +3,13 @@ import { ChildEntity } from 'typeorm';
 import { Credentials } from 'google-auth-library/build/src/auth/credentials';
 import { Model } from '../../lib/sti-model-operations';
 
+const TYPE = "ExternalConnection>GoogleExternalConnection";
+
 @Model('GoogleExternalConnection')
-@ChildEntity('ExternalConnection>GoogleExternalConnection')
+@ChildEntity(TYPE)
 export class GoogleExternalConnection extends ExternalConnection {
+  public type = TYPE;
+  
   public get expiryDate() {
     return new Date(this.data.validUntil);
   }

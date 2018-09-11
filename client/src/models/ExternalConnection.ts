@@ -4,7 +4,7 @@ import { ApplicationModel, baseFields, IBaseFields } from './ApplicationModel';
 import { IOrganization } from './Organization';
 
 export enum ExternalConnectionType {
-  google = 'GoogleExternalConnection'
+  google = 'ExternalConnection>GoogleExternalConnection'
 }
 
 export interface IExternalConnection {

@@ -12,13 +12,12 @@ export abstract class ExternalConnection extends ApplicationEntity {
   @PrimaryGeneratedColumn()
   public id!: number;
   
-  @Column()
   public type!: string;
 
   @Column({ type: 'json' })
   public data!: any;
 
-  @Column()
+  @Column({ nullable: true })
   public lastResourceSync!: Date;
 
   @OneToMany(() => Resource, resource => resource.externalConnection)

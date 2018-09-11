@@ -10,7 +10,7 @@ export enum Authority {
   admin = 'admin'
 }
 
-@Model('Entity')
+@Model('Member')
 @Entity()
 @Index(['organizationId', 'email'], { unique: true })
 export class Member extends ApplicationEntity {

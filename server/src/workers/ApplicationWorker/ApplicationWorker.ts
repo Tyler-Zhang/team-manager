@@ -1,4 +1,5 @@
-import { Queue } from 'bull';
+import { Queue, Job } from 'bull';
+import { log } from '../../config';
 
 export class ApplicationWorker<J=any> {
   private queue: Queue;
@@ -9,22 +10,31 @@ export class ApplicationWorker<J=any> {
 
   public async start() {
     await this.setup();
-    this.queue.process(this.processorName, this.concurrency, this.process.bind(this));
+    this.queue.process(this.concurrency, (job: Job<J>) => this.processWrapper(job));
   }
 
   protected async setup() {
     return;
   }
 
-  protected async process(job: J) {
+  protected async process(job: Job<J>) {
     throw new Error('ApplicationWorker#process should be overrided');
   }
 
-  protected get processorName() {
+  protected get workerName() {
     return this.constructor.name;
   }
 
   protected get concurrency() {
     return 1;
+  }
+
+  private async processWrapper(job: Job<J>) {
+    const startTime = Date.now();
+    log.info(`${this.workerName} started processing a job`);
+
+    await this.process(job);
+
+    log.info(`${this.workerName} finished [${Date.now() - startTime}ms]`);
   }
 }

@@ -15,7 +15,7 @@ export class GoogleExternalConnectionEnsureValid extends EnsureValid {
   protected async shouldRenew() {
     return (
       !this.model.isValid ||
-      Math.abs(Date.now() - this.model.expiryDate.getTime()) < externalConnectionConfig.reauthPadding
+      Math.abs(Date.now() - (this.model.credentials.expiry_date || 0)) < externalConnectionConfig.reauthPadding
     )
   }
 }

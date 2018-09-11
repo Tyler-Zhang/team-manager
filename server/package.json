@@ -5,7 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "start": "nf run ts-node ./index.ts | bunyan",
-    "dev": "nf run nodemon | bunyan",
+    "dev": "nf run nodemon",
     "test": "nf run sh ./scripts/test.sh"
   },
   "author": "",

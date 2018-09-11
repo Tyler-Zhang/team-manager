@@ -1,6 +1,6 @@
-import { ModelApplicationOperation, IModelApplicationOperationArgs } from '../ApplicationOperation';
-import { ExternalConnection } from '../../models';
-import { Operation } from "../../lib/sti-model-operations/Operation";
+import { ModelApplicationOperation, IModelApplicationOperationArgs } from '../../ApplicationOperation';
+import { ExternalConnection } from '../../../models';
+import { Operation } from "../../../lib/sti-model-operations/Operation";
 
 @Operation('ExternalConnection')
 export class Create extends ModelApplicationOperation<ExternalConnection> {

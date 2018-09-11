@@ -1,4 +1,4 @@
-import Queue from 'bull';
+import * as Queue from 'bull';
 import * as assert from 'assert';
 
 const REDIS_URL = process.env.REDIS_URL;

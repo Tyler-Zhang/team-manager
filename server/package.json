@@ -4,9 +4,10 @@
   "description": "Team manager server",
   "main": "index.ts",
   "scripts": {
-    "start": "nf run ts-node ./index.ts | bunyan",
+    "start": "nf run ts-node ./index | bunyan",
     "dev": "nf run nodemon",
-    "test": "nf run sh ./scripts/test.sh"
+    "test": "nf run sh ./scripts/test.sh",
+    "console": "nf run ts-node ./src/console"
   },
   "author": "",
   "license": "ISC",

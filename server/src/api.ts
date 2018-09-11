@@ -45,3 +45,7 @@ export async function launch() {
   app.listen(port);
   log.info(`Running web app on port ${port}`);
 }
+
+if (require.main === module) {
+  launch();
+}

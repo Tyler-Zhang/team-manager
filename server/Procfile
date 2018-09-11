@@ -1,2 +1,2 @@
-api: node_modules/.bin/ts-node ./index.ts | bunyan
+api: node_modules/.bin/ts-node ./src/api.ts | bunyan
 workers: node_modules/.bin/ts-node ./src/workers/index.ts | bunyan

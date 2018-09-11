@@ -1,3 +1,4 @@
+import * as Arena from 'bull-arena';
 import * as Queue from 'bull';
 import * as assert from 'assert';
 
@@ -21,3 +22,21 @@ const defaultQueueOptions: Queue.QueueOptions = {
  * Different queues that we can publish messages to
  */
 export const syncResourceQueue = new Queue('syncResourceQueue', defaultQueueOptions);
+
+/**
+ * Bull Arena config: this allows us to create a server to display job statuses
+ */
+export const bullArenaQueueConfig = {
+  queues: [{
+    name: 'syncResourceQueue',
+    hostId: 'api'
+  }]
+};
+
+export const bullArenaServerConfig = {
+  port: 5000
+}
+
+export function startBullArenaServer() {
+  return Arena(bullArenaQueueConfig, bullArenaServerConfig);
+}

@@ -45,6 +45,7 @@
     "@types/mocha": "^5.2.5",
     "@types/rosie": "^0.0.35",
     "@types/sinon": "^5.0.1",
+    "bull-arena": "^2.4.5",
     "chai": "^4.1.2",
     "foreman": "^3.0.1",
     "prettier": "^1.13.7",
@@ -52,6 +53,6 @@
     "ts-node": "^7.0.0",
     "tslint": "^5.10.0",
     "tslint-config-prettier": "^1.13.0",
-    "typescript": "^2.9.2"
+    "typescript": "3.0.3"
   }
 }

@@ -45,7 +45,7 @@ export default class GoogleController {
     
     const googleExternalConnection = new GoogleExternalConnection();
     googleExternalConnection.organizationId = authContext.getOrganizationId();
-    googleExternalConnection.setFromCredential(tokens);
+    googleExternalConnection.credentials = tokens;
     
     await ExternalConnectionOperations.Create.run({ model: googleExternalConnection });
     

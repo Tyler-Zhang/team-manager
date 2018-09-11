@@ -2,6 +2,7 @@ import { schema } from 'normalizr';
 import { attr, TableState } from 'redux-orm';
 import { ApplicationModel, baseFields, IBaseFields } from './ApplicationModel';
 import { ExternalConnectionListSchema, IExternalConnection } from './ExternalConnection';
+import { resourceListSchema } from './Resource';
 
 export interface IOrganization {
   id: number;
@@ -22,7 +23,8 @@ export class Organization extends ApplicationModel<IOrganization, IBaseFields> {
 }
 
 export const OrganizationSchema = new schema.Entity('organizations', {
-  externalConnections: ExternalConnectionListSchema
+  externalConnections: ExternalConnectionListSchema,
+  resources: resourceListSchema
 });
 
 export const OrganizationListSchema = new schema.Array(OrganizationSchema);

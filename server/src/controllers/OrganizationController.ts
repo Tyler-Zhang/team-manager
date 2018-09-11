@@ -14,7 +14,7 @@ export class OrganizationController {
 
     return Organization.find({
       where: { id: organizationId },
-      relations: ['externalConnections']
+      relations: ['externalConnections', 'resources']
     });
   }
 

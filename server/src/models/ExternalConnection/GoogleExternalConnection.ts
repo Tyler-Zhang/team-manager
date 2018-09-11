@@ -2,6 +2,7 @@ import { ExternalConnection } from './ExternalConnection';
 import { ChildEntity } from 'typeorm';
 import { Credentials } from 'google-auth-library/build/src/auth/credentials';
 import { Model } from '../../lib/sti-model-operations';
+import { createGoogleOauth2Client } from '../../config';
 
 const TYPE = "ExternalConnection>GoogleExternalConnection";
 
@@ -50,5 +51,12 @@ export class GoogleExternalConnection extends ExternalConnection {
       refresh_token: this.refreshToken,
       expiry_date: this.expiryDate.getTime()
     }
+  }
+
+  public toGoogleAuthClient() {
+    const googleOauth2Client = createGoogleOauth2Client();
+    googleOauth2Client.setCredentials(this.toCredential());
+    
+    return googleOauth2Client;
   }
 }

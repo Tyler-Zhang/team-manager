@@ -33,7 +33,17 @@ export class ApplicationWorker<J=any> {
     const startTime = Date.now();
     log.info(`${this.workerName} started processing a job`);
 
-    await this.process(job);
+    try {
+      await this.process(job);
+    } catch (e) {
+      /**
+       * Log the error, and rethrow so that the job does not
+       * register as a success
+       */
+      log.error(e);
+      log.info(`${this.workerName} finished with error [${Date.now() - startTime}ms]`);
+      throw e;
+    }
 
     log.info(`${this.workerName} finished [${Date.now() - startTime}ms]`);
   }

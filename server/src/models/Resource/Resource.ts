@@ -13,19 +13,30 @@ export abstract class Resource extends ApplicationEntity {
   public id!: number;
 
   @Column()
+  @Index()
+  public externalId!: string;
+
+  @Column()
+  public name!: string;
+
   public type!: string;
 
   @Column({ type: 'json' })
   public data!: any;
 
-  @ManyToOne(() => ExternalConnection)
+  @Column({ type: 'int', nullable: false })
+  @Index()
+  public externalConnectionId!: number;
+
+  @ManyToOne(() => ExternalConnection, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'externalConnectionId'})
   public externalConnection!: ExternalConnection;
 
   @Column({ type: 'int', nullable: false })
   @Index()
   public organizationId!: number;
 
-  @ManyToOne(type => Organization)
+  @ManyToOne(type => Organization, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'organizationId' })
   public organization!: Organization;
 

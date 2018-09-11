@@ -3,8 +3,10 @@ import { Model } from '../../lib/sti-model-operations';
 import { GoogleExternalConnection, ExternalConnection } from '../ExternalConnection';
 import { IncomingWebhook } from './IncomingWebhook';
 
+const TYPE = 'IncomingWebhook>GoogleIncomingWebhook';
+
 @Model('GoogleIncomingWebhook')
-@ChildEntity('IncomingWebhook>GoogleIncomingWebhook')
+@ChildEntity(TYPE)
 export abstract class GoogleIncomingWebhook extends IncomingWebhook {  
   @Index({ unique: true })
   @Column()
@@ -13,6 +15,8 @@ export abstract class GoogleIncomingWebhook extends IncomingWebhook {
   
   @ManyToOne(type => ExternalConnection)
   public externalConnection!: GoogleExternalConnection;
+
+  public type = TYPE;
 
   public get address(): string {
     return this.data.address;

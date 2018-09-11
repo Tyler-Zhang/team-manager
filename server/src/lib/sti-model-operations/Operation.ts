@@ -65,14 +65,14 @@ export function Operation(modelType: string) {
 }
 
 function getDeepestPropertyInMap(obj: any, path: string[]) {
-  const deepestFoundValue = null;
+  let deepestFoundValue = null;
   
   for (const p of path) {
     if (!_.has(obj, p)) {
       break;
     }
-
     obj = obj[p];
+    deepestFoundValue = obj;
   }
 
   return deepestFoundValue;
@@ -84,12 +84,16 @@ export abstract class ConstructableOperation {
     const operationMap = container[operationName];
     
     const typeChain = this.getTypeChain(...args);
-  
     if(!typeChain) {
       return this;
     }
 
-    return getDeepestPropertyInMap(operationMap, typeChain) || this;
+    const deepest: ISubclassNode | null = getDeepestPropertyInMap(operationMap, typeChain);
+    if (!deepest) {
+      return this;
+    }
+
+    return deepest[KLASS_PROPERTY];
   }
 
   public static getTypeChain(...args: any[]): string[] | null {

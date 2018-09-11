@@ -11,7 +11,7 @@ import { Resource } from '../Resource';
 export abstract class ExternalConnection extends ApplicationEntity {
   @PrimaryGeneratedColumn()
   public id!: number;
-  
+
   public type!: string;
 
   @Column({ type: 'json' })
@@ -35,5 +35,9 @@ export abstract class ExternalConnection extends ApplicationEntity {
   constructor() {
     super();
     this.data = {};
+  }
+
+  public get isValid() {
+    return true;
   }
 }

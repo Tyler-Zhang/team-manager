@@ -20,7 +20,7 @@ export interface IORMState extends ORMCommonState {
   Position: PositionState;
   Organization: OrganizationState;
   ExternalConnection: ExternalConnectionState;
-  ResourceState: ResourceState;
+  Resource: ResourceState;
 }
 
 export interface IORMModels {

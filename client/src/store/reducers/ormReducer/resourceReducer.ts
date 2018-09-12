@@ -14,7 +14,10 @@ export default function resourceReducer(state: any, action: AnyAction) {
 
       if (resourceEntites) {
         const resources = Object.values(resourceEntites);
-        resources.forEach(resource => Resource.upsert(resource));
+        resources.forEach(resource => {
+          const createdResource = Resource.upsert(resource)
+          createdResource.externalConnection = createdResource.externalConnectionId;
+        });
       }
       break;
     }

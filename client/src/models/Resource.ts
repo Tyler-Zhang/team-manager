@@ -4,11 +4,17 @@ import { ApplicationModel, baseFields, IBaseFields } from './ApplicationModel';
 import { IExternalConnection } from './ExternalConnection';
 import { positionSchema } from './Position';
 
+export enum ResourceType {
+  Resource = 'Resource',
+  GoogleDriveFileResource ='Resource>GoogleDriveFileResource'
+}
+
 export interface IResource {
   id: number;
   name: string;
   externalConnection: IExternalConnection;
-  type: string;
+  type: ResourceType;
+  data: any;
   createdAt: string;
   updatedAt: string;
 }

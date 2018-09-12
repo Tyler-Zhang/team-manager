@@ -2,7 +2,7 @@ import { Button, Col, Input, Layout, Row } from 'antd';
 import * as React from 'react';
 import { Flex } from 'reflexbox';
 
-import AddTeamButton from '../../../teams/AddTeamButton/AddTeamButton';
+import AddTeamButton from '../../../team/AddTeamButton/AddTeamButton';
 
 interface IProps {
   onRefresh: () => any;

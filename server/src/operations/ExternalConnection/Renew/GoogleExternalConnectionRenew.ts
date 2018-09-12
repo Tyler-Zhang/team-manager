@@ -17,10 +17,10 @@ export class GoogleExternalConnectionRenew extends Renew {
 
     const googleOauth2Client = createGoogleOauth2Client();
 
-    googleOauth2Client.setCredentials(this.model.toCredential());
+    googleOauth2Client.setCredentials(this.model.credentials);
     const { credentials: refreshedCredentials } = await googleOauth2Client.refreshAccessToken();
     
-    this.model.setFromCredential(refreshedCredentials);
+    this.model.credentials = refreshedCredentials;
     
     await this.model.save();
 

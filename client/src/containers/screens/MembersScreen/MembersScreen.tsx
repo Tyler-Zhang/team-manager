@@ -5,7 +5,7 @@ import { compose } from 'recompose';
 import { bindActionCreators, Dispatch } from 'redux';
 import { IMember, OrmModel } from '../../../models';
 import { memberListSelector } from '../../../selectors/memberListSelector';
-import { IState } from '../../../store';
+import { IStore } from '../../../store';
 import { IMemberPayloadDelete, MemberActions } from '../../../store/reducers/membersReducer';
 
 import MembersHeader from './MembersHeader/MembersHeader';
@@ -34,7 +34,7 @@ class MembersScreen extends React.Component<IProps, {}> {
 }
 
 export default compose(
-  connect((state: IState) => ({
+  connect((state: IStore) => ({
       members: memberListSelector(state.orm),
     }),
     (dispatch: Dispatch) => bindActionCreators({

@@ -4,7 +4,7 @@ import { compose } from 'recompose';
 import ResourceCardList from '../../../components/resource/ResourceCardList/ResourceCardList';
 import { IExternalConnection, IResource } from '../../../models';
 import { externalConnectionResourceListSelector } from '../../../selectors/resourceListSelector';
-import { IState } from '../../../store';
+import { IStore } from '../../../store';
 
 interface IOuterProps {
   externalConnection: IExternalConnection;
@@ -25,7 +25,7 @@ class ExternalConnectionResourceList extends React.Component<IProps> {
 }
 
 export default compose<IProps, IOuterProps>(
-  connect((state: IState, props: IOuterProps) => ({
+  connect((state: IStore, props: IOuterProps) => ({
     resources: externalConnectionResourceListSelector(props.externalConnection.id, state.orm)
   }))
 )(ExternalConnectionResourceList);

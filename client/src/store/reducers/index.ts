@@ -5,7 +5,7 @@ import ormReducer from './ormReducer/ormReducer';
 import startupReducer, { IStartupState } from './startupReducer';
 import teamsReducer, { ITeamsState } from './teamsReducer';
 
-export interface IState {
+export interface IStore {
   orm: any;
   authentication: IAuthenticationState;
   members: IMembersState;

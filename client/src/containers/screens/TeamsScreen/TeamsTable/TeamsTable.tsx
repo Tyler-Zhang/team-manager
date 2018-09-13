@@ -6,6 +6,7 @@ import { ITeam, OrmModel } from '../../../../models';
 interface IProps {
   teams: Array<OrmModel<ITeam>>;
   onDelete: (id: number) => any;
+  onSelect?: (team: ITeam) => any;
 }
 
 export default class MembersTable extends React.PureComponent<IProps> {
@@ -30,8 +31,11 @@ export default class MembersTable extends React.PureComponent<IProps> {
   public render() {
     return (
     <Table
+      style={{ flex: 1 }}
       columns={this.columns}
-      dataSource={this.props.teams} />
+      dataSource={this.props.teams}
+      onRowClick={this.props.onSelect}
+    />
     );
   }
 

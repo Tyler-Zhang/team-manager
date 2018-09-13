@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { IOrganization } from '../../../models';
 import { organizationSelector } from '../../../selectors/organizationSelector';
-import { IState } from '../../../store';
+import { IStore } from '../../../store';
 
 import CenterInPage from '../../../components/CenterInPage/CenterInPage';
 import spinnerWhileLoading from '../../../compositions/spinnerWhileLoading';
@@ -33,7 +33,7 @@ class OrganizationScreen extends React.Component<IProps> {
 }
 
 export default compose(
-  connect((state: IState) => ({
+  connect((state: IStore) => ({
     organization: organizationSelector(state.orm),
   })),
   spinnerWhileLoading(['organization'])

@@ -13,8 +13,7 @@ export const externalConnectionResourceListSelector = (externalConnectionId: num
     orm,
     session => {
       const externalConnection = session.ExternalConnection.withId(externalConnectionId as any);
-
-      return (externalConnection && externalConnection.resources) || [];
+      return (externalConnection && externalConnection.resources.toModelArray()) || [];
     }
   )(ormState);
 }
@@ -24,12 +23,7 @@ export const teamEnabledResourceListSelector = (teamId: number, ormState: any) =
     orm,
     session => {
       const team = session.Team.withId(teamId as any);
-
-      if (!team) {
-        return [];
-      }
-
-      return team.resources.toModelArray();
+      return (team && team.resources.toModelArray()) || [];
     }
   )(ormState);
 }

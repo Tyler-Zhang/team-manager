@@ -14,21 +14,21 @@ interface IProps {
   resource: IResource;
   selectable?: boolean;
   selected?: boolean;
-  onSelect?: () => any;
+  onChange?: () => any;
 }
 
 const ResourceCard: React.SFC<IProps> = ({ 
   resource,
   selectable = false,
   selected,
-  onSelect
+  onChange
 }) => (
   <div>
     {
       selectable &&
       <Checkbox
         checked={selected}
-        onChange={onSelect}
+        onChange={onChange}
       />
     }
     <b>{ResourceNameMap[resource.type]}: {resource.name}</b>

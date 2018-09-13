@@ -2,7 +2,6 @@ import { schema } from 'normalizr';
 import { attr, fk, TableState } from 'redux-orm';
 import { ApplicationModel, baseFields, IBaseFields } from './ApplicationModel';
 import { IExternalConnection } from './ExternalConnection';
-import { positionSchema } from './Position';
 
 export enum ResourceType {
   Resource = 'Resource',
@@ -37,8 +36,6 @@ export class Resource extends ApplicationModel<IResource, IBaseFields> {
   }
 }
 
-export const resourceSchema: schema.Entity = new schema.Entity('resources', {
-  positions: new schema.Array(positionSchema)
-});
+export const resourceSchema: schema.Entity = new schema.Entity('resources');
 
 export const resourceListSchema = new schema.Array(resourceSchema);

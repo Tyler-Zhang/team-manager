@@ -2,7 +2,7 @@ import { Create } from './Create';
 import { IModelApplicationOperationArgs } from '../../ApplicationOperation';
 import { GoogleExternalConnection } from '../../../models';
 import { Operation } from "../../../lib/sti-model-operations/Operation";
-import { syncResourcesPublisher } from '../../../publishers';
+import { syncResourcesFromExternalConnectionPublisher } from '../../../publishers';
 
 @Operation('GoogleExternalConnection')
 export class GoogleExternalConnectionCreate extends Create {
@@ -15,7 +15,7 @@ export class GoogleExternalConnectionCreate extends Create {
   public async run() {
     await super.run();
 
-    await syncResourcesPublisher.publish({
+    await syncResourcesFromExternalConnectionPublisher.publish({
       externalConnectionId: this.model.id
     });
 

@@ -1,12 +1,12 @@
-import { syncResourceQueue } from '../config/bullConfig';
-import { SyncResourcesQueueWorker } from './SyncResourcesQueueWorker';
+import { syncResourceFromExternalConnectionQueue } from '../config/bullConfig';
+import { SyncResourcesFromExternalConnectionWorker } from './SyncResourcesFromExternalConnectionWorker';
 import { log } from '../config';
 
 export async function startAllWorkers() {
   log.info('Starting workers');
 
   const startWorkerPromises = await Promise.all([
-    new SyncResourcesQueueWorker(syncResourceQueue).start()
+    new SyncResourcesFromExternalConnectionWorker(syncResourceFromExternalConnectionQueue).start()
   ]);
 
   log.info(`Started ${startWorkerPromises.length} workers successfully`);

@@ -1,1 +1,2 @@
-export * from './SyncResourcesPublisher';
+export * from './SyncResourcesFromExternalConnectionPublisher';
+export * from './SyncResourceToMemberPublisher';

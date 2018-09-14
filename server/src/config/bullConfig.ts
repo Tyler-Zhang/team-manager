@@ -21,14 +21,18 @@ const defaultQueueOptions: Queue.QueueOptions = {
 /**
  * Different queues that we can publish messages to
  */
-export const syncResourceQueue = new Queue('syncResourceQueue', defaultQueueOptions);
+export const syncResourceFromExternalConnectionQueue = new Queue('syncResourceFromExternalConnectionQueue', defaultQueueOptions);
+export const syncResourceToMemberQueue = new Queue('syncResourceToMemberQueue', defaultQueueOptions);
 
 /**
  * Bull Arena config: this allows us to create a server to display job statuses
  */
 export const bullArenaQueueConfig = {
   queues: [{
-    name: 'syncResourceQueue',
+    name: 'syncResourceFromExternalConnectionQueue',
+    hostId: 'api'
+  }, {
+    name: 'syncResourceToMemberQueue',
     hostId: 'api'
   }]
 };

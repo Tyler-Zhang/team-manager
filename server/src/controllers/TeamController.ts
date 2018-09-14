@@ -1,4 +1,4 @@
-import { Post, Body, BadRequestError, JsonController, Get, QueryParam, Param, Delete, NotFoundError, HttpCode } from "routing-controllers";
+import { Post, Body, BadRequestError, JsonController, Get, QueryParam, Param, Delete, NotFoundError, HttpCode, Patch, UnauthorizedError } from "routing-controllers";
 import { Team, Organization, AuthenticatedContext } from '../models';
 import { TeamOperations, PositionOperations } from "../operations";
 import authenticatedContext from "../authorization/authenticatedContext";
@@ -54,8 +54,29 @@ export class TeamController {
 
     return Team.find({
       where: { organizationId },
-      relations: ['positions']
+      relations: ['positions', 'resources']
     });
+  }
+
+  @Patch('/:id')
+  public async patch(
+    @QueryParam('id') teamId: number,
+    @authenticatedContext({ required: true }) authContext: AuthenticatedContext,
+    @Body({ required: true }) teamChanges: Partial<Team>
+  ) {
+    const team = await Team.findOne(teamId, {
+      relations: ['positions', 'resources']
+    });
+
+    if (!team) {
+      throw new BadRequestError('This team does not exist');
+    }
+
+    if (team.organizationId !== authContext.getOrganizationId()) {
+      throw new UnauthorizedError('You must be a part of the organization to patch the team');
+    }
+
+    return TeamOperations.Patch.run({ model: team, changes: teamChanges });
   }
 
   @Delete('/:id')

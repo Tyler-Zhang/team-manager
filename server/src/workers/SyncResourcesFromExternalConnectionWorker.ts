@@ -4,7 +4,7 @@ import { ExternalConnection } from '../models';
 import { ISyncResourcesFromExternalConnectionJobPayload } from '../publishers';
 import { Job } from 'bull';
 
-export class SyncResourcesQueueWorker extends DBApplicationWorker<ISyncResourcesFromExternalConnectionJobPayload> {
+export class SyncResourcesFromExternalConnectionWorker extends DBApplicationWorker<ISyncResourcesFromExternalConnectionJobPayload> {
   protected async process(job: Job<ISyncResourcesFromExternalConnectionJobPayload>) {
     const externalConnection = await ExternalConnection.findOne(job.data.externalConnectionId);
 

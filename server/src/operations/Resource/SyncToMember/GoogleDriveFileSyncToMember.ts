@@ -16,7 +16,7 @@ export class GoogleDriveFileSyncToMember extends SyncToMember<GoogleDriveFileRes
 
     this.googleDriveClient = google.drive({
       version: 'v3',
-      auth: (this.externalConnection as GoogleExternalConnection).toGoogleAuthClient()
+      auth: (this.externalConnection as any as GoogleExternalConnection).toGoogleAuthClient()
     });
   }
 

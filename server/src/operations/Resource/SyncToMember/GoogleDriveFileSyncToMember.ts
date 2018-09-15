@@ -3,7 +3,6 @@ import { Operation } from "../../../lib/sti-model-operations/Operation";
 import { SyncToMember, IResourceSyncToMemberOperationArgs } from './SyncToMember';
 import { drive_v3, google } from 'googleapis';
 
-
 @Operation('GoogleDriveFileResource')
 export class GoogleDriveFileSyncToMember extends SyncToMember<GoogleDriveFileResource> {
   public static run(args: IResourceSyncToMemberOperationArgs<GoogleDriveFileResource>) {
@@ -11,7 +10,6 @@ export class GoogleDriveFileSyncToMember extends SyncToMember<GoogleDriveFileRes
   }
 
   private googleDriveClient!: drive_v3.Drive;
-
 
   protected async hydrateExternalConnectionForResource() {
     await super.hydrateExternalConnectionForResource();

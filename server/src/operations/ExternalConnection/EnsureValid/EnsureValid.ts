@@ -11,7 +11,7 @@ export class EnsureValid extends ModelApplicationOperation<ExternalConnection> {
 
   public async run() {
     if (await this.shouldRenew()) {
-      ExternalConnectionOperations.EnsureValid.run({ 
+      await ExternalConnectionOperations.Renew.run({
         model: this.model, 
         entityManager: this.entityManager 
       });

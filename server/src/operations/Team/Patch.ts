@@ -43,7 +43,7 @@ export class Patch extends PatchModelApplicationOperation<Team> {
     }
 
     // Add a job for each changed resource for each member
-    for (const { id: memberId } of await this.getModelPositions()) { 
+    for (const { memberId } of await this.getModelPositions()) {
       for(const resourceId of resourceTouchedIds) {
         syncResourceToMemberPublisher.publish({
           memberId,

@@ -2,7 +2,6 @@ import { ModelApplicationOperation, IModelApplicationOperationArgs } from '../..
 import { Member, Resource, ExternalConnection } from '../../../models';
 import { Operation } from "../../../lib/sti-model-operations/Operation";
 import { ExternalConnectionOperations } from '../..';
-import { log } from '../../../config';
 
 export interface IResourceSyncToMemberOperationArgs<T=Resource>
   extends IModelApplicationOperationArgs<T>{
@@ -46,11 +45,9 @@ export abstract class SyncToMember<T extends Resource = Resource> extends ModelA
   protected async shouldMemberHaveAccessToResource(): Promise<boolean> {
     const queryResult = await this.entityManager
       .createQueryBuilder(Member, 'member')
-      .leftJoinAndSelect('member.positions', 'position')
-      .leftJoinAndSelect('position.team', 'team')
-      .leftJoinAndSelect('team.resources', 'resource')
-      .where('resource.id = :resourceId', { resourceId: this.model.id })
-      .andWhere('member.id = :memberId', { memberId: this.member.id })
+      .innerJoin('member.positions', 'position', 'member.id = :memberId', { memberId: this.member.id })
+      .innerJoin('position.team', 'team')
+      .innerJoin('team.resources', 'resource', 'resource.id = :resourceId', { resourceId: this.model.id })
       .getOne();
     
     return !!queryResult;
@@ -60,7 +57,10 @@ export abstract class SyncToMember<T extends Resource = Resource> extends ModelA
    * Get the external connection for the resource and make sure it is valid
    */
   protected async hydrateExternalConnectionForResource() {
-    const externalConnection = await ExternalConnection.findOne(this.model.externalConnectionId);
+    const externalConnection = await this.entityManager.findOne(
+      ExternalConnection,
+      this.model.externalConnectionId
+    );
 
     if (!externalConnection) {
       // This should never happen

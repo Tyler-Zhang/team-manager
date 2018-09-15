@@ -4,9 +4,13 @@ import {
 } from '../config/bullConfig';
 import { SyncResourcesFromExternalConnectionWorker } from './SyncResourcesFromExternalConnectionWorker';
 import { SyncResourceToMemberWorker } from './SyncResourceToMemberWorker';
-import { log } from '../config';
+import { log, databaseConfig } from '../config';
+import { createConnection } from 'typeorm';
 
 export async function startAllWorkers() {
+  log.info('Connecting to database');
+  await createConnection(databaseConfig);
+  
   log.info('Starting workers');
 
   const startWorkerPromises = await Promise.all([

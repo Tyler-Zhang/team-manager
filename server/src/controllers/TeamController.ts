@@ -60,7 +60,7 @@ export class TeamController {
 
   @Patch('/:id')
   public async patch(
-    @QueryParam('id') teamId: number,
+    @Param('id') teamId: number,
     @authenticatedContext({ required: true }) authContext: AuthenticatedContext,
     @Body({ required: true }) teamChanges: Partial<Team>
   ) {

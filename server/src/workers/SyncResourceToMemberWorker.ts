@@ -1,10 +1,10 @@
-import { DBApplicationWorker } from './ApplicationWorker';
+import { ApplicationWorker } from './ApplicationWorker';
 import { ResourceOperations } from '../operations';
 import { Member, Resource } from '../models';
 import { ISyncResourceToMemberJobPayload } from '../publishers';
 import { Job } from 'bull';
 
-export class SyncResourceToMemberWorker extends DBApplicationWorker<ISyncResourceToMemberJobPayload> {
+export class SyncResourceToMemberWorker extends ApplicationWorker<ISyncResourceToMemberJobPayload> {
   protected async process(job: Job<ISyncResourceToMemberJobPayload>) {
     const { memberId, resourceId } = job.data;
 

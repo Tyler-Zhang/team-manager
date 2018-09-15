@@ -1,5 +1,6 @@
 import { BaseEntity, CreateDateColumn, UpdateDateColumn, AfterInsert, AfterRemove } from 'typeorm';
 import { ConstructableModel } from '../lib/sti-model-operations';
+import { Exclude } from 'class-transformer';
 
 type IEventCallback<T> = (entity: T) => any;
 
@@ -18,7 +19,10 @@ export abstract class ApplicationEntity extends BaseEntity {
   @UpdateDateColumn()
   public updatedAt!: Date;
 
+  @Exclude()
   private onAfterInsertCallbacks: Array<IEventCallback<this>> = [];
+
+  @Exclude()
   private onAfterRemoveCallbacks: Array<IEventCallback<this>> = [];
 
   public onAfterInsert(callback: IEventCallback<this>) {

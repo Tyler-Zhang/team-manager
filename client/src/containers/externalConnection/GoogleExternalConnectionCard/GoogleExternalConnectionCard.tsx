@@ -15,7 +15,7 @@ export default class GoogleExternalConnectionCard extends React.PureComponent<IP
       return (
         <ConnectedCard
           externalConnection={this.props.externalConnection}
-        />
+       />
       );
     }
 

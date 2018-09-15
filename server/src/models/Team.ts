@@ -17,7 +17,7 @@ export class Team extends ApplicationEntity {
   public name!: string;
 
   @Type(() => Position)
-  @OneToMany(type => Position, position => position.team)
+  @OneToMany(type => Position, position => position.team, { persistence: false })
   public positions!: Position[];
 
   @Column('int', { nullable: false })

@@ -1,8 +1,9 @@
 import * as _ from 'lodash';
-import { Team, Resource } from '../../models';
+import { Team, Resource, Position } from '../../models';
 import { Operation } from "../../lib/sti-model-operations/Operation";
 import { PatchModelApplicationOperation, IPatchModelApplicationOperationArgs } from '../ApplicationOperation/PatchModelApplicationOperation';
 import { BadRequestError } from 'routing-controllers';
+import { syncResourceToMemberPublisher } from '../../publishers';
 
 @Operation('Team')
 export class Patch extends PatchModelApplicationOperation<Team> {
@@ -20,8 +21,8 @@ export class Patch extends PatchModelApplicationOperation<Team> {
     /**
      * Update everything but resources
      */
-    this.model = Team.merge(this.model, _.omit(this.changes, 'resources'));
-
+    this.model.name = this.changes.name || this.model.name;
+    
     await this.setResourcesFromChanges();
     await this.model.save();
 
@@ -29,7 +30,27 @@ export class Patch extends PatchModelApplicationOperation<Team> {
      * If there were resource changes, we need to fire off jobs to sync them
      * with each team member
      */
-    
+    await this.notifyResourceChanges();
+
+    return this.model;
+  }
+
+  private async notifyResourceChanges() {
+    const resourceTouchedIds = this.resourceTouchedIds;
+
+    if(!resourceTouchedIds) {
+      return;
+    }
+
+    // Add a job for each changed resource for each member
+    for (const { id: memberId } of await this.getModelPositions()) { 
+      for(const resourceId of resourceTouchedIds) {
+        syncResourceToMemberPublisher.publish({
+          memberId,
+          resourceId
+        });
+      }
+    }
   }
 
   private async setResourcesFromChanges() {
@@ -41,12 +62,11 @@ export class Patch extends PatchModelApplicationOperation<Team> {
 
     const resourceIds = resources.map(r => r.id);
 
-    const resourceModels = await Resource.find({
-      where: {
-        id: resourceIds,
-        organizationId: this.model.organizationId
-      }
-    });
+    const resourceModels = await this.entityManager.getRepository(Resource)
+      .createQueryBuilder('resource')
+      .where('resource.organizationId = :organizationId', { organizationId: this.model.organizationId })
+      .andWhereInIds(resourceIds)
+      .getMany();
 
     if (resources.length !== resourceModels.length) {
       throw new BadRequestError('Not all resources found');
@@ -64,8 +84,18 @@ export class Patch extends PatchModelApplicationOperation<Team> {
     if (this.model.resources) {
       return this.model.resources;
     } else {
-      return Resource.find({
+      return this.entityManager.find(Resource, {
         where: { teams: [this.model] }
+      });
+    }
+  }
+
+  private async getModelPositions() {
+    if (this.model.positions) {
+      return this.model.positions;
+    } else {
+      return this.entityManager.find(Position, {
+        where: { team: this.model }
       });
     }
   }

@@ -1,4 +1,4 @@
-import { Entity, ManyToOne, Column, JoinColumn, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, ManyToOne, Column, JoinColumn, PrimaryGeneratedColumn, Index } from 'typeorm';
 import { ApplicationEntity } from './ApplicationEntity';
 import { Team } from './Team';
 import { Member } from './Member';
@@ -11,7 +11,8 @@ export class Position extends ApplicationEntity {
   @PrimaryGeneratedColumn()
   public id!: number;
 
-  @Column('int', { primary: true })
+  @Index()
+  @Column('int')
   public teamId!: number;
 
   @Type(() => Team)
@@ -19,7 +20,8 @@ export class Position extends ApplicationEntity {
   @JoinColumn({ name: 'teamId'})
   public team!: Team;
 
-  @Column('int', { primary: true })
+  @Index()
+  @Column('int')
   public memberId!: number;
 
   @Type(() => Member)

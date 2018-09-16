@@ -6,6 +6,7 @@ import { IModelApplicationOperationArgs, ModelApplicationOperation } from '../Ap
 import { Team, Member, Resource } from '../../models';
 import { Operation } from "../../lib/sti-model-operations/Operation";
 import { syncResourceToMemberPublisher } from '../../publishers';
+import { log } from '../../config';
 
 interface ISyncResourcesWithMemberOperationArgs extends IModelApplicationOperationArgs<Team> {
   member: Member;
@@ -26,7 +27,7 @@ export class SyncResourcesWithMember extends ModelApplicationOperation<Team> {
 
   public async run() {
     const resources = await this.getResources();
-    
+
     for (const resource of resources) {
       syncResourceToMemberPublisher.publish({
         memberId: this.member.id,
@@ -39,11 +40,11 @@ export class SyncResourcesWithMember extends ModelApplicationOperation<Team> {
     if (this.model.resources) {
       return this.model.resources;
     } else {
-      return this.entityManager.find(Resource, {
-        where: {
-          teams: [this.model]
-        }
+      const teamWithResources = await this.entityManager.findOneOrFail(Team, this.model.id, {
+        relations: ['resources']
       });
+
+      return teamWithResources.resources;
     }
   }
 }

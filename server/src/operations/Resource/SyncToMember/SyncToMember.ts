@@ -33,9 +33,10 @@ export abstract class SyncToMember<T extends Resource = Resource> extends ModelA
       return;
     }
 
-    await shouldMemberHaveAccess? 
+    await (shouldMemberHaveAccess?
       this.grantMemberAccessToResource() : 
-      this.revokeMemberAccessToResource();
+      this.revokeMemberAccessToResource()
+    );
   }
 
   /**

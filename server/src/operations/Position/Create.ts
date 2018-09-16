@@ -11,7 +11,7 @@ export class Create extends ModelApplicationOperation<Position> {
   }
 
   public async run() {
-    this.populateRelations();
+    await this.populateRelations();
 
     this.model.onAfterInsert(() => {
       TeamOperations.SyncResourcesWithMember.run({

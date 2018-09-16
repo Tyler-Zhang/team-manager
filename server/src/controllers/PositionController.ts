@@ -6,7 +6,11 @@ import authenticatedContext from "../authorization/authenticatedContext";
 @JsonController('/positions')
 export class PositionController {
   @Post('')
-  public async create(@Body({ required: true }) body: Position) {
+  public async create(
+    @Body({ required: true }) body: Position,
+    @authenticatedContext({ required: true }) authContext: AuthenticatedContext
+  ) {
+    // TODO: verify authcontext
     return PositionOperations.Create.run({ model: body });
   }
 

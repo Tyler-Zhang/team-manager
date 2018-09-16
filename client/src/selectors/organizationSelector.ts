@@ -15,4 +15,4 @@ export const organizationSelector = createSelector(
 
     return organization;
   }
-)
+);

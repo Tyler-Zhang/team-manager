@@ -1,7 +1,7 @@
 import { schema } from 'normalizr';
 import { attr, TableState } from 'redux-orm';
 import { ApplicationModel, baseFields, IBaseFields } from './ApplicationModel';
-import { IPosition, positionSchema } from './Position';
+import { IPosition,  positionListSchema, positionSchema } from './Position';
 
 export enum Authority {
   member = 'member',
@@ -37,8 +37,11 @@ export class Member extends ApplicationModel<IMember, IBaseFields> {
   }
 }
 
+
 export const memberSchema: schema.Entity = new schema.Entity('members', {
-  positions: new schema.Array(positionSchema)
+  positions: positionListSchema
 });
 
 export const memberListSchema = new schema.Array(memberSchema);
+
+positionSchema.define({ member: memberSchema });

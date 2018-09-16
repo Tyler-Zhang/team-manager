@@ -29,3 +29,5 @@ export const teamSchema: schema.Entity = new schema.Entity('teams', {
 });
 
 export const teamListSchema = new schema.Array(teamSchema);
+
+positionSchema.define({ team: teamSchema });

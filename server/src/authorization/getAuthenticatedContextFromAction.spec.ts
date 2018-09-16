@@ -8,7 +8,7 @@ import { AuthenticatedContextOperations } from '../operations';
 describe('getAuthenticatedContextFromAction', () => {
   const token = lorem.text(10);
   const mockAction = {};
-  _.set(mockAction, 'request.headers.authorization', token);
+  _.set(mockAction, 'request.cookies.authorization', token);
 
   it('calls AuthenticatedContextOperations.FromToken with the correct arguments', () => {
     const fromMemberRun = sinon.stub(AuthenticatedContextOperations.FromToken, 'run');

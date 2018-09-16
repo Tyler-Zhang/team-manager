@@ -12,7 +12,7 @@ export class Delete extends ModelApplicationOperation<Position> {
   public async run() {
     await this.populateRelations();
 
-    this.model.onAfterInsert(() => {
+    this.model.onAfterRemove(() => {
       TeamOperations.SyncResourcesWithMember.run({
         member: this.model.member,
         model: this.model.team

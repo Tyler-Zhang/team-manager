@@ -5,6 +5,7 @@ import { IMember, memberSchema } from './Member';
 import { ITeam, teamSchema } from './Team';
 
 export interface IPosition {
+  id: number;
   team: ITeam;
   member: IMember;
   teamId: number;

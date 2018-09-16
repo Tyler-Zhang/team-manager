@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import authenticationReducer, { IAuthenticationState } from './authReducer';
 import membersReducer, { IMembersState } from './membersReducer';
 import ormReducer from './ormReducer/ormReducer';
+import positionsReducer, { IPositionsState } from './positionsReducer';
 import startupReducer, { IStartupState } from './startupReducer';
 import teamsReducer, { ITeamsState } from './teamsReducer';
 
@@ -11,6 +12,7 @@ export interface IStore {
   members: IMembersState;
   teams: ITeamsState;
   startup: IStartupState;
+  positions: IPositionsState;
 }
 
 export const rootReducer = combineReducers({
@@ -18,5 +20,6 @@ export const rootReducer = combineReducers({
   authentication: authenticationReducer,
   members: membersReducer,
   teams: teamsReducer,
-  startup: startupReducer
+  startup: startupReducer,
+  positions: positionsReducer
 });

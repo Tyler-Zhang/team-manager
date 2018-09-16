@@ -4,6 +4,14 @@ import { orm } from '../models';
 export const memberListSelector = createSelector(
   orm,
   session => {
-    return session.Member.all().toModelArray();
+    const members = session.Member.all().toModelArray();
+
+    return members.map(member => ({
+      ...member.ref,
+      positions: member.positions.toModelArray().map((position: any) => ({
+        ...position.ref,
+        team: position.team.ref
+      }))
+    }));
   }
 )

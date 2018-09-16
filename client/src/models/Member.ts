@@ -1,7 +1,7 @@
 import { schema } from 'normalizr';
 import { attr, TableState } from 'redux-orm';
 import { ApplicationModel, baseFields, IBaseFields } from './ApplicationModel';
-import { positionSchema } from './Position';
+import { IPosition, positionSchema } from './Position';
 
 export enum Authority {
   member = 'member',
@@ -16,6 +16,7 @@ export interface IMember {
   email: string;
   phoneNumber: string;
   password?: string;
+  positions?: IPosition[]
 }
 
 export type MemberModel = IMember & IBaseFields;

@@ -3,6 +3,7 @@ import { AnyAction } from 'redux';
 import { getType } from 'typesafe-actions';
 import { orm } from '../../../models';
 import { IPosition } from '../../../models/Position';
+import { PositionActions } from '../positionsReducer';
 import { OrmActions } from './ormReducer';
 
 export default function positionReducer(state: any, action: AnyAction) {
@@ -21,6 +22,22 @@ export default function positionReducer(state: any, action: AnyAction) {
           createdPosition.team = position.teamId;
         });
       }
+      break;
+    }
+
+    case getType(PositionActions.positionsDelete): {
+      Position.withId(action.payload.id).isDeleting = true;
+      break;
+    }
+
+    case getType(PositionActions.positionsDeleteSuccess): {
+      Position.withId(action.payload.id).delete();
+      break;
+    }
+
+    case getType(PositionActions.positionsDeleteError): {
+      Position.withId(action.payload.id).isDeleting = false;
+      break;
     }
   }
 

@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 import AddMemberForm from '../../../components/member/AddMemberForm/AddMemberForm';
 import { IAlertProps, withAlertContext } from '../../../compositions';
 import { IMember, ITeam, memberSchema, ProtoModel } from '../../../models';
-import { teamBareListSelector } from '../../../selectors/teamBareListSelector';
+import { teamBareListSelector } from '../../../selectors/teamListSelector';
 import { MemberService } from '../../../services';
 import { OrmActions } from '../../../store/reducers/ormReducer/ormReducer';
 

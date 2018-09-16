@@ -3,12 +3,13 @@ import * as React from 'react'
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { bindActionCreators, Dispatch } from 'redux';
+import { Flex } from 'reflexbox';
+
 import { ITeam, OrmModel } from '../../../models';
+import { teamBareListSelector } from '../../../selectors/teamListSelector';
 import { IStore } from '../../../store';
 import { ITeamPayload, ITeamPayloadCreate, TeamActions } from '../../../store/reducers/teamsReducer';
 
-import { Flex } from 'reflexbox';
-import { teamBareListSelector } from '../../../selectors/teamBareListSelector';
 import TeamSettings from '../../team/TeamSettings/TeamSettings';
 import TeamsHeader from './TeamsHeader/TeamsHeader';
 import TeamsTable from './TeamsTable/TeamsTable';

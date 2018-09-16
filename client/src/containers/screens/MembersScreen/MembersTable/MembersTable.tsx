@@ -1,8 +1,9 @@
 import { Table } from 'antd';
 import * as React from 'react';
-import { IMember, OrmModel } from '../../../../models';
+import { IMember, ITeam, OrmModel } from '../../../../models';
 
 import DeleteButton from '../../../../components/DeleteButton/DeleteButton';
+import PositionTags from '../../../member/PositionTags/PositionTags';
 
 interface IProps {
   members: Array<OrmModel<IMember>>;
@@ -34,6 +35,13 @@ export default class MembersTable extends React.PureComponent<IProps> {
     title: 'Email',
     dataIndex: 'email',
     key: 'email'
+  }, {
+    title: 'Teams',
+    dataIndex: 'teams',
+    key: 'teams',
+    render: (teams: ITeam[], member: IMember) => (
+      <PositionTags member={member}/>
+    )
   }]
 
   public render() {

@@ -13,6 +13,7 @@ export * from './ApplicationModel';
 export * from './AuthenticatedContext';
 export * from './ExternalConnection';
 export * from './Resource';
+export * from './Position';
 
 export interface IORMState extends ORMCommonState {
   Member: MemberState;

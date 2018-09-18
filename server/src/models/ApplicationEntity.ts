@@ -20,10 +20,10 @@ export abstract class ApplicationEntity extends BaseEntity {
   public updatedAt!: Date;
 
   @Exclude()
-  private onAfterInsertCallbacks: Array<IEventCallback<this>> = [];
+  private onAfterInsertCallbacks: Array<IEventCallback<any>> = [];
 
   @Exclude()
-  private onAfterRemoveCallbacks: Array<IEventCallback<this>> = [];
+  private onAfterRemoveCallbacks: Array<IEventCallback<any>> = [];
 
   public onAfterInsert(callback: IEventCallback<this>) {
     this.onAfterInsertCallbacks.push(callback);
@@ -47,5 +47,7 @@ export abstract class ApplicationEntity extends BaseEntity {
     for (const cb of this.onAfterRemoveCallbacks) {
       cb(this);
     }
+
+    this.onAfterRemoveCallbacks = [];
   }
 }

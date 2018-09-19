@@ -26,7 +26,7 @@
   },
   "scripts": {
     "start": "DANGEROUSLY_DISABLE_HOST_CHECK=true react-scripts-ts start",
-    "build": "react-scripts-ts build",
+    "build": "react-scripts-ts build && sw-precache --config=sw-precache-config.js",
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
     "prod": "node index.js"
@@ -45,6 +45,7 @@
     "@types/redux-orm": "^0.9.0",
     "@types/redux-saga": "^0.10.5",
     "http-server": "^0.11.1",
+    "sw-precache": "^5.2.1",
     "typescript": "^2.9.2"
   },
   "proxy": {

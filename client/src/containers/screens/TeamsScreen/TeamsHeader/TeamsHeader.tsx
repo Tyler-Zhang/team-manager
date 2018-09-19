@@ -13,7 +13,7 @@ export default class TeamsHeader extends React.PureComponent<IProps> {
     return (
       <Layout.Header style={{ background: '#fff'}}>
           <Row>
-            <Col span={4}><h3> Users Page </h3></Col>
+            <Col span={4}><h3> Teams </h3></Col>
             <Col span={8}>
               <Input.Search
                   placeholder="Search here"

@@ -1,0 +1,61 @@
+.intro-section .shadowed {
+  -webkit-box-shadow: 10px 10px 47px -12px rgba(0,0,0,0.54);
+  -moz-box-shadow: 10px 10px 47px -12px rgba(0,0,0,0.54);
+  box-shadow: 10px 10px 47px -12px rgba(0,0,0,0.54);;
+}
+
+.intro-section {
+  padding: 250px 0 300px 0;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#562fef+0,b073d6+100 */
+  background: #562fef; /* Old browsers */
+  background: -moz-linear-gradient(-45deg, #562fef 0%, #b073d6 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg, #562fef 0%,#b073d6 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg, #562fef 0%,#b073d6 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#562fef', endColorstr='#b073d6',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+  font-family: 'Roboto', sans-serif;
+  color: white;
+}
+
+.intro-section  .title {
+  font-size: 70px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.intro-section .subtext {
+  font-size: 19px;
+  font-weight: 200;
+  margin-top: 20px;
+  margin-bottom: 60px;
+}
+
+.intro-section .get-started {
+  height: 50px;
+  width: 150px;
+  margin: 0;
+  background-color: #fc397d;
+  border-radius: 20px 20px 0px 20px;
+}
+
+.intro-section .get-started a {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.intro-section .get-started span {
+  color: white;
+  font-weight: bold;
+}
+
+.intro-section .login {
+  padding-top: 15px;
+}
+
+.intro-section .demo-image {
+  width: 700px;
+  transform: rotate3d(10deg)
+}

@@ -12,9 +12,12 @@ services:
     hostname: postgres
   redis:
     image: 'redis:alpine'
+    command: ["redis-server", "--appendonly", "yes"]
     networks:
       - network
     hostname: redis
+    volumes:
+      - ./volumes/redis:/data
   client:
     image: tylerzhang/team-manager-client:latest
     environment:

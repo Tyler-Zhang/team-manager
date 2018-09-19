@@ -2,13 +2,45 @@ version: '3'
 services:
   postgres: 
     image: postgres:10.5
-    ports:
-      - "5432:5432"
     environment:
-      - POSTGRES_USER=postgres
+      POSTGRES_USER: ${DATABASE_NAME}
+      POSTGRES_DB: ${DATABASE_NAME}
     volumes:
       - ./volumes/db:/var/lib/postgresql/data
+    networks:
+      - network
+    hostname: postgres
   redis:
     image: 'redis:alpine'
+    networks:
+      - network
+    hostname: redis
+  client:
+    image: tylerzhang/team-manager-client:latest
+    environment:
+      API_URL: http://api:8080
     ports:
-      - "6379:6379"
+      - "${PORT}:80"
+    hostname: client
+    networks:
+      - network
+  api:
+    image: tylerzhang/team-manager-server:latest
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      DATABASE_LOGGING: "false"
+      DATABASE_SYNC: "true"
+      DATABASE_URL: postgresql://${DATABASE_NAME}@postgres/${DATABASE_NAME}
+      REDIS_HOST: redis
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+      HOST: ${HOST}
+      PRIVATE_KEY: ${API_PRIVATE_KEY}
+    hostname: api
+    networks:
+      - network
+networks:
+  network:
+    driver: bridge

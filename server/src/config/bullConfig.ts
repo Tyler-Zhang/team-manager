@@ -2,8 +2,8 @@ import * as Arena from 'bull-arena';
 import * as Queue from 'bull';
 import * as assert from 'assert';
 
-const REDIS_URL = process.env.REDIS_URL;
-assert.ok(REDIS_URL, 'ENV variable REDIS_URL required!');
+const REDIS_HOST = process.env.REDIS_HOST;
+assert.ok(REDIS_HOST, 'ENV variable REDIS_URL required!');
 
 /**
  * Default options
@@ -15,6 +15,9 @@ const defaultQueueOptions: Queue.QueueOptions = {
       type: 'exponential',
       delay: 5000
     },
+  },
+  redis: {
+    host: REDIS_HOST
   }
 }
 

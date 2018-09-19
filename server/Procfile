@@ -1,3 +1,3 @@
-api: $EXECUTABLE $DIR/api | yarn bunyan
-workers: DATABASE_SYNC=false $EXECUTABLE $DIR/workers | yarn bunyan
-arena: DATABASE_SYNC=false $EXECUTABLE $DIR/arena | yarn bunyan
+api: node ./dist/api | yarn bunyan
+workers: DATABASE_SYNC=false node ./dist/workers | yarn bunyan
+arena: DATABASE_SYNC=false node ./dist/arena | yarn bunyan

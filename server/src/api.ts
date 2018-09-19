@@ -37,7 +37,6 @@ export async function launch() {
     routePrefix: '/api',
     classTransformer: true
   });
-
   /**
    * Start the server
    */

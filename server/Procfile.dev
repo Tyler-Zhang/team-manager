@@ -1,0 +1,3 @@
+api: yarn ts-node ./src/api | yarn bunyan
+workers: DATABASE_SYNC=false yarn ts-node ./src/workers | yarn bunyan
+arena: DATABASE_SYNC=false yarn ts-node ./src/arena | yarn bunyan

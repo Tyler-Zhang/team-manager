@@ -4,8 +4,9 @@
   "description": "Team manager server",
   "main": "index.ts",
   "scripts": {
-    "start": "EXECUTABLE=node DIR=./dist/src nf start",
-    "dev": "EXECUTABLE=node_modules/.bin/ts-node DIR=./src nodemon",
+    "prod": "nf start",
+    "dev": "nf start --procfile Procfile.dev",
+    "dev:watch": "nodemon",
     "build": "tsc",
     "test": "nf run sh ./scripts/test.sh",
     "console": "nf run ts-node ./src/console"

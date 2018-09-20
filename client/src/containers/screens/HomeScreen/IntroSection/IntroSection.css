@@ -1,9 +1,3 @@
-.intro-section .shadowed {
-  -webkit-box-shadow: 10px 10px 47px -12px rgba(0,0,0,0.54);
-  -moz-box-shadow: 10px 10px 47px -12px rgba(0,0,0,0.54);
-  box-shadow: 10px 10px 47px -12px rgba(0,0,0,0.54);;
-}
-
 .intro-section {
   padding: 250px 0 300px 0;
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#562fef+0,b073d6+100 */
@@ -15,6 +9,12 @@
 
   font-family: 'Roboto', sans-serif;
   color: white;
+}
+
+.intro-section .shadowed {
+  -webkit-box-shadow: 10px 10px 47px -12px rgba(0,0,0,0.54);
+  -moz-box-shadow: 10px 10px 47px -12px rgba(0,0,0,0.54);
+  box-shadow: 10px 10px 47px -12px rgba(0,0,0,0.54);;
 }
 
 .intro-section  .title {
@@ -57,5 +57,4 @@
 
 .intro-section .demo-image {
   width: 700px;
-  transform: rotate3d(10deg)
 }

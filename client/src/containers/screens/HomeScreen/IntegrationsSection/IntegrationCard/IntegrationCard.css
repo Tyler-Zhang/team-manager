@@ -1,0 +1,13 @@
+.integration-card img{
+  width: 100%;
+}
+
+.integration-card .name {
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.integration-card .description {
+  font-size: 15px;
+}

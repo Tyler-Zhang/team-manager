@@ -1,0 +1,15 @@
+.integrations-section {
+  padding-top: 150px;
+  padding-bottom: 150px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.integrations-section .heading {
+  font-size: 50px;
+  font-weight: bold;
+  padding-bottom: 100px;
+}
+
+.integrations-section .integration-cards .integration-card {
+  padding-bottom: 60px;
+}

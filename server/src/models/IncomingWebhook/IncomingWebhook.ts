@@ -25,5 +25,6 @@ export abstract class IncomingWebhook extends ApplicationEntity {
   constructor() {
     super();
     this.data = {};
+    this.isEnabled = false;
   }
 }

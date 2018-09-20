@@ -22,6 +22,7 @@ class NormalLoginForm extends React.Component<IProps & FormComponentProps> {
     const { getFieldDecorator } = this.props.form;
     return (
       <Form onSubmit={this.handleSubmit} className="login-form">
+        <h1> Login </h1>
         <FormItem>
           {getFieldDecorator('email', {
             rules: [{ required: true, message: 'Please input your email!' }],

@@ -11,12 +11,6 @@
   color: white;
 }
 
-.intro-section .shadowed {
-  -webkit-box-shadow: 10px 10px 47px -12px rgba(0,0,0,0.54);
-  -moz-box-shadow: 10px 10px 47px -12px rgba(0,0,0,0.54);
-  box-shadow: 10px 10px 47px -12px rgba(0,0,0,0.54);;
-}
-
 .intro-section  .title {
   font-size: 70px;
   font-weight: bold;

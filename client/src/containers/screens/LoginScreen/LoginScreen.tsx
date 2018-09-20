@@ -3,11 +3,12 @@ import { connect } from 'react-redux';
 import { RouteComponentProps, withRouter } from 'react-router';
 import { compose } from 'recompose';
 import { Dispatch } from 'redux';
-import CenterInPage from '../../../components/CenterInPage/CenterInPage';
 import { IAlertProps, withAlertContext } from '../../../compositions';
 import { AuthenticationService } from '../../../services';
 import { AuthActions, IAuthPayloadSuccess } from '../../../store/reducers/authReducer';
 import LoginForm from './LoginForm/LoginForm';
+
+import './LoginScreen.css';
 
 interface IProps {
   authSuccess: (params: IAuthPayloadSuccess) => any;
@@ -16,10 +17,12 @@ interface IProps {
 class LoginScreen extends React.Component<IProps & IAlertProps & RouteComponentProps<{}>> {
   public render() {
     return (
-      <CenterInPage width={4}>
-        <LoginForm
-          onSubmit={this.onSubmit}/>
-      </CenterInPage>
+      <div className="login-screen">
+        <div className="login-form-container shadowed">
+          <LoginForm
+            onSubmit={this.onSubmit}/>
+        </div>
+      </div>
     )
   }
 

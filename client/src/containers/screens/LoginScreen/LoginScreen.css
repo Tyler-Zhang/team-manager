@@ -1,0 +1,20 @@
+.login-screen {
+  height: 100vh;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#562fef+0,b073d6+100 */
+  background: #562fef; /* Old browsers */
+  background: -moz-linear-gradient(-45deg, #562fef 0%, #b073d6 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg, #562fef 0%,#b073d6 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg, #562fef 0%,#b073d6 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#562fef', endColorstr='#b073d6',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-screen .login-form-container {
+  background: white;
+  width: 400px;
+  padding: 60px;
+  border-radius: 10px;
+}

@@ -5,11 +5,12 @@
   "main": "index.ts",
   "scripts": {
     "start": "nf start",
+    "console": "nf run node ./dist/src/console",
     "dev": "nf start --procfile Procfile.dev",
     "dev:watch": "nodemon",
+    "dev:console": "nf run ts-node ./src/console",
     "build": "tsc",
-    "test": "nf run sh ./scripts/test.sh",
-    "console": "nf run ts-node ./src/console"
+    "test": "nf run sh ./scripts/test.sh"
   },
   "author": "",
   "license": "ISC",

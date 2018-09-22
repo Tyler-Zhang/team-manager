@@ -1,7 +1,8 @@
 import { Operation } from "../../../lib/sti-model-operations/Operation";
 import { GoogleIncomingWebhook, ExternalConnection } from '../../../models';
 import { ProcessEvent, IProcessEventOperationArgs } from './ProcessEvent';
-import { IWebhookReceivedJobPayload, syncResourcesFromExternalConnectionPublisher } from "../../../publishers";
+import { IWebhookReceivedJobPayload } from "../../../publishers";
+import { ExternalConnectionOperations } from "../..";
 
 @Operation('GoogleIncomingWebhook')
 export class GoogleIncomingWebhookProcessEvent extends ProcessEvent<GoogleIncomingWebhook, IWebhookReceivedJobPayload> {
@@ -22,9 +23,7 @@ export class GoogleIncomingWebhookProcessEvent extends ProcessEvent<GoogleIncomi
       return;
     }
 
-    return syncResourcesFromExternalConnectionPublisher.publish({
-      externalConnectionId: externalConnection.id 
-    });
+    await ExternalConnectionOperations.SyncResources.run({ model: externalConnection }, true);
   }
 
   private async resolveExternalConnection() {

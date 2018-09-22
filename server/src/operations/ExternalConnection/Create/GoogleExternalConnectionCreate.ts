@@ -2,8 +2,7 @@ import { Create } from './Create';
 import { IModelApplicationOperationArgs } from '../../ApplicationOperation';
 import { GoogleExternalConnection, GoogleIncomingWebhook } from '../../../models';
 import { Operation } from "../../../lib/sti-model-operations/Operation";
-import { syncResourcesFromExternalConnectionPublisher } from '../../../publishers';
-import { IncomingWebhookOperations } from '../..';
+import { IncomingWebhookOperations, ExternalConnectionOperations } from '../..';
 
 @Operation('GoogleExternalConnection')
 export class GoogleExternalConnectionCreate extends Create {
@@ -15,13 +14,8 @@ export class GoogleExternalConnectionCreate extends Create {
 
   public async run() {
     await super.run();
-
     await this.createWebhook();
-
-    await syncResourcesFromExternalConnectionPublisher.publish({
-      externalConnectionId: this.model.id
-    });
-
+    await ExternalConnectionOperations.SyncResources.run({ model: this.model }, true);
     return this.model;
   }
 

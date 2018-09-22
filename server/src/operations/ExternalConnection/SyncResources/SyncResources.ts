@@ -5,8 +5,8 @@ import { ExternalConnectionOperations } from '../..';
 
 @Operation('ExternalConnection')
 export class SyncResources extends ModelApplicationOperation<ExternalConnection> {
-  public static run(args: IModelApplicationOperationArgs<ExternalConnection>): Promise<ExternalConnection> {
-    return super.run(args);
+  public static run(args: IModelApplicationOperationArgs<ExternalConnection>, async?: boolean): Promise<ExternalConnection> {
+    return super.run(args, async);
   }
 
   public async run() {

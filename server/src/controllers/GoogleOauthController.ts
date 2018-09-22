@@ -8,10 +8,10 @@ import { ExternalConnectionOperations, AuthenticatedContextOperations } from '..
 @JsonController('/google_oauth')
 export default class GoogleController {
   @Get('/redirect_url')
-  public redirectUrl (
-    @authenticatedContext() authContext: AuthenticatedContext
+  public async redirectUrl (
+    @authenticatedContext({ required: true }) authContext: AuthenticatedContext
   ) {
-    const authContextToken = AuthenticatedContextOperations.IntoToken.run({ authContext });
+    const authContextToken = await AuthenticatedContextOperations.IntoToken.run({ authContext });
 
     const authUrl = createGoogleOauth2Client().generateAuthUrl({
       access_type: 'offline',

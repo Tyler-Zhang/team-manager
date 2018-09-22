@@ -23,7 +23,7 @@ export interface IIntoToken {
 
 @Operation('AuthenticatedContext')
 export class IntoToken extends ApplicationOperation {
-  public static run(args: IIntoToken): string {
+  public static run(args: IIntoToken): Promise<string> {
     return super.run(args);
   }
 

@@ -24,6 +24,15 @@ export abstract class Resource extends ApplicationEntity {
   @Column({ type: 'json' })
   public data!: any;
 
+  /**
+   * We can use this flag to mark every resource of an external
+   * connection to be deleted, and then resync each resource updating
+   * this flag to false if it exists. Then at the end, we delete every
+   * record where this flag is true
+   */
+  @Column({ nullable: true })
+  public slatedForDeletion!: boolean;
+
   @Column({ type: 'int', nullable: false })
   @Index()
   public externalConnectionId!: number;

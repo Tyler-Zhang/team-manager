@@ -5,6 +5,7 @@ import * as PositionOperations from './Position';
 import * as TeamOperations from './Team';
 import * as ExternalConnectionOperations from './ExternalConnection';
 import * as ResourceOperations from './Resource';
+import * as IncomingWebhookOperations from './IncomingWebhook';
 
 
 export {
@@ -14,5 +15,6 @@ export {
   PositionOperations,
   TeamOperations,
   ExternalConnectionOperations,
-  ResourceOperations
+  ResourceOperations,
+  IncomingWebhookOperations
 }

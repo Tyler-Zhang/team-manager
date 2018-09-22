@@ -34,7 +34,7 @@ export class IntoToken extends ApplicationOperation {
     this.authContext = authContext
   }
 
-  public run() {
+  public async run() {
     let payload: ITokenPayload;
 
     if (this.authContext.isSystem()) {

@@ -24,7 +24,6 @@ const defaultQueueOptions: Queue.QueueOptions = {
 /**
  * Different queues that we can publish messages to
  */
-export const syncResourceFromExternalConnectionQueue = new Queue('syncResourceFromExternalConnectionQueue', defaultQueueOptions);
 export const syncResourceToMemberQueue = new Queue('syncResourceToMemberQueue', defaultQueueOptions);
 export const webhookReceivedQueue = new Queue('webhookReceivedQueue', defaultQueueOptions);
 export const asyncOperationQueue = new Queue('asyncOperationQueue', defaultQueueOptions);
@@ -33,7 +32,6 @@ export const asyncOperationQueue = new Queue('asyncOperationQueue', defaultQueue
  * Bull Arena config: this allows us to create a server to display job statuses
  */
 export const queues = [
-  'syncResourceFromExternalConnectionQueue',
   'syncResourceToMemberQueue',
   'webhookReceivedQueue',
   'asyncOperationQueue'

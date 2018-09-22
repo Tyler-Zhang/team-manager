@@ -11,7 +11,7 @@ export const googleConfig = {
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
   redirectUri: `${process.env.HOST}/api/google_oauth/callback`,
   webhookUri: `${process.env.HOST}/api/google/notify`,
-  maxWebhookTTL: 604800
+  maxWebhookTTL: 24 * 60 * 60 * 1000
 }
 
 export const createGoogleOauth2Client = () => new google.auth.OAuth2(

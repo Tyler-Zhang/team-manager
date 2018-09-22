@@ -31,6 +31,6 @@ export class GoogleIncomingWebhookCreateAndEnable extends CreateAndEnable<Google
       fileId: 'root'
     });
     
-    this.model.expirationDate = new Date(Date.now() + Number(response.data.expiration));
+    this.model.expirationDate = new Date(Number(response.data.expiration));
   }
 }

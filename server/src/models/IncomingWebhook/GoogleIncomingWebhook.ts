@@ -9,11 +9,7 @@ const TYPE = 'IncomingWebhook>GoogleIncomingWebhook';
 
 @Model('GoogleIncomingWebhook')
 @ChildEntity(TYPE)
-export class GoogleIncomingWebhook extends IncomingWebhook {  
-  @Index()
-  @Column()
-  public expirationDate!: Date;
-  
+export class GoogleIncomingWebhook extends IncomingWebhook {
   @ManyToOne(type => ExternalConnection)
   public externalConnection!: GoogleExternalConnection;
 

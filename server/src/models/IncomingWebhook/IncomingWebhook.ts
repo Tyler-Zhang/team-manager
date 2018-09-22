@@ -23,6 +23,10 @@ export abstract class IncomingWebhook extends ApplicationEntity {
   @Column()
   public isEnabled!: boolean;
 
+  @Index()
+  @Column({ nullable: true })
+  public expirationDate!: Date;
+
   @Column('int')
   public externalConnectionId!: number;
 

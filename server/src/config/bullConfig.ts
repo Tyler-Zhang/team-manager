@@ -32,7 +32,7 @@ export const asyncOperationQueue = new Queue('asyncOperationQueue', defaultQueue
 /**
  * Bull Arena config: this allows us to create a server to display job statuses
  */
-export const bullArenaQueueConfig = [
+export const queues = [
   'syncResourceFromExternalConnectionQueue',
   'syncResourceToMemberQueue',
   'webhookReceivedQueue',
@@ -41,6 +41,10 @@ export const bullArenaQueueConfig = [
   name,
   hostId: 'api'
 }));
+
+const bullArenaQueueConfig = {
+  queues
+};
 
 export const bullArenaServerConfig = {
   port: 5000

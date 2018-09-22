@@ -11,7 +11,8 @@ export class PositionController {
     @authenticatedContext({ required: true }) authContext: AuthenticatedContext
   ) {
     // TODO: verify authcontext
-    return PositionOperations.Create.run({ model: body });
+    const createJob = await PositionOperations.Create.run({ model: body });
+    return true;
   }
 
   @Delete('/:id')
@@ -32,7 +33,7 @@ export class PositionController {
       throw new UnauthorizedError();
     }
 
-    await PositionOperations.Delete.run({ model: position });
+    await PositionOperations.Delete.run({ model: position }, true);
     return true;
   }
 }

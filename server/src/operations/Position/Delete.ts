@@ -5,8 +5,8 @@ import { TeamOperations } from '..';
 
 @Operation('Position')
 export class Delete extends ModelApplicationOperation<Position> {
-  public static run(args: IModelApplicationOperationArgs<Position>): Promise<Position> {
-    return super.run(args);
+  public static run(args: IModelApplicationOperationArgs<Position>, async?: boolean): Promise<Position> {
+    return super.run(args, async);
   }
 
   public async run() {

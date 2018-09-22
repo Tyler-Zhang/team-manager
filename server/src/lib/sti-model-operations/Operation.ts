@@ -78,26 +78,34 @@ function getDeepestPropertyInMap(obj: any, path: string[]) {
   return deepestFoundValue;
 }
 
+export function getClassFromContainer(operationName: string, typeChain: string[]) {
+  const operationMap = container[operationName];
+  const deepest: ISubclassNode | null = getDeepestPropertyInMap(operationMap, typeChain);
+
+  if (!deepest) {
+    return null;
+  }
+
+  return deepest[KLASS_PROPERTY] as IClass;
+}
+
 export abstract class ConstructableOperation {
   public static getAppropriateClass(...args: any[]) {
-    const operationName: string = (this as any)[OPERATION_NAME_PROPERTY];
-    const operationMap = container[operationName];
-    
+    const operationName: string = this.getOperationName();
     const typeChain = this.getTypeChain(...args);
     if(!typeChain) {
       return this;
     }
 
-    const deepest: ISubclassNode | null = getDeepestPropertyInMap(operationMap, typeChain);
-    if (!deepest) {
-      return this;
-    }
-
-    return deepest[KLASS_PROPERTY];
+    return getClassFromContainer(operationName, typeChain) || this;
   }
 
   public static getTypeChain(...args: any[]): string[] | null {
     return null;
+  }
+
+  public static getOperationName(): string {
+    return (this as any)[OPERATION_NAME_PROPERTY];
   }
 
   public static build(...args: any[]): any {
@@ -106,7 +114,7 @@ export abstract class ConstructableOperation {
     return new appropriateClass(...args);
   }
 
-  public static run(...args: any[]) {
+  public static async run(...args: any[]) {
     return this.build(...args).run();
   }
 

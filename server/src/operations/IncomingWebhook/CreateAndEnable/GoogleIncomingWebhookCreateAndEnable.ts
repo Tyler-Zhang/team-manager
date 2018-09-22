@@ -4,6 +4,7 @@ import { GoogleIncomingWebhook } from '../../../models';
 import { CreateAndEnable } from './CreateAndEnable';
 import { google } from 'googleapis';
 import { googleConfig } from '../../../config';
+import { ExternalConnectionOperations } from '../..';
 
 @Operation('GoogleIncomingWebhook')
 export class GoogleIncomingWebhookCreateAndEnable extends CreateAndEnable<GoogleIncomingWebhook> {
@@ -12,14 +13,17 @@ export class GoogleIncomingWebhookCreateAndEnable extends CreateAndEnable<Google
   }
 
   protected async enableWebhook() {
+    await ExternalConnectionOperations.EnsureValid.run({ 
+      model: this.model.externalConnection,
+      entityManager: this.entityManager
+    });
+    
     const googleAuthClient = this.model.externalConnection.toGoogleAuthClient();
     
     const googleDriveClient = google.drive({
       version: 'v3',
       auth: googleAuthClient
     });
-
-    const startPageToken = await googleDriveClient.changes.getStartPageToken();
 
     const response = await googleDriveClient.files.watch({
       requestBody: {

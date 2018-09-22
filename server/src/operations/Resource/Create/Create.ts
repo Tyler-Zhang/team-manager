@@ -9,6 +9,22 @@ export class Create extends ModelApplicationOperation<Resource> {
   }
 
   public async run() {
-    return this.entityManager.save(this.model);
+    const existingResource = await this.getExistingResource();
+
+    if (existingResource) {
+      // A resource with the same id exists, we should update it.
+      Resource.merge(existingResource, this.model);
+      return this.entityManager.save(existingResource);
+    } else {
+      return this.entityManager.save(this.model);
+    }
+  }
+
+  protected async getExistingResource() {
+    const externalId = this.model.externalId;
+
+    return this.entityManager.findOne(Resource, {
+      where: { externalId }
+    });
   }
 }

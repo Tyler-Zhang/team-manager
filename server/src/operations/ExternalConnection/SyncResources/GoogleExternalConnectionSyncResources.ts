@@ -44,9 +44,11 @@ export class GoogleExternalConnectionSyncResources extends SyncResources {
       /**
        * Use the create operation to create the resources
        */
-      await googleDriveFileResources.map(googleDriveFileResource => {
+      const createPromiseArray = googleDriveFileResources.map(googleDriveFileResource => {
         return ResourceOperations.Create.run({ model: googleDriveFileResource, entityManager: transaction});
       });
+
+      return Promise.all(createPromiseArray);
     });
   }
 }

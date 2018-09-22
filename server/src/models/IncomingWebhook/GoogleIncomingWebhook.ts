@@ -1,17 +1,18 @@
-import { ChildEntity, ManyToOne, Generated, Column, Index} from 'typeorm';
+import { ChildEntity, ManyToOne, Column, Index} from 'typeorm';
+import * as  uuid from 'uuid';
 import { Model } from '../../lib/sti-model-operations';
 import { GoogleExternalConnection, ExternalConnection } from '../ExternalConnection';
 import { IncomingWebhook } from './IncomingWebhook';
+import { googleConfig } from '../../config';
 
 const TYPE = 'IncomingWebhook>GoogleIncomingWebhook';
 
 @Model('GoogleIncomingWebhook')
 @ChildEntity(TYPE)
-export abstract class GoogleIncomingWebhook extends IncomingWebhook {  
-  @Index({ unique: true })
+export class GoogleIncomingWebhook extends IncomingWebhook {  
+  @Index()
   @Column()
-  @Generated('uuid')
-  public googleId!: string;
+  public expirationDate!: Date;
   
   @ManyToOne(type => ExternalConnection)
   public externalConnection!: GoogleExternalConnection;
@@ -32,5 +33,11 @@ export abstract class GoogleIncomingWebhook extends IncomingWebhook {
 
   public set token(value: string) {
     this.data.token = value;
+  }
+  
+  constructor(){
+    super();
+    this.address = googleConfig.webhookUri;
+    this.externalId = uuid.v4(); 
   }
 }

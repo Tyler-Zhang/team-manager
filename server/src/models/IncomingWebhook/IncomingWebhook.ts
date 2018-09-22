@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, TableInheritance } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, TableInheritance, Index, JoinColumn } from 'typeorm';
 import { ApplicationEntity } from '../ApplicationEntity';
 import { Model } from '../../lib/sti-model-operations';
 import { ExternalConnection } from '../ExternalConnection';
@@ -16,10 +16,18 @@ export abstract class IncomingWebhook extends ApplicationEntity {
   @Column({ type: 'json' })
   public data!: any;
 
+  @Index({ unique: true })
+  @Column()
+  public externalId!: string;
+
   @Column()
   public isEnabled!: boolean;
 
-  @ManyToOne(type => ExternalConnection, { nullable: false })
+  @Column('int')
+  public externalConnectionId!: number;
+
+  @ManyToOne(type => ExternalConnection, { nullable: false, onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'externalConnectionId' })
   public externalConnection!: ExternalConnection;
 
   constructor() {

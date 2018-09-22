@@ -13,7 +13,11 @@ export class WebhookReceivedWorker extends ApplicationWorker<IWebhookReceivedJob
     });
 
     if (!incomingWebhook) {
-      throw new Error(`Could not find IncomingWebhook by id ${job.data.externalId}`);
+      /**
+       * We don't have the webhook, it might've been deleted
+       */
+      this.log.info(`Could not find IncomingWebhook by id ${job.data.externalId}`);
+      return;
     }
     
     await IncomingWebhookOperations.ProcessEvent.run({

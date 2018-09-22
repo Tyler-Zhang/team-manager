@@ -27,6 +27,7 @@ const defaultQueueOptions: Queue.QueueOptions = {
 export const syncResourceToMemberQueue = new Queue('syncResourceToMemberQueue', defaultQueueOptions);
 export const webhookReceivedQueue = new Queue('webhookReceivedQueue', defaultQueueOptions);
 export const asyncOperationQueue = new Queue('asyncOperationQueue', defaultQueueOptions);
+export const renewIncomingWebhooksQueue = new Queue('renewIncomingWebhooksQueue', defaultQueueOptions);
 
 /**
  * Bull Arena config: this allows us to create a server to display job statuses
@@ -34,7 +35,8 @@ export const asyncOperationQueue = new Queue('asyncOperationQueue', defaultQueue
 export const queues = [
   'syncResourceToMemberQueue',
   'webhookReceivedQueue',
-  'asyncOperationQueue'
+  'asyncOperationQueue',
+  'renewIncomingWebhooksQueue'
 ].map(name => ({
   name,
   hostId: 'api'

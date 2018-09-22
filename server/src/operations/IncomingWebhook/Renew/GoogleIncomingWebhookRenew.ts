@@ -24,20 +24,18 @@ export class GoogleIncomingWebhookRenew extends Renew<GoogleIncomingWebhook> {
     const newIncomingWebhook = new GoogleIncomingWebhook();
     newIncomingWebhook.externalConnectionId = this.model.externalConnectionId;
     
-    return this.entityManager.transaction(async (transaction) => {
-      // Enable the new webhook
-      await IncomingWebhookOperations.CreateAndEnable.run({
-        model: newIncomingWebhook,
-        entityManager: transaction
-      });
-
-      // Disable the existing webhook
-      await IncomingWebhookOperations.Disable.run({
-        model: this.model,
-        entityManager: this.entityManager
-      })
-
-      return newIncomingWebhook;
+    // Enable the new webhook
+    await IncomingWebhookOperations.CreateAndEnable.run({
+      model: newIncomingWebhook,
+      entityManager: this.entityManager
     });
+
+    // Disable the existing webhook with a job
+    await IncomingWebhookOperations.Disable.run({
+      model: this.model,
+      entityManager: this.entityManager
+    }, true);
+
+    return newIncomingWebhook;
   }
 }

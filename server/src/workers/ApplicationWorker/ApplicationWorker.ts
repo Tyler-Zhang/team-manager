@@ -1,11 +1,14 @@
 import { Queue, Job } from 'bull';
-import { log } from '../../config';
+import buyan from 'bunyan';
+import { log as baseLog } from '../../config';
 
 export class ApplicationWorker<J=any> {
+  protected log: buyan;
   private queue: Queue;
   
-  constructor(queue: Queue) {
+  constructor(queue: Queue, log = baseLog) {
     this.queue = queue;
+    this.log = log.child({ worker: this.workerName });
   } 
 
   public async start() {
@@ -31,7 +34,7 @@ export class ApplicationWorker<J=any> {
 
   private async processWrapper(job: Job<J>) {
     const startTime = Date.now();
-    log.info(`${this.workerName} started processing a job`);
+    this.log.info(`Started processing a job`);
 
     try {
       await this.process(job);
@@ -40,11 +43,11 @@ export class ApplicationWorker<J=any> {
        * Log the error, and rethrow so that the job does not
        * register as a success
        */
-      log.error(e);
-      log.info(`${this.workerName} finished with error [${Date.now() - startTime}ms]`);
+      this.log.error(e);
+      this.log.info(`Finished with error [${Date.now() - startTime}ms]`);
       throw e;
     }
 
-    log.info(`${this.workerName} finished [${Date.now() - startTime}ms]`);
+    this.log.info(`Finished [${Date.now() - startTime}ms]`);
   }
 }

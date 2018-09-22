@@ -7,6 +7,7 @@ import { useExpressServer, useContainer } from 'routing-controllers';
 import { databaseConfig, log } from './config';
 import { join } from 'path';
 import { Container } from 'typedi';
+import { setup } from './setup';
 
 export async function launch() {
   /**
@@ -14,6 +15,11 @@ export async function launch() {
    */
   await createConnection(databaseConfig);
   log.info(`Connected to database`);
+
+  /**
+   * Do initial setup
+   */
+  await setup();
 
   /**
    * Create express server
@@ -37,6 +43,7 @@ export async function launch() {
     routePrefix: '/api',
     classTransformer: true
   });
+
   /**
    * Start the server
    */

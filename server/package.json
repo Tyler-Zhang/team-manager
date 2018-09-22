@@ -14,6 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/node-cron": "^1.2.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "bull": "^3.4.8",
@@ -27,6 +28,7 @@
     "lodash": "^4.17.10",
     "mocha": "^5.2.0",
     "multer": "^1.3.1",
+    "node-cron": "^2.0.1",
     "pg": "^7.4.3",
     "reflect-metadata": "^0.1.12",
     "rosie": "^2.0.1",

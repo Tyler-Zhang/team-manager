@@ -2,6 +2,7 @@ import * as repl from 'repl';
 import * as models from './models';
 import * as operations from './operations';
 import * as config from './config';
+import * as publishers from './publishers';
 import { createConnection } from 'typeorm';
 
 async function startRepl() {
@@ -14,7 +15,8 @@ async function startRepl() {
     {
       models,
       operations,
-      config
+      config,
+      publishers
     }
   );
 }

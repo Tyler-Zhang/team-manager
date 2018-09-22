@@ -4,7 +4,7 @@ import { IncomingWebhook } from '../../../models';
 
 @Operation('IncomingWebhook')
 export abstract class Renew<T extends IncomingWebhook> extends ModelApplicationOperation<T> {
-  public static run(args: IModelApplicationOperationArgs<IncomingWebhook>): Promise<IncomingWebhook> {
-    return super.run(args);
+  public static run(args: IModelApplicationOperationArgs<IncomingWebhook>, async?: boolean): Promise<IncomingWebhook> {
+    return super.run(args, async);
   }
 }

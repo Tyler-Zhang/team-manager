@@ -26,6 +26,7 @@ const defaultQueueOptions: Queue.QueueOptions = {
  */
 export const syncResourceFromExternalConnectionQueue = new Queue('syncResourceFromExternalConnectionQueue', defaultQueueOptions);
 export const syncResourceToMemberQueue = new Queue('syncResourceToMemberQueue', defaultQueueOptions);
+export const resourcesChangedQueue = new Queue('resourcesChangedQueue', defaultQueueOptions);
 
 /**
  * Bull Arena config: this allows us to create a server to display job statuses
@@ -36,6 +37,9 @@ export const bullArenaQueueConfig = {
     hostId: 'api'
   }, {
     name: 'syncResourceToMemberQueue',
+    hostId: 'api'
+  }, {
+    name: 'resourcesChangedQueue',
     hostId: 'api'
   }]
 };

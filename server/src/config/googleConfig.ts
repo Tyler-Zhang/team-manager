@@ -9,7 +9,9 @@ assert.ok(process.env.HOST, 'HOST must be set');
 export const googleConfig = {
   clientId: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  redirectUri: `${process.env.HOST}/api/google_oauth/callback`
+  redirectUri: `${process.env.HOST}/api/google_oauth/callback`,
+  webhookUri: `${process.env.HOST}/api/google/notify`,
+  maxWebhookTTL: 604800
 }
 
 export const createGoogleOauth2Client = () => new google.auth.OAuth2(

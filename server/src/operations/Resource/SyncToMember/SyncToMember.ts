@@ -2,8 +2,9 @@ import { ModelApplicationOperation, IModelApplicationOperationArgs } from '../..
 import { Member, Resource, ExternalConnection } from '../../../models';
 import { Operation } from "../../../lib/sti-model-operations/Operation";
 import { ExternalConnectionOperations } from '../..';
+import { ApplicationEntity } from '../../../models/ApplicationEntity';
 
-export interface IResourceSyncToMemberOperationArgs<T=Resource>
+export interface IResourceSyncToMemberOperationArgs<T extends ApplicationEntity=Resource>
   extends IModelApplicationOperationArgs<T>{
     member: Member;
 }

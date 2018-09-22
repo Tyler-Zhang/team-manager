@@ -4,7 +4,7 @@
   "description": "Team manager server",
   "main": "index.ts",
   "scripts": {
-    "prod": "nf start",
+    "start": "nf start",
     "dev": "nf start --procfile Procfile.dev",
     "dev:watch": "nodemon",
     "build": "tsc",

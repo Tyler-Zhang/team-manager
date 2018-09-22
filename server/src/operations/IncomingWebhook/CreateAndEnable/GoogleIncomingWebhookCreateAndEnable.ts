@@ -1,6 +1,6 @@
 import { IModelApplicationOperationArgs } from '../../ApplicationOperation';
 import { Operation } from "../../../lib/sti-model-operations/Operation";
-import { GoogleIncomingWebhook } from '../../../models';
+import { GoogleIncomingWebhook, ExternalConnection } from '../../../models';
 import { CreateAndEnable } from './CreateAndEnable';
 import { google } from 'googleapis';
 import { googleConfig } from '../../../config';
@@ -13,6 +13,8 @@ export class GoogleIncomingWebhookCreateAndEnable extends CreateAndEnable<Google
   }
 
   protected async enableWebhook() {
+    await this.hydrateExternalConnection();
+
     await ExternalConnectionOperations.EnsureValid.run({ 
       model: this.model.externalConnection,
       entityManager: this.entityManager
@@ -36,5 +38,16 @@ export class GoogleIncomingWebhookCreateAndEnable extends CreateAndEnable<Google
     });
     
     this.model.expirationDate = new Date(Number(response.data.expiration));
+  }
+
+  private async hydrateExternalConnection() {
+    if (this.model.externalConnection) {
+      return;
+    }
+
+    this.model.externalConnection = await this.entityManager.findOneOrFail(
+      ExternalConnection,
+      this.model.externalConnectionId
+    ) as any;
   }
 }

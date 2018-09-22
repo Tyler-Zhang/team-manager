@@ -11,6 +11,10 @@ describe('operations/AuthenticatedContext/IntoToken', () => {
 
   const run = () => AuthenticatedContextOperations.IntoToken.run({ authContext: authContext() })
 
+  it('actually returns a promise', () => {
+    expect(run() instanceof Promise).to.equal(true);
+  })
+
   it('returns a string', async () => {
     expect(typeof await run()).to.equal('string');
   })

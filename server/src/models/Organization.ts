@@ -25,5 +25,5 @@ export class Organization extends ApplicationEntity {
 
   @Type(() => Resource)
   @OneToMany(type => Resource, resource => resource.organization)
-  public resources!: ExternalConnection[];
+  public resources!: Resource[];
 }

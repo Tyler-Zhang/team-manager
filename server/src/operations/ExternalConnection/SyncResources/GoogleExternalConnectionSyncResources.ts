@@ -1,9 +1,10 @@
 import { SyncResources } from './SyncResources';
 import { Operation } from '../../../lib/sti-model-operations';
-import { GoogleExternalConnection, GoogleDriveFileResource } from '../../../models';
+import { GoogleExternalConnection, GoogleDriveFileResource, Resource } from '../../../models';
 import { IModelApplicationOperationArgs } from '../../ApplicationOperation';
 import { google } from 'googleapis';
 import { ResourceOperations } from '../..';
+import { EntityManager } from 'typeorm';
 
 @Operation('GoogleExternalConnection')
 export class GoogleExternalConnectionSyncResources extends SyncResources {
@@ -36,11 +37,13 @@ export class GoogleExternalConnectionSyncResources extends SyncResources {
       googleDriveFileResource.name = file.name as string;
       googleDriveFileResource.externalConnectionId = this.model.id;
       googleDriveFileResource.organizationId = this.model.organizationId;
+      googleDriveFileResource.slatedForDeletion = false;
 
       return googleDriveFileResource;
     });
 
     await this.entityManager.transaction(async (transaction) => {
+      await this.markResourcesToBeDeleted(transaction);
       /**
        * Use the create operation to create the resources
        */
@@ -48,7 +51,31 @@ export class GoogleExternalConnectionSyncResources extends SyncResources {
         return ResourceOperations.Create.run({ model: googleDriveFileResource, entityManager: transaction});
       });
 
-      return Promise.all(createPromiseArray);
+      await Promise.all(createPromiseArray);
+
+      await this.deleteMarkedForDeletionResources(transaction);
     });
+  }
+
+  private async markResourcesToBeDeleted(transaction: EntityManager) {
+    return transaction.update(Resource, {
+        externalConnectionId: this.model.id
+      }, {
+        slatedForDeletion: true
+      }
+    );
+  }
+
+  private async deleteMarkedForDeletionResources(transaction: EntityManager) {
+    const resourcesMarkedForDeletion = await transaction.find(
+      Resource,
+      { where: { slatedForDeletion: true }}
+    );
+
+    return Promise.all(
+      resourcesMarkedForDeletion.map(resource => {
+        return ResourceOperations.Delete.run({ model: resource, entityManager: transaction });
+      })
+    );
   }
 }

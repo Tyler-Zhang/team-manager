@@ -1,5 +1,5 @@
 import { Resource } from '../Resource/Resource';
-import { ChildEntity } from 'typeorm';
+import { ChildEntity, Column } from 'typeorm';
 import { Model } from '../../lib/sti-model-operations';
 
 const TYPE = 'Resource>GoogleDriveFileResource';

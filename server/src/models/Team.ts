@@ -28,7 +28,7 @@ export class Team extends ApplicationEntity {
   @JoinColumn({ name: 'organizationId'})
   public organization!: Organization;
 
-  @ManyToMany(() => Resource)
+  @ManyToMany(() => Resource, resource => resource.teams)
   @JoinTable()
   public resources!: Resource[];
 }

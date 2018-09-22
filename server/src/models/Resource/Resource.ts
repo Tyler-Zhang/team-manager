@@ -49,7 +49,7 @@ export abstract class Resource extends ApplicationEntity {
   @JoinColumn({ name: 'organizationId' })
   public organization!: Organization;
 
-  @ManyToMany(() => Team)
+  @ManyToMany(() => Team, team => team.resources)
   public teams!: Team[];
 
   constructor() {

@@ -22,7 +22,10 @@ export class GoogleIncomingWebhookDisable extends Disable<GoogleIncomingWebhook>
     await driveClient.channels.stop({
       requestBody: {
         id: this.model.externalId,
-        resourceId: 'root'
+        resourceId: this.model.resourceId,
+        resourceUri: this.model.resourceUri,
+        kind: 'api#channel',
+        type: 'webhook'
       }
     });
   }

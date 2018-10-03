@@ -30,7 +30,23 @@ export class GoogleIncomingWebhook extends IncomingWebhook {
   public set token(value: string) {
     this.data.token = value;
   }
+
+  public get resourceId(): string {
+    return this.data.resourceId;
+  }
+
+  public set resourceId(value: string) {
+    this.data.resourceId = value;
+  }
   
+  public get resourceUri(): string {
+    return this.data.resourceUri;
+  }
+
+  public set resourceUri(value: string) {
+    this.data.resourceUri = value;
+  }
+
   constructor(){
     super();
     this.address = googleConfig.webhookUri;

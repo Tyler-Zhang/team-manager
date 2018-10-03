@@ -3,7 +3,7 @@ import { Operation } from "../../../lib/sti-model-operations/Operation";
 import { GoogleIncomingWebhook, ExternalConnection } from '../../../models';
 import { CreateAndEnable } from './CreateAndEnable';
 import { google } from 'googleapis';
-import { googleConfig } from '../../../config';
+import { googleConfig, log } from '../../../config';
 import { ExternalConnectionOperations } from '../..';
 
 @Operation('GoogleIncomingWebhook')
@@ -36,7 +36,9 @@ export class GoogleIncomingWebhookCreateAndEnable extends CreateAndEnable<Google
       },
       fileId: 'root'
     });
-    
+
+    this.model.resourceId = response.data.resourceId as string;
+    this.model.resourceUri = response.data.resourceUri as string;
     this.model.expirationDate = new Date(Number(response.data.expiration));
   }
 

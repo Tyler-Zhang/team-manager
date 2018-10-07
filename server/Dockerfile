@@ -12,9 +12,6 @@ RUN (cd /server && rm .env)
 # Install dependencies
 RUN yarn install
 
-# Build
-RUN yarn build
-
 # Expose the port
 ENV PORT 8080
 EXPOSE 8080

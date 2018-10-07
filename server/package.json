@@ -5,11 +5,8 @@
   "main": "index.ts",
   "scripts": {
     "start": "nf start",
-    "console": "nf run node ./dist/src/console",
-    "dev": "nf start --procfile Procfile.dev",
-    "dev:watch": "nodemon",
-    "dev:console": "nf run ts-node ./src/console",
-    "build": "tsc",
+    "console": "nf run ts-node ./src/console",
+    "dev": "nodemon -e 'ts' -x 'yarn start' -i 'src/**/*.spec.ts' -w 'src'",
     "test": "nf run sh ./scripts/test.sh"
   },
   "author": "",

@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, Index, TableInheritance, ManyToMany, JoinTable } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, Index, TableInheritance, ManyToMany, JoinTable, OneToOne } from 'typeorm';
 import { Organization } from '../Organization';
 import { Team } from '../Team';
 import { ExternalConnection } from '../ExternalConnection';
@@ -51,6 +51,21 @@ export abstract class Resource extends ApplicationEntity {
 
   @ManyToMany(() => Team, team => team.resources)
   public teams!: Team[];
+
+  /**
+   * Resources can also be associated with themselves. Each
+   * resource can depend on another
+   */
+  @Column({ type: 'int', nullable: true })
+  @Index()
+  public prereqResourceId?: number;
+
+  @OneToOne(() => Resource, resource => resource.postreqResource)
+  @JoinColumn({ name: 'prereqResourceId' })
+  public prereqResource?: Resource;
+
+  @OneToOne(() => Resource, resource => resource.prereqResource)
+  public postreqResource?: Resource;
 
   constructor() {
     super();

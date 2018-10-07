@@ -4,3 +4,4 @@ export * from './externalConnectionConfig';
 export * from './googleConfig';
 export * from './log';
 export * from './secretsConfig';
+export * from './slackConfig';
